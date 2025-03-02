@@ -220,9 +220,12 @@ const Index = () => {
                 >
                   Start Your Journey
                 </a>
-                <button className="px-6 py-3 bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 transition-colors">
+                <a 
+                  href="/about"
+                  className="px-6 py-3 bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 transition-colors"
+                >
                   Learn More
-                </button>
+                </a>
               </div>
             </div>
             

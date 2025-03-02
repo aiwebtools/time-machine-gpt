@@ -3,6 +3,8 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+
 const About = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-time-dark to-time-medium">
@@ -59,14 +61,14 @@ const About = () => {
             </p>
           </div>
           
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center space-y-6">
             <a 
-              href="https://gpt4.aiwebtools.ai/time-machine-gpt/" 
+              href={TIME_MACHINE_URL} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-time-accent text-white rounded-full hover:bg-time-accent/90 transition-colors animate-pulse hover:animate-none"
+              className="inline-flex items-center px-8 py-4 bg-time-accent text-white rounded-full hover:bg-time-accent/90 transition-colors text-lg font-medium animate-pulse hover:animate-none"
             >
-              <span className="mr-2">Begin Your Time Travel</span>
+              <span className="mr-2">START YOUR JOURNEY THROUGH TIME NOW</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m5 12 14 0"></path>
                 <path d="m12 5 7 7-7 7"></path>
