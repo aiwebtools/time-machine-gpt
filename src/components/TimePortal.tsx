@@ -8,17 +8,12 @@ interface TimePortalProps {
 }
 
 const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) => {
-  const [destination, setDestination] = useState('');
-  const [date, setDate] = useState('');
-  const [isReady, setIsReady] = useState(false);
   const [portalActive, setPortalActive] = useState(false);
   
-  useEffect(() => {
-    setIsReady(destination.trim() !== '' && date.trim() !== '');
-  }, [destination, date]);
-  
   const handleStartJourney = () => {
-    if (!isReady) return;
+    // Set default values since we no longer have input fields
+    const destination = "Time Machine Experience";
+    const date = "Present Day";
     
     setPortalActive(true);
     
@@ -56,49 +51,22 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) =>
       </div>
       
       <div className="relative z-10 p-8">
-        <h3 className="text-2xl md:text-3xl font-serif text-white text-center mb-6">
-          Configure Your Journey
-        </h3>
+        <div className="aspect-w-16 aspect-h-9 w-full max-w-md mx-auto">
+          <iframe 
+            className="w-full h-full rounded-md shadow-lg"
+            src="https://www.youtube.com/embed/2htUNBOzEA0" 
+            title="Time Machine Experience"
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          ></iframe>
+        </div>
         
-        <div className="space-y-6 max-w-md mx-auto">
-          <div className="space-y-2">
-            <label htmlFor="destination" className="block text-sm text-white/80">
-              Where would you like to go?
-            </label>
-            <input
-              id="destination"
-              type="text"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-              placeholder="Ancient Rome, Medieval Paris, etc."
-              className="w-full px-4 py-3 rounded-md bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-time-accent/50"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label htmlFor="date" className="block text-sm text-white/80">
-              What time period?
-            </label>
-            <input
-              id="date"
-              type="text"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              placeholder="44 BCE, 1692, 1920s, etc."
-              className="w-full px-4 py-3 rounded-md bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-time-accent/50"
-            />
-          </div>
-          
+        <div className="space-y-6 max-w-md mx-auto mt-6">
           <button
             onClick={handleStartJourney}
-            disabled={!isReady || portalActive}
-            className={cn(
-              "w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden",
-              "font-medium text-white mt-2",
-              isReady && !portalActive 
-                ? "bg-time-accent hover:bg-time-accent/90 cursor-pointer" 
-                : "bg-gray-500/50 cursor-not-allowed"
-            )}
+            className="w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden
+              font-medium text-white mt-2 bg-time-accent hover:bg-time-accent/90 cursor-pointer"
           >
             <span className={cn(
               "absolute inset-0 flex items-center justify-center",
