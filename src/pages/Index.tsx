@@ -242,7 +242,7 @@ const Index = () => {
             
             <div
               ref={addToRefs}
-              className="reveal lg:ml-auto"
+              className="reveal lg:mr-0 lg:-mt-20 lg:ml-0"
             >
               <TimePortal 
                 onStartJourney={handleStartJourney}

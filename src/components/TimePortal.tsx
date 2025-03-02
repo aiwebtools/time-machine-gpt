@@ -57,7 +57,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       
       <div className="relative z-10 p-8">
         <div className="w-full mx-auto">
-          {/* Removing max-width restriction to make video larger */}
+          {/* Increased video size for better visibility */}
           <div className="aspect-video">
             <iframe 
               className="w-full h-full rounded-md shadow-lg"
