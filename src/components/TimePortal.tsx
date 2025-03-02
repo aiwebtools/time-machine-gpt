@@ -51,7 +51,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) =>
       </div>
       
       <div className="relative z-10 p-8">
-        <div className="aspect-w-16 aspect-h-9 w-full max-w-md mx-auto">
+        <div className="aspect-w-16 aspect-h-9 w-full max-w-2xl mx-auto">
           <iframe 
             className="w-full h-full rounded-md shadow-lg"
             src="https://www.youtube.com/embed/2htUNBOzEA0" 
