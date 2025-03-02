@@ -40,13 +40,13 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/history" className="text-white/70 hover:text-time-accent transition-colors">
-                  History
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="text-white/70 hover:text-time-accent transition-colors">
-                  Terms & Privacy
+                <a 
+                  href="https://aiwebtools.ai/terms-of-services" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white/70 hover:text-time-accent transition-colors"
+                >
+                  User Terms of Usage
                 </a>
               </li>
             </ul>
