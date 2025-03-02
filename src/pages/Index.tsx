@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { RotateCw } from 'lucide-react';
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -88,6 +89,17 @@ const Index = () => {
     setTimeout(() => {
       window.open(TIME_MACHINE_URL, '_blank');
     }, 3500);
+  };
+  
+  const handleTimeWarp = () => {
+    toast.success("Time warp initiated!", {
+      description: "Preparing to transport you through time...",
+      duration: 2000,
+    });
+    
+    setTimeout(() => {
+      window.open(TIME_MACHINE_URL, '_blank');
+    }, 2000);
   };
   
   const testimonials = [
