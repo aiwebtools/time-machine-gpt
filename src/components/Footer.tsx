@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -54,7 +55,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-white/50 text-sm">
-            © {new Date().getFullYear()} Father Time. All rights reserved.
+            © 2025 AI WEB TOOLS LLC. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
             <a href="#" className="text-white/50 hover:text-white transition-colors">
