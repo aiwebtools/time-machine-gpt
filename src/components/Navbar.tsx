@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
+const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -96,7 +98,10 @@ const Navbar = () => {
             label="History" 
             isScrolled={scrollPosition > 50} 
           />
-          <button 
+          <a 
+            href={TIME_MACHINE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               "px-5 py-2 rounded-full transition-all",
               "border border-time-accent",
@@ -107,7 +112,7 @@ const Navbar = () => {
             )}
           >
             Begin Journey
-          </button>
+          </a>
         </nav>
       </div>
       
@@ -122,12 +127,15 @@ const Navbar = () => {
           <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
           <MobileNavItem to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
           <MobileNavItem to="/history" label="History" onClick={() => setIsMenuOpen(false)} />
-          <button 
+          <a 
+            href={TIME_MACHINE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full py-3 text-center bg-time-medium text-white rounded-md mt-2 hover:bg-time-dark transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Begin Journey
-          </button>
+          </a>
         </nav>
       </div>
     </header>

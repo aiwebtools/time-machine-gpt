@@ -162,8 +162,8 @@ const TimelineAnimation: React.FC<TimelineAnimationProps> = ({ className }) => {
           </p>
         </div>
         
-        {/* Add CSS for star twinkling animation */}
-        <style jsx>{`
+        {/* Fix: Replace jsx prop with standard React style element */}
+        <style>{`
           @keyframes twinkle {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }

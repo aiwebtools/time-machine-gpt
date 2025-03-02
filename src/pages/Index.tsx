@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -8,6 +7,8 @@ import Footer from '@/components/Footer';
 import TimePortal from '@/components/TimePortal';
 import TimelineAnimation from '@/components/TimelineAnimation';
 import { cn } from '@/lib/utils';
+
+const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -89,10 +90,9 @@ const Index = () => {
       duration: 3000,
     });
     
-    // In a real application, this would navigate to the GPT interface
-    // For now, we'll just show a toast as a placeholder
+    // After showing the toast, redirect to the actual Time Machine GPT
     setTimeout(() => {
-      toast.info("This is a demo - in a full implementation, this would connect to the Father Time GPT.");
+      window.open(TIME_MACHINE_URL, '_blank');
     }, 3500);
   };
   
@@ -528,9 +528,14 @@ const Index = () => {
           <p className="text-white/80 max-w-2xl mx-auto mb-8">
             Start exploring the past with unprecedented detail and accuracy. Begin your adventure through history with Father Time.
           </p>
-          <button className="px-8 py-4 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors">
-            Begin Time Travel Now
-          </button>
+          <a 
+            href={TIME_MACHINE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors inline-block"
+          >
+            Access Time Machine GPT
+          </a>
         </div>
       </section>
       
