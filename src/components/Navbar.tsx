@@ -93,11 +93,6 @@ const Navbar = () => {
             label="About" 
             isScrolled={scrollPosition > 50} 
           />
-          <NavItem 
-            to="/history" 
-            label="History" 
-            isScrolled={scrollPosition > 50} 
-          />
           <a 
             href={TIME_MACHINE_URL}
             target="_blank"
@@ -126,7 +121,6 @@ const Navbar = () => {
         <nav className="flex flex-col space-y-3 text-time-dark">
           <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
           <MobileNavItem to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
-          <MobileNavItem to="/history" label="History" onClick={() => setIsMenuOpen(false)} />
           <a 
             href={TIME_MACHINE_URL}
             target="_blank"
