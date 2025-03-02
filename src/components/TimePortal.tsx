@@ -51,15 +51,17 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) =>
       </div>
       
       <div className="relative z-10 p-8">
-        <div className="aspect-w-16 aspect-h-9 w-full max-w-2xl mx-auto">
-          <iframe 
-            className="w-full h-full rounded-md shadow-lg"
-            src="https://www.youtube.com/embed/2htUNBOzEA0" 
-            title="Time Machine Experience"
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
-          ></iframe>
+        <div className="w-full mx-auto" style={{ maxWidth: "90%" }}>
+          <div className="aspect-video">
+            <iframe 
+              className="w-full h-full rounded-md shadow-lg"
+              src="https://www.youtube.com/embed/2htUNBOzEA0" 
+              title="Time Machine Experience"
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
         
         <div className="space-y-6 max-w-md mx-auto mt-6">
