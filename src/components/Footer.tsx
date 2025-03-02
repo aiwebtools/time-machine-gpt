@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Instagram, Tiktok } from 'lucide-react';
+import { Instagram, TikTok } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return <footer className="bg-time-dark text-white py-12">
@@ -62,7 +63,7 @@ const Footer: React.FC = () => {
               <Instagram size={20} />
             </a>
             <a href="https://www.tiktok.com/@aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
-              <Tiktok size={20} />
+              <TikTok size={20} />
             </a>
           </div>
         </div>
