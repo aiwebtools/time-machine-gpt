@@ -2,7 +2,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Instagram, TikTok } from 'lucide-react';
+import { Instagram } from 'lucide-react';
+
+// Custom TikTok icon since it's not available in lucide-react
+const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width || 20}
+    height={props.height || 20}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
+    <path d="M20 9V6a2 2 0 0 0-2-2h-2.5"></path>
+    <path d="M15 12v-2a2 2 0 0 0-2-2h-2"></path>
+    <path d="M20 9c-5.847.008-9.429-4.964-10-9"></path>
+  </svg>
+);
 
 const Footer: React.FC = () => {
   return <footer className="bg-time-dark text-white py-12">
@@ -63,7 +84,7 @@ const Footer: React.FC = () => {
               <Instagram size={20} />
             </a>
             <a href="https://www.tiktok.com/@aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
-              <TikTok size={20} />
+              <TikTokIcon size={20} />
             </a>
           </div>
         </div>
