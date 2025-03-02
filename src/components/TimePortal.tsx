@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -55,7 +56,8 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       </div>
       
       <div className="relative z-10 p-8">
-        <div className="w-full mx-auto" style={{ maxWidth: "90%" }}>
+        <div className="w-full mx-auto">
+          {/* Removing max-width restriction to make video larger */}
           <div className="aspect-video">
             <iframe 
               className="w-full h-full rounded-md shadow-lg"
