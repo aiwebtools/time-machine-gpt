@@ -24,11 +24,15 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <span className={cn("font-serif text-xl font-medium transition-colors", scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold")}>TIME MACHINE GPT
-        </span>
+          <div className="flex flex-col">
+            <span className={cn("font-serif text-xl font-medium transition-colors", scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold")}>TIME MACHINE GPT
+            </span>
+            <span className={cn("text-xs font-medium transition-colors", scrollPosition > 50 ? "text-time-dark/70" : "text-time-accent/90")}>
+              Presented By: AiWebTools.Ai
+            </span>
+          </div>
         </Link>
         
-        {/* Mobile menu button */}
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <span className={cn("sr-only", scrollPosition > 50 ? "text-time-dark" : "text-white")}>
             Menu
@@ -38,7 +42,6 @@ const Navbar = () => {
           </svg>
         </button>
         
-        {/* Desktop navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
           <NavItem to="/about" label="About" isScrolled={scrollPosition > 50} />
@@ -51,7 +54,6 @@ const Navbar = () => {
         </nav>
       </div>
       
-      {/* Mobile menu */}
       <div className={cn("md:hidden absolute w-full left-0 px-4 py-3 shadow-lg", "bg-white/95 backdrop-blur-md", "transition-all duration-300 ease-in-out", isMenuOpen ? "opacity-100 top-full" : "opacity-0 -top-40 pointer-events-none")}>
         <nav className="flex flex-col space-y-3 text-time-dark">
           <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
