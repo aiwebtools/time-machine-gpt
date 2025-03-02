@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-
 const Footer: React.FC = () => {
-  return (
-    <footer className="bg-time-dark text-white py-12">
+  return <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -19,7 +16,7 @@ const Footer: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <span className="font-serif text-xl font-medium">Father Time</span>
+              <span className="font-serif text-xl font-medium">TIME MACHINE GPT</span>
             </div>
             <p className="text-white/70 text-sm max-w-xs">
               Experience history like never before with our immersive time travel experience. Journey through the ages and discover the past with vivid detail.
@@ -40,47 +37,19 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="https://aiwebtools.ai/terms-of-services" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-white/70 hover:text-time-accent transition-colors"
-                >
+                <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   User Terms of Usage
                 </a>
               </li>
               <li>
-                <a 
-                  href="https://www.aiwebtools.ai" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-white/70 hover:text-time-accent transition-colors"
-                >
+                <a href="https://www.aiwebtools.ai" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   MORE AI TOOLS
                 </a>
               </li>
             </ul>
           </div>
           
-          <div>
-            <h4 className="text-lg font-medium mb-4">Subscribe</h4>
-            <p className="text-white/70 text-sm mb-4">
-              Join our newsletter to receive updates on new historical destinations.
-            </p>
-            <div className="flex">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="px-4 py-2 bg-white/10 border border-white/20 rounded-l-md focus:outline-none focus:ring-1 focus:ring-time-accent w-full"
-              />
-              <button className="bg-time-accent hover:bg-time-accent/90 px-4 py-2 rounded-r-md transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m5 12 14 0"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
+          
         </div>
         
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center">
@@ -108,8 +77,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
