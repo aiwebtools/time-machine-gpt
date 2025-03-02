@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -17,12 +16,10 @@ const Index = () => {
   const revealRefs = useRef<HTMLElement[]>([]);
   
   useEffect(() => {
-    // Simulate initial loading
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 500);
     
-    // Set up scroll reveal observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,10 +32,8 @@ const Index = () => {
       { threshold: 0.1 }
     );
     
-    // Observe all elements with reveal class
     revealRefs.current.forEach((el) => observer.observe(el));
     
-    // Set up scroll progress bar
     const progressBar = document.querySelector('.progress-bar');
     const updateProgress = () => {
       const scrollPosition = window.scrollY;
@@ -54,7 +49,6 @@ const Index = () => {
     
     window.addEventListener('scroll', updateProgress);
     
-    // Generate random stars for the hero section
     const heroSection = document.querySelector('.hero-section');
     if (heroSection) {
       for (let i = 0; i < 100; i++) {
@@ -91,7 +85,6 @@ const Index = () => {
       duration: 3000,
     });
     
-    // After showing the toast, redirect to the actual Time Machine GPT
     setTimeout(() => {
       window.open(TIME_MACHINE_URL, '_blank');
     }, 3500);
@@ -173,33 +166,21 @@ const Index = () => {
       "min-h-screen flex flex-col transition-opacity duration-700",
       isLoaded ? "opacity-100" : "opacity-0"
     )}>
-      {/* Progress bar */}
       <div className="progress-container">
         <div className="progress-bar"></div>
       </div>
       
       <Navbar />
       
-      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center hero-section overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-time-dark via-time-medium to-time-dark z-0"></div>
         
-        {/* Time Warp Background Effect */}
         <div className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none z-0">
           <div className="relative">
-            {/* Outer spinning ring */}
             <div className="w-[600px] h-[600px] rounded-full border-2 border-time-accent/20 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-            
-            {/* Middle spinning ring */}
             <div className="w-[400px] h-[400px] rounded-full border border-time-accent/30 animate-clock-spin absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDirection: 'reverse' }}></div>
-            
-            {/* Inner spinning ring */}
             <div className="w-[200px] h-[200px] rounded-full border border-time-accent/50 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-            
-            {/* Center glow */}
             <div className="w-[100px] h-[100px] rounded-full bg-time-accent/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse blur-md"></div>
-            
-            {/* Diagonal lines */}
             <div className="w-[600px] h-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-clock-spin">
               <div className="w-full h-1 bg-gradient-to-r from-transparent via-time-accent/20 to-transparent absolute top-1/2 -translate-y-1/2"></div>
               <div className="h-full w-1 bg-gradient-to-b from-transparent via-time-accent/20 to-transparent absolute left-1/2 -translate-x-1/2"></div>
@@ -274,7 +255,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Timeline Section */}
       <section className="py-20 bg-gradient-to-b from-time-dark to-white">
         <div className="container mx-auto px-4 md:px-6">
           <div 
@@ -341,7 +321,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Features Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div 
@@ -377,7 +356,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Demo Section */}
       <section className="py-20 bg-gray-50 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-time-accent/10 to-transparent"></div>
@@ -506,10 +484,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Testimonials */}
       <section className="py-20 bg-time-dark text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          {/* Abstract time-themed background */}
           <div className="absolute w-[800px] h-[800px] rounded-full border border-time-accent/10 -top-[400px] -right-[400px]"></div>
           <div className="absolute w-[600px] h-[600px] rounded-full border border-time-accent/10 top-[100px] -right-[300px]"></div>
           <div className="absolute w-[400px] h-[400px] rounded-full border border-time-accent/10 top-[200px] -right-[200px]"></div>
@@ -560,7 +536,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* CTA Section */}
       <section 
         ref={addToRefs}
         className="reveal py-24 bg-gradient-to-r from-time-medium to-time-dark text-white text-center"
