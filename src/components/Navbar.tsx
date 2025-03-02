@@ -41,7 +41,7 @@ const Navbar = () => {
           </div>
           <span className={cn(
             "font-serif text-xl font-medium transition-colors",
-            scrollPosition > 50 ? "text-time-dark" : "text-white text-shadow"
+            scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold"
           )}>
             Father Time
           </span>
@@ -70,7 +70,7 @@ const Navbar = () => {
             strokeLinejoin="round" 
             className={cn(
               "transition-colors",
-              scrollPosition > 50 ? "text-time-dark" : "text-white"
+              scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
             )}
           >
             {isMenuOpen ? (
@@ -108,7 +108,7 @@ const Navbar = () => {
               "hover:bg-time-accent/10",
               scrollPosition > 50 
                 ? "text-time-dark" 
-                : "text-white text-shadow"
+                : "text-time-accent font-medium"
             )}
           >
             Begin Journey
@@ -155,7 +155,7 @@ const NavItem: React.FC<NavItemProps> = ({ to, label, isScrolled }) => (
       "relative font-medium hover:text-time-accent transition-colors",
       "after:absolute after:w-0 after:h-0.5 after:bg-time-accent after:left-0 after:-bottom-1",
       "hover:after:w-full after:transition-all after:duration-300",
-      isScrolled ? "text-time-dark" : "text-white text-shadow"
+      isScrolled ? "text-time-dark" : "text-time-accent"
     )}
   >
     {label}
