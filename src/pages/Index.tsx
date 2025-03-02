@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TimePortal from '@/components/TimePortal';
 import TimelineAnimation from '@/components/TimelineAnimation';
+import AudioPlayer from '@/components/AudioPlayer';
 import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
@@ -175,6 +176,8 @@ const Index = () => {
       </div>
       
       <Navbar />
+      
+      <AudioPlayer autoPlay={true} />
       
       <section className="relative min-h-screen flex items-center hero-section overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-time-dark via-time-medium to-time-dark z-0"></div>
