@@ -212,9 +212,14 @@ const Index = () => {
                 ref={addToRefs}
                 className="reveal flex flex-col sm:flex-row gap-4 pt-4"
               >
-                <button className="px-6 py-3 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors">
+                <a 
+                  href={TIME_MACHINE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors"
+                >
                   Start Your Journey
-                </button>
+                </a>
                 <button className="px-6 py-3 bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 transition-colors">
                   Learn More
                 </button>
@@ -292,9 +297,14 @@ const Index = () => {
                 <div className="p-6 bg-white">
                   <div className="text-sm text-time-accent font-medium mb-2">{era.years}</div>
                   <p className="text-gray-700">{era.description}</p>
-                  <button className="mt-4 px-4 py-2 border border-time-medium text-time-medium rounded hover:bg-time-medium hover:text-white transition-colors">
+                  <a
+                    href={TIME_MACHINE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 px-4 py-2 border border-time-medium text-time-medium rounded hover:bg-time-medium hover:text-white transition-colors inline-block"
+                  >
                     Explore This Era
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -454,9 +464,14 @@ const Index = () => {
                 ))}
               </ul>
               
-              <button className="px-6 py-3 bg-time-medium text-white rounded-md font-medium hover:bg-time-dark transition-colors mt-4">
+              <a
+                href={TIME_MACHINE_URL}
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="px-6 py-3 bg-time-medium text-white rounded-md font-medium hover:bg-time-dark transition-colors mt-4"
+              >
                 Try It Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
