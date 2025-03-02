@@ -49,6 +49,16 @@ const Footer: React.FC = () => {
                   User Terms of Usage
                 </a>
               </li>
+              <li>
+                <a 
+                  href="https://www.aiwebtools.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white/70 hover:text-time-accent transition-colors"
+                >
+                  MORE AI TOOLS
+                </a>
+              </li>
             </ul>
           </div>
           
