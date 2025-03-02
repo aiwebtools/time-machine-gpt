@@ -1,13 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface TimePortalProps {
   onStartJourney: (destination: string, date: string) => void;
+  timeDestinationUrl: string;
   className?: string;
 }
 
-const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) => {
+const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestinationUrl, className }) => {
   const [portalActive, setPortalActive] = useState(false);
   
   const handleStartJourney = () => {
@@ -20,6 +20,10 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, className }) =>
     // Simulate portal activation
     setTimeout(() => {
       onStartJourney(destination, date);
+      
+      // Open the AI tool URL in a new window
+      window.open(timeDestinationUrl, '_blank');
+      
       setPortalActive(false);
     }, 3000);
   };

@@ -85,10 +85,6 @@ const Index = () => {
       description: `Preparing journey to ${destination} in ${date}`,
       duration: 3000,
     });
-    
-    setTimeout(() => {
-      window.open(TIME_MACHINE_URL, '_blank');
-    }, 3500);
   };
   
   const handleTimeWarp = () => {
@@ -96,10 +92,6 @@ const Index = () => {
       description: "Preparing to transport you through time...",
       duration: 2000,
     });
-    
-    setTimeout(() => {
-      window.open(TIME_MACHINE_URL, '_blank');
-    }, 2000);
   };
   
   const testimonials = [
@@ -254,6 +246,7 @@ const Index = () => {
             >
               <TimePortal 
                 onStartJourney={handleStartJourney}
+                timeDestinationUrl={TIME_MACHINE_URL}
                 className="max-w-md mx-auto lg:mr-0"
               />
             </div>
@@ -342,7 +335,7 @@ const Index = () => {
             <div className="inline-block px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-time-medium text-sm font-medium mb-4">
               Key Features
             </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-time-dark">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-time-dark">
               An Unparalleled Time Travel Experience
             </h2>
             <p className="text-gray-600">
