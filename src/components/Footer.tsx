@@ -73,6 +73,16 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
+          <div className="flex flex-col items-center justify-center">
+            <a 
+              href="https://www.aiwebtools.ai" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-48 h-48 bg-time-accent hover:bg-time-accent/90 transition-colors flex flex-col items-center justify-center text-time-dark font-bold text-center p-4 rounded-lg border-2 border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              <span className="text-xl font-serif">GO TO AI WEB TOOLS MAINFRAME</span>
+            </a>
+          </div>
         </div>
         
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center">
@@ -84,7 +94,7 @@ const Footer: React.FC = () => {
               <Instagram size={20} />
             </a>
             <a href="https://www.tiktok.com/@aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
-              <TikTokIcon size={20} />
+              <TikTokIcon width={20} height={20} />
             </a>
           </div>
         </div>
