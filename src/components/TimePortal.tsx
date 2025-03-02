@@ -56,10 +56,10 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       </div>
       
       <div className="relative z-10 p-8">
-        {/* Increased video size container */}
+        {/* Significantly increased video size container */}
         <div className="w-full mx-auto">
-          {/* Much larger video size by using a taller aspect ratio container */}
-          <div className="aspect-[16/12] w-full max-w-[800px] mx-auto">
+          {/* Much larger video size with taller aspect ratio */}
+          <div className="aspect-[16/9] w-full max-w-[1200px] mx-auto">
             <iframe 
               className="w-full h-full rounded-md shadow-lg"
               src="https://www.youtube.com/embed/e5YDEFZQ0uA" 
