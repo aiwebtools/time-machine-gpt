@@ -10,6 +10,7 @@ interface TimePortalProps {
 
 const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestinationUrl, className }) => {
   const [portalActive, setPortalActive] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   
   const handleStartJourney = () => {
     // Set default values since we no longer have input fields
@@ -17,6 +18,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     const date = "Present Day";
     
     setPortalActive(true);
+    setVideoLoaded(true); // Enable full video when journey starts
     
     // Simulate portal activation
     setTimeout(() => {
@@ -62,8 +64,9 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           <div className="aspect-video w-full">
             <iframe 
               className="w-full h-full shadow-xl"
-              src="https://www.youtube.com/embed/e5YDEFZQ0uA?autoplay=1" 
+              src={`https://www.youtube.com/embed/e5YDEFZQ0uA?rel=0&modestbranding=1${videoLoaded ? '&autoplay=1' : ''}&fs=1&color=white&iv_load_policy=3&playsinline=1&enablejsapi=1&origin=${window.location.origin}&widgetid=1`}
               title="Time Machine Experience"
+              loading="lazy"
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowFullScreen
