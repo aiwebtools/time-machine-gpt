@@ -55,13 +55,13 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
         </div>
       </div>
       
-      <div className="relative z-10 p-8">
-        {/* Significantly increased video size container */}
+      <div className="relative z-10">
+        {/* Video container - removed padding constraints and made it full width */}
         <div className="w-full mx-auto">
-          {/* Much larger video size with taller aspect ratio */}
-          <div className="aspect-[16/9] w-full max-w-[1200px] mx-auto">
+          {/* Increased aspect ratio for a larger video display */}
+          <div className="aspect-video w-full">
             <iframe 
-              className="w-full h-full rounded-md shadow-lg"
+              className="w-full h-full shadow-xl"
               src="https://www.youtube.com/embed/e5YDEFZQ0uA?autoplay=1&mute=1" 
               title="Time Machine Experience"
               frameBorder="0" 
@@ -71,7 +71,8 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           </div>
         </div>
         
-        <div className="space-y-6 max-w-md mx-auto mt-8">
+        {/* Moved button below with proper spacing */}
+        <div className="py-6 px-4 max-w-md mx-auto">
           <button
             onClick={handleStartJourney}
             className="w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden
