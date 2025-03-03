@@ -1,0 +1,139 @@
+
+/* Global reveal animations for sections */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Star animations for hero section */
+.star {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.star.shooting {
+  width: 2px !important;
+  height: 2px !important;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  animation: shooting-star 6s ease-out infinite;
+  opacity: 0;
+}
+
+/* Space background */
+.space-bg {
+  background-color: #0f172a;
+  position: relative;
+}
+
+/* Text effects */
+.text-glow {
+  text-shadow: 0 0 10px rgba(194, 160, 110, 0.7);
+  animation: text-pulse 3s ease-in-out infinite;
+}
+
+.text-shimmer {
+  background: linear-gradient(to right, #c2a06e 20%, #fff 40%, #fff 60%, #c2a06e 80%);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Button glow effect */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+}
+
+/* Progress bar */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, rgba(194, 160, 110, 0.7), rgba(194, 160, 110, 1));
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* Glass effect */
+.glass-effect {
+  background: rgba(30, 58, 138, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional animations */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes shooting-star {
+  0% { 
+    transform: translateX(0) translateY(0); 
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  70% {
+    transform: translateX(-100px) translateY(100px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-150px) translateY(150px);
+    opacity: 0;
+  }
+}
+
+@keyframes text-pulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(194, 160, 110, 0.7); }
+  50% { text-shadow: 0 0 20px rgba(194, 160, 110, 1), 0 0 30px rgba(194, 160, 110, 0.5); }
+}
+
+@keyframes text-shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Time portal animation */
+.time-portal-bg {
+  background: radial-gradient(circle, #1e3a8a 0%, #0f172a 70%);
+}
