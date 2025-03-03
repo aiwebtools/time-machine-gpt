@@ -10,13 +10,13 @@ interface TimelineSectionProps {
 
 const TimelineSection = ({ className, addToRefs }: TimelineSectionProps) => {
   return (
-    <section className={cn("py-20 bg-gradient-to-b from-time-dark to-[#121a29]", className)}>
+    <section className={cn("py-20 bg-gradient-to-b from-time-dark to-white", className)}>
       <div className="container mx-auto px-4 md:px-6">
-        <div ref={addToRefs} className="reveal text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white text-glow">
+        <div ref={addToRefs} className="reveal text-center max-w-3xl mx-auto mb-16 text-white">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
             Travel Across The Ages
           </h2>
-          <p className="text-white/90 text-lg">
+          <p className="text-white/80">
             From ancient civilizations to recent history, explore any time period with unprecedented detail and immersion.
           </p>
         </div>
