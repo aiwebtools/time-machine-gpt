@@ -1,0 +1,21 @@
+
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced text effects */
+.text-shimmer {
+  background: linear-gradient(to right, 
+    theme('colors.time.accent') 0%, 
+    white 10%, 
+    theme('colors.time.accent') 20%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: textShimmer 6s infinite linear;
+}
+
+.text-glow {
+  animation: textGlow 3s infinite alternate;
+}

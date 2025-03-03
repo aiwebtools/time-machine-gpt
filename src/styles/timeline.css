@@ -1,0 +1,48 @@
+
+.timeline-track {
+  height: 2px;
+  background: linear-gradient(90deg, rgba(194, 160, 110, 0.2), rgba(194, 160, 110, 1), rgba(194, 160, 110, 0.2));
+  position: relative;
+}
+
+.time-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: theme('colors.time.accent');
+  position: absolute;
+  top: -5px;
+  transform: translateX(-50%);
+}
+
+.time-marker::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid theme('colors.time.accent');
+  top: -4px;
+  left: -4px;
+  animation: pulse 2s infinite;
+}
+
+.clock-hand {
+  position: absolute;
+  background-color: theme('colors.time.accent');
+  transform-origin: bottom center;
+}
+
+.hour-hand {
+  width: 2px;
+  height: 30%;
+  top: 20%;
+  left: calc(50% - 1px);
+}
+
+.minute-hand {
+  width: 1px;
+  height: 40%;
+  top: 10%;
+  left: calc(50% - 0.5px);
+}
