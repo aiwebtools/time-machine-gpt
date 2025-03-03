@@ -34,9 +34,9 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-start">
             <span className={cn(
-              "font-serif text-sm md:text-lg font-medium transition-colors", 
+              "font-serif text-sm md:text-lg font-medium transition-colors leading-tight", 
               scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold"
             )}>
               TIME MACHINE GPT

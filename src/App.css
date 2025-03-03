@@ -64,12 +64,36 @@
   
   /* Prevent text overlaps in header */
   header .flex.items-center {
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
   
   header .font-serif {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.1rem;
+  }
+  
+  /* Fix alignment and spacing */
+  header .flex.flex-col.items-start {
+    max-width: 120px;
+  }
+  
+  header .w-7 {
+    min-width: 28px;
+  }
+}
+
+/* Smaller screens require more aggressive adjustments */
+@media screen and (max-width: 360px) {
+  header .font-serif {
+    font-size: 0.7rem;
+  }
+  
+  header .text-\[8px\] {
+    font-size: 7px;
+  }
+  
+  header .flex.flex-col.items-start {
+    max-width: 100px;
   }
 }
 

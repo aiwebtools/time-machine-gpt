@@ -1,4 +1,3 @@
-
 /* Facebook in-app browser compatibility fixes */
 @supports (-webkit-overflow-scrolling: touch) {
   html, body {
@@ -43,7 +42,16 @@
     /* Fix for overlapping text in header */
     header .font-serif {
       font-size: 0.875rem !important;
-      line-height: 1.25rem !important;
+      line-height: 1.1rem !important;
+    }
+    
+    /* Improve header layout on small screens */
+    header .flex.items-center {
+      gap: 0.5rem !important;
+    }
+    
+    header .flex.flex-col.items-start {
+      max-width: 160px !important;
     }
   }
 }
@@ -84,13 +92,19 @@
   
   /* Fix header text wrapping */
   & header .font-serif {
-    font-size: 0.875rem !important;
+    font-size: 0.75rem !important;
     white-space: nowrap !important;
+    line-height: 1.1 !important;
   }
   
   & header .text-\[8px\] {
     font-size: 0.5rem !important;
     white-space: nowrap !important;
+  }
+  
+  /* Additional spacing adjustments */
+  & header .flex.items-center {
+    gap: 0.35rem !important;
   }
 }
 
@@ -116,11 +130,25 @@ iframe {
 @media screen and (max-width: 640px) {
   /* Fix overlapping logo and text */
   header .font-serif {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.1rem;
   }
   
-  header .flex.items-center > div {
-    max-width: 130px;
+  header .flex.items-center {
+    gap: 0.35rem;
+  }
+  
+  header .flex.items-center > div.flex.flex-col {
+    max-width: 120px;
+  }
+  
+  /* Ensure proper text alignment */
+  header .flex.flex-col.items-start {
+    align-items: flex-start !important;
+  }
+  
+  /* Improved spacing between logo and text */
+  header .flex.items-center > div.relative {
+    flex-shrink: 0;
   }
 }
