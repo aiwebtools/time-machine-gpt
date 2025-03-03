@@ -411,13 +411,20 @@ const Index = () => {
                     <div className="flex-1">
                       <div className="bg-gray-100 rounded-lg p-3 text-gray-700">
                         <p className="font-medium text-time-dark mb-1">
-                          *Time warping to Ancient Rome, 44 BCE*
+                          🏛️ Welcome to Rome, 44 BCE!
                         </p>
                         <p className="mb-2">
-                          The air fills with the scent of olive oil lamps and fresh bread as you materialize on a cobblestone street in Rome. It's early morning, and the city is already bustling with activity. You're standing near the Forum Romanum, the political heart of the Roman Republic. Men in white togas with purple stripes—senators on their way to a meeting—walk briskly past you...
+                          The air is thick with the sounds of a bustling empire—the rhythmic clang of metal from the blacksmith's forge, the low murmurs of traders haggling over exotic silks, and the distant roar of a crowd in the great Forum Romanum. You stand amidst the beating heart of Imperial Rome, a city that exudes power, ambition, and intrigue.
+                        </p>
+                        <p className="mb-2">
+                          Towering marble temples, decorated with intricate friezes, stretch toward the sky, while grand statues of Roman deities overlook the bustling streets. The roads, paved with well-worn stone, are alive with movement—senators in pristine white togas embroidered with purple trim stride purposefully toward the Senate House.
+                        </p>
+                        <p className="mb-2">
+                          🗡️ The Ides of March Approaches...
+                          The streets of Rome hum with tension, whispers creeping through the alleys like a venomous serpent coiling in the shadows. The year is 44 BCE, and Caesar, fresh from his conquests, now holds absolute power.
                         </p>
                         <p className="text-sm text-gray-500 italic">
-                          [Detailed historical narrative continues...]
+                          [Historical narrative continues...]
                         </p>
                       </div>
                       
@@ -480,7 +487,7 @@ const Index = () => {
                 href={TIME_MACHINE_URL}
                 target="_blank"
                 rel="noopener noreferrer" 
-                className="px-6 py-3 bg-time-medium text-white rounded-md font-medium hover:bg-time-dark transition-colors mt-4"
+                className="px-6 py-3 bg-time-medium text-white rounded-md font-medium hover:bg-time-dark transition-colors mt-8 inline-block"
               >
                 Try It Now
               </a>
