@@ -62,7 +62,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           <div className="aspect-[16/9] w-full max-w-[1200px] mx-auto">
             <iframe 
               className="w-full h-full rounded-md shadow-lg"
-              src="https://www.youtube.com/embed/e5YDEFZQ0uA" 
+              src="https://www.youtube.com/embed/e5YDEFZQ0uA?autoplay=1&mute=1" 
               title="Time Machine Experience"
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
