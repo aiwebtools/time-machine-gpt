@@ -66,6 +66,11 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Talk to History GPT
+                </a>
+              </li>
+              <li>
                 <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   User Terms of Usage
                 </a>
