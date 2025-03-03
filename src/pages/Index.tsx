@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -77,34 +78,49 @@ const Index = () => {
         heroSection.appendChild(shootingStar);
       }
       
-      // Add parallax effect to stars
+      // Modified parallax effect to avoid mouse jitter
       const parallaxEffect = (e: MouseEvent) => {
         const stars = heroSection.querySelectorAll('.star:not(.shooting)');
         const mouseX = e.clientX / window.innerWidth;
         const mouseY = e.clientY / window.innerHeight;
         
-        stars.forEach((star, index) => {
-          const depth = Math.random() * 5;
-          const moveX = (mouseX - 0.5) * depth;
-          const moveY = (mouseY - 0.5) * depth;
-          
-          if (star instanceof HTMLElement) {
-            star.style.transform = `translate(${moveX}px, ${moveY}px)`;
-          }
+        requestAnimationFrame(() => {
+          stars.forEach((star) => {
+            const depth = Math.random() * 5;
+            const moveX = (mouseX - 0.5) * depth;
+            const moveY = (mouseY - 0.5) * depth;
+            
+            if (star instanceof HTMLElement) {
+              star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+          });
         });
       };
       
-      window.addEventListener('mousemove', parallaxEffect);
+      // Throttle the mousemove event to reduce flicker
+      let lastTime = 0;
+      const throttledParallaxEffect = (e: MouseEvent) => {
+        const now = Date.now();
+        if (now - lastTime >= 50) { // Limit to executing at most once every 50ms
+          lastTime = now;
+          parallaxEffect(e);
+        }
+      };
+      
+      window.addEventListener('mousemove', throttledParallaxEffect);
+      
+      return () => {
+        clearTimeout(timer);
+        observer.disconnect();
+        window.removeEventListener('scroll', updateProgress);
+        window.removeEventListener('mousemove', throttledParallaxEffect);
+      };
     }
     
     return () => {
       clearTimeout(timer);
       observer.disconnect();
       window.removeEventListener('scroll', updateProgress);
-      
-      if (heroSection) {
-        window.removeEventListener('mousemove', (e: any) => {});
-      }
     };
   }, []);
 
@@ -124,6 +140,46 @@ const Index = () => {
   const setHeroSectionRef = (el: HTMLElement | null) => {
     heroSectionRef.current = el;
   };
+  
+  // Add a properly throttled time travel handler to avoid flickering
+  const handleTimeTravelClick = () => {
+    try {
+      window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
+      toast.success("Launching Time Machine!", {
+        description: "Prepare for an extraordinary journey through time",
+        duration: 3000
+      });
+      console.log("Time travel button clicked!");
+    } catch (error) {
+      toast.error("Couldn't launch the Time Machine", {
+        description: "Your browser may be blocking popups. Please allow popups or try a different browser.",
+        duration: 5000
+      });
+    }
+  };
+
+  // Add a timeTravel section between Timeline and Testimonials
+  const TimeTravelSectionBetween = () => (
+    <section 
+      ref={addToRefs as React.RefCallback<HTMLDivElement>} 
+      className="reveal py-16 bg-time-dark text-white"
+    >
+      <div className="container mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-8 text-glow">Ready to Embark on Your Journey?</h2>
+        <p className="max-w-2xl mx-auto mb-8 text-lg">
+          The Time Machine is ready for your instructions. Where and when would you like to travel?
+        </p>
+        <button
+          onClick={handleTimeTravelClick}
+          className="px-10 py-4 bg-time-accent text-white text-lg rounded-md font-medium 
+                   hover:bg-time-accent/90 transition-colors duration-300 
+                   shadow-[0_0_15px_rgba(194,160,110,0.4)]"
+        >
+          Begin Time Travel Experience Now
+        </button>
+      </div>
+    </section>
+  );
 
   return (
     <div className={cn("min-h-screen flex flex-col transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
@@ -141,6 +197,8 @@ const Index = () => {
       />
       
       <TimelineSection addToRefs={addToRefs} />
+      
+      <TimeTravelSectionBetween />
       
       <TestimonialsSection addToRefs={addToRefs} />
       

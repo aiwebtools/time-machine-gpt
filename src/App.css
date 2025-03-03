@@ -50,3 +50,15 @@
 .navbar-title {
   text-shadow: 0 0 10px rgba(194, 160, 110, 0.5);
 }
+
+/* Fix for button hover flickering */
+button {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Prevent animation jitter */
+.btn-glow:after {
+  pointer-events: none;
+}
