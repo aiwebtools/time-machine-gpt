@@ -90,7 +90,7 @@
 @layer base {
   /* Complete removal of any border styles from the global selector */
   * {
-    border: none;
+    border: none !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -102,6 +102,17 @@
     overflow-x: hidden;
     position: relative;
   }
+}
+
+/* Explicitly target the header to ensure no borders */
+header {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Explicitly target navigation elements to ensure no borders */
+nav, nav * {
+  border: none !important;
 }
 
 .time-portal-bg {
