@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { RotateCw, Clock, BookOpen, Image, MessageSquareText, GraduationCap } from 'lucide-react';
+import { RotateCw, Clock, BookOpen, Image, MessageSquareText, GraduationCap, Star, Quote } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TimePortal from '@/components/TimePortal';
@@ -129,15 +129,18 @@ const Index = () => {
   const testimonials = [{
     quote: "The historical accuracy and immersive storytelling transported me back to Ancient Rome in a way no book or documentary ever could.",
     author: "Michael T.",
-    location: "History Professor"
+    location: "History Professor",
+    stars: 5
   }, {
     quote: "I was able to experience the Renaissance through the eyes of someone who lived it. The details were incredible!",
     author: "Sarah L.",
-    location: "Art Historian"
+    location: "Art Historian",
+    stars: 5
   }, {
     quote: "I've used this with my students and they're finally excited about history. It's revolutionized my classroom.",
     author: "David K.",
-    location: "High School Teacher"
+    location: "High School Teacher",
+    stars: 5
   }];
 
   const features = [{
@@ -245,88 +248,63 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="py-20 bg-gradient-to-b from-time-dark via-time-medium to-time-dark relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/c73d4e37-b0c3-4d03-9e63-4d000f6b90ad.png')] opacity-5 bg-cover bg-center"></div>
-        <div className="absolute inset-0 bg-time-dark/80"></div>
+      <section className="py-20 bg-gradient-to-b from-time-dark via-time-dark to-time-medium relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/c73d4e37-b0c3-4d03-9e63-4d000f6b90ad.png')] opacity-10 bg-cover bg-center"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-time-dark/90 to-time-dark/70 backdrop-blur-sm"></div>
         
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div ref={addToRefs} className="reveal text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-block px-3 py-1 bg-time-medium/30 border border-time-accent/30 rounded-full text-time-accent text-sm font-medium mb-4">
-              Key Features
-            </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">
-              An Unparalleled Time Travel Experience
-            </h2>
-            <p className="text-gray-300">
-              Father Time combines cutting-edge AI with historical accuracy to create the most immersive time travel simulation available.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div 
-                key={index} 
-                ref={addToRefs} 
-                className="reveal p-6 border border-time-accent/10 rounded-xl bg-time-dark/70 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_8px_30px_rgba(194,160,110,0.1)] hover:border-time-accent/30 hover:transform hover:scale-105 group"
-              >
-                <div className="w-12 h-12 flex items-center justify-center rounded-full bg-time-dark mb-4 border border-time-accent/20 group-hover:border-time-accent/50 transition-all duration-500">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-medium text-white mb-2 group-hover:text-time-accent transition-colors">{feature.title}</h3>
-                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-16 text-center">
-            <a 
-              href={TIME_MACHINE_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-glow inline-flex items-center gap-2 px-6 py-3 bg-time-medium/80 text-white rounded-md font-medium hover:bg-time-medium transition-all duration-300 hover:scale-105 hover:shadow-lg border border-time-accent/20 hover:border-time-accent/50"
-            >
-              <Clock className="h-5 w-5" /> 
-              Experience It Now
-            </a>
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div ref={addToRefs} className="reveal text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-block px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-time-medium text-sm font-medium mb-4">
+            <div className="inline-block px-3 py-1 bg-time-medium/30 border border-time-accent/30 rounded-full text-time-accent text-sm font-medium mb-4 animate-pulse">
               Testimonials
             </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-white text-glow">
               What Time Travelers Are Saying
             </h2>
-            <p className="text-gray-600">
+            <p className="text-white/70">
               Hear from historians, educators, and history enthusiasts who have experienced Father Time.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => <div key={index} ref={addToRefs} className="reveal backdrop-blur-sm bg-time-dark/40 border border-time-accent/10 rounded-xl p-6 transition-all duration-300 hover:bg-time-medium/30 hover:border-time-accent/30 hover:shadow-[0_0_15px_rgba(194,160,110,0.3)] hover:scale-105 group">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-4 text-time-accent/70 group-hover:text-time-accent transition-colors duration-300">
-                  <path d="M13.5 21H9C9 13.5 14.5 10.4987 14.5 10.4987V15C12.5 15.5 12 17 12 18.5H13.5C14.3284 18.5 15 19.1716 15 20V25C15 25.8284 14.3284 26.5 13.5 26.5H8.5C7.67157 26.5 7 25.8284 7 25V20C7 19.1716 7.67157 18.5 8.5 18.5H10C10 16.4826 9.27834 13.4331 7 11C7 11 9 7 15 7C15 7 18 7.09468 18 10.4987C18 13.4987 15 14 13.5 21Z" fill="currentColor" />
-                  <path d="M27.5 21H23C23 13.5 28.5 10.4987 28.5 10.4987V15C26.5 15.5 26 17 26 18.5H27.5C28.3284 18.5 29 19.1716 29 20V25C29 25.8284 28.3284 26.5 27.5 26.5H22.5C21.6716 26.5 21 25.8284 21 25V20C21 19.1716 21.6716 18.5 22.5 18.5H24C24 16.4826 23.2783 13.4331 21 11C21 11 23 7 29 7C29 7 32 7.09468 32 10.4987C32 13.4987 29 14 27.5 21Z" fill="currentColor" />
-                </svg>
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index} 
+                ref={addToRefs} 
+                className="reveal relative overflow-hidden backdrop-blur-md bg-time-medium/10 border border-time-accent/20 rounded-xl p-8 transition-all duration-500 hover:bg-time-medium/20 hover:border-time-accent/40 hover:shadow-[0_0_25px_rgba(194,160,110,0.4)] hover:scale-105 group"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-time-accent/5 rounded-full blur-3xl transform translate-x-16 -translate-y-16 group-hover:bg-time-accent/10 transition-all duration-700"></div>
                 
-                <p className="mb-6 text-white/90 italic font-medium">{testimonial.quote}</p>
+                <Quote className="w-10 h-10 text-time-accent/60 mb-6 group-hover:text-time-accent transition-colors duration-300" />
                 
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-time-accent/20 flex items-center justify-center text-white font-serif">
-                    {testimonial.author.charAt(0)}
+                <p className="mb-8 text-white/90 italic font-medium leading-relaxed relative z-10">
+                  {testimonial.quote}
+                </p>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-time-accent/30 to-time-accent/10 flex items-center justify-center text-white font-serif text-lg border border-time-accent/30 group-hover:border-time-accent/60 transition-all duration-300">
+                      {testimonial.author.charAt(0)}
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-time-accent group-hover:text-time-accent/90 transition-colors">
+                        {testimonial.author}
+                      </div>
+                      <div className="text-sm text-white/60 group-hover:text-white/80 transition-colors">
+                        {testimonial.location}
+                      </div>
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <div className="font-medium text-time-accent">{testimonial.author}</div>
-                    <div className="text-sm text-white/70">{testimonial.location}</div>
+                  
+                  <div className="flex">
+                    {[...Array(testimonial.stars)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-time-accent/70 group-hover:text-time-accent fill-time-accent/70 group-hover:fill-time-accent transition-colors duration-300" />
+                    ))}
                   </div>
                 </div>
-
-                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-time-accent/5 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
-              </div>)}
+                
+                <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-time-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
