@@ -164,10 +164,6 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="w-full mx-auto z-10 pt-10">
-          <TimePortal onStartJourney={handleStartJourney} timeDestinationUrl={TIME_MACHINE_URL} className="max-w-5xl mx-auto" />
-        </div>
-        
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-10 md:py-20 flex-grow">
           <div className="grid grid-cols-1 gap-12 items-center">
             <div className="text-white space-y-6 max-w-2xl mx-auto text-center">
@@ -179,6 +175,10 @@ const Index = () => {
                 Journey Through Time<br />
                 <span className="text-time-accent">With Father Time</span>
               </h1>
+              
+              <div className="w-full mx-auto mt-8 mb-8">
+                <TimePortal onStartJourney={handleStartJourney} timeDestinationUrl={TIME_MACHINE_URL} className="max-w-5xl mx-auto" />
+              </div>
               
               <p ref={addToRefs} className="reveal text-lg text-white/80 max-w-xl mx-auto">
                 Experience history like never before. Travel to any era, any location, and immerse yourself in vivid, historically accurate narratives and visuals.
