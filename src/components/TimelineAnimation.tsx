@@ -32,7 +32,7 @@ const TimelineAnimation: React.FC<TimelineAnimationProps> = ({ className }) => {
     ];
     
     const track = document.createElement('div');
-    track.className = 'timeline-track w-[85%] h-1 bg-gradient-to-r from-time-accent/20 via-time-accent/60 to-time-accent/20 mx-auto mt-16 relative rounded-full overflow-hidden';
+    track.className = 'timeline-track w-[85%] h-1 bg-gradient-to-r from-time-accent/20 via-time-accent/80 to-time-accent/20 mx-auto mt-16 relative rounded-full overflow-hidden';
     timeline.appendChild(track);
     
     // Add pulsing light effect to track
@@ -43,7 +43,7 @@ const TimelineAnimation: React.FC<TimelineAnimationProps> = ({ className }) => {
     
     markers.forEach((marker, index) => {
       const markerElement = document.createElement('div');
-      markerElement.className = 'time-marker absolute w-4 h-4 -mt-1.5 rounded-full bg-time-accent/80 border border-time-accent cursor-pointer transform transition-all duration-300 hover:scale-125 hover:bg-time-accent';
+      markerElement.className = 'time-marker absolute w-5 h-5 -mt-2 rounded-full bg-time-accent border-2 border-time-accent/80 cursor-pointer transform transition-all duration-300 hover:scale-125 hover:bg-time-accent hover:border-white';
       markerElement.style.left = marker.position;
       markerElement.dataset.index = index.toString();
       
@@ -58,7 +58,7 @@ const TimelineAnimation: React.FC<TimelineAnimationProps> = ({ className }) => {
       });
       
       const label = document.createElement('div');
-      label.className = 'absolute text-xs font-medium text-time-accent whitespace-nowrap -bottom-8 transition-all duration-300';
+      label.className = 'absolute text-sm font-medium text-white whitespace-nowrap -bottom-8 transition-all duration-300';
       label.textContent = marker.year;
       label.style.left = '50%';
       label.style.transform = 'translateX(-50%)';
@@ -148,18 +148,20 @@ const TimelineAnimation: React.FC<TimelineAnimationProps> = ({ className }) => {
       <div 
         ref={timelineRef} 
         className={cn(
-          "relative w-full h-44 overflow-hidden bg-gradient-to-b from-time-dark/50 to-transparent rounded-xl",
+          "relative w-full h-64 overflow-hidden bg-gradient-to-b from-[#121a29] to-[#0a0f18] rounded-xl border border-blue-900/30 shadow-xl",
           className
         )}
       >
         {/* Timeline description appears when a marker is hovered/active */}
         <div className={cn(
-          "absolute top-2 left-0 right-0 text-center transition-all duration-500 px-4",
+          "absolute top-6 left-0 right-0 text-center transition-all duration-500 px-6 h-16",
           activeMarkerIndex !== null ? "opacity-100" : "opacity-0"
         )}>
-          <p className="text-sm text-time-accent/90 font-medium">
-            {activeMarkerIndex !== null ? descriptions[activeMarkerIndex] : ""}
-          </p>
+          <div className="glass-effect p-4 rounded-lg inline-block max-w-3xl">
+            <p className="text-base text-white font-medium">
+              {activeMarkerIndex !== null ? descriptions[activeMarkerIndex] : ""}
+            </p>
+          </div>
         </div>
         
         {/* Fix: Replace jsx prop with standard React style element */}
