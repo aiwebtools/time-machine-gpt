@@ -88,8 +88,12 @@
 }
 
 @layer base {
+  /* Complete removal of any border styles from the global selector */
   * {
-    /* Removed the border-border that was causing the white border */
+    border: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   body {
