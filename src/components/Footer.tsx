@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://www.collegedegree.xyz" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                <a href="http://collegedegreegpt.xyz/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   College Degree GPT
                 </a>
               </li>
