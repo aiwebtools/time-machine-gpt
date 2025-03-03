@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface TimeJourneySectionProps {
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
   onTimeTravel: () => void;
 }
 

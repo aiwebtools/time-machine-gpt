@@ -37,7 +37,16 @@ const ScrollReveal = ({ children }: ScrollRevealProps) => {
     <React.Fragment>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, { addToRefs });
+          // Only pass addToRefs to components that accept it
+          const childProps = { ...child.props };
+          
+          // Check if the component type accepts addToRefs
+          // This is a safer approach that handles both custom components and built-in elements
+          if (typeof child.type !== 'string') {
+            childProps.addToRefs = addToRefs;
+          }
+          
+          return React.cloneElement(child, childProps);
         }
         return child;
       })}
