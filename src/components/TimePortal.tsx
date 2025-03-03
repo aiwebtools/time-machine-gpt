@@ -56,9 +56,9 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       </div>
       
       <div className="relative z-10">
-        {/* Video container - removed padding constraints and made it full width */}
-        <div className="w-full mx-auto">
-          {/* Increased aspect ratio for a larger video display */}
+        {/* Full-width video container with no constraints */}
+        <div className="w-full">
+          {/* Very large aspect ratio for maximum video display */}
           <div className="aspect-video w-full">
             <iframe 
               className="w-full h-full shadow-xl"
@@ -71,7 +71,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           </div>
         </div>
         
-        {/* Moved button below with proper spacing */}
+        {/* Button with proper spacing */}
         <div className="py-6 px-4 max-w-md mx-auto">
           <button
             onClick={handleStartJourney}
