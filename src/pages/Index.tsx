@@ -126,12 +126,34 @@ const Index = () => {
     heroSectionRef.current = el;
   };
 
+  // Updated the time travel click handler to ensure it works properly
   const handleTimeTravelClick = () => {
-    window.open(TIME_MACHINE_URL, '_blank');
-    toast.success("Launching Time Machine!", {
-      description: "Prepare for an extraordinary journey through time",
-      duration: 3000
-    });
+    console.log("Time travel button clicked!");
+    try {
+      // Use window.open with proper parameters and error handling
+      const newWindow = window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
+      
+      // Handle popup blockers
+      if (newWindow === null) {
+        toast.error("Popup was blocked", {
+          description: "Please allow popups and try again",
+          duration: 3000
+        });
+        return;
+      }
+      
+      // Show success toast if window opened successfully
+      toast.success("Launching Time Machine!", {
+        description: "Prepare for an extraordinary journey through time",
+        duration: 3000
+      });
+    } catch (error) {
+      console.error("Error opening Time Machine URL:", error);
+      toast.error("Could not launch Time Machine", {
+        description: "Please try again later",
+        duration: 3000
+      });
+    }
   };
 
   return (
@@ -151,7 +173,7 @@ const Index = () => {
       
       <TimelineSection addToRefs={addToRefs} />
       
-      {/* New CTA Button Section */}
+      {/* Time Travel CTA Button Section */}
       <div 
         ref={addToRefs}
         className="reveal bg-gradient-to-b from-time-dark/80 to-time-dark py-16 text-center relative overflow-hidden"
