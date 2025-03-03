@@ -96,10 +96,15 @@
     padding: 0;
   }
 
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    overflow-x: hidden;
     position: relative;
   }
 }
@@ -113,4 +118,12 @@ header {
 /* Explicitly target navigation elements to ensure no borders */
 nav, nav * {
   border: none !important;
+}
+
+/* Responsive fixes */
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
 }

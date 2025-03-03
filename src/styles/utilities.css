@@ -44,3 +44,33 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(194, 160, 110, 0.8);
 }
+
+/* Responsive utilities */
+.mobile-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .reveal {
+    transform: translateY(20px);
+  }
+}
+
+/* Fix for header and navbar on mobile */
+@media screen and (max-width: 768px) {
+  header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+  }
+  
+  nav {
+    width: 100% !important;
+  }
+}
