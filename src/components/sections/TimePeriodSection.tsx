@@ -22,7 +22,7 @@ const TimePeriodSection: React.FC<TimePeriodSectionProps> = ({ timeDestinationUr
       era: "Ancient World",
       years: "3000 BCE - 500 CE",
       description: "Witness the rise of early civilizations, from Ancient Egypt and Greece to the Roman Empire.",
-      image: "bg-[url('/lovable-uploads/7698c4b8-7aaf-4db1-ac4b-de8fc07f9333.png')]"
+      image: "bg-[url('/lovable-uploads/7698c4b8-7aaf-4db1-ac4b-de8fc07f9333.png')] bg-cover bg-center"
     }, 
     {
       era: "Middle Ages & Renaissance",
