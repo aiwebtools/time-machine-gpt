@@ -39,6 +39,12 @@
     .time-portal-bg {
       background: theme('colors.time.dark');
     }
+    
+    /* Fix for overlapping text in header */
+    header .font-serif {
+      font-size: 0.875rem !important;
+      line-height: 1.25rem !important;
+    }
   }
 }
 
@@ -75,6 +81,17 @@
     transform: none !important;
     opacity: 1 !important;
   }
+  
+  /* Fix header text wrapping */
+  & header .font-serif {
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+  }
+  
+  & header .text-\[8px\] {
+    font-size: 0.5rem !important;
+    white-space: nowrap !important;
+  }
 }
 
 /* Fix for various WebKit browsers */
@@ -93,4 +110,17 @@ iframe {
 .progress-container {
   width: 100%;
   left: 0;
+}
+
+/* Add specific mobile header fixes */
+@media screen and (max-width: 640px) {
+  /* Fix overlapping logo and text */
+  header .font-serif {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  header .flex.items-center > div {
+    max-width: 130px;
+  }
 }

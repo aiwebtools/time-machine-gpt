@@ -61,6 +61,16 @@
     width: 100% !important;
     max-width: 100vw !important;
   }
+  
+  /* Prevent text overlaps in header */
+  header .flex.items-center {
+    gap: 0.5rem;
+  }
+  
+  header .font-serif {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 /* Facebook browser specific fixes */
