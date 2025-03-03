@@ -71,11 +71,11 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           </div>
         </div>
         
-        <div className="space-y-6 max-w-md mx-auto mt-6">
+        <div className="space-y-6 max-w-md mx-auto mt-8">
           <button
             onClick={handleStartJourney}
             className="w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden
-              font-medium text-white mt-2 bg-time-accent hover:bg-time-accent/90 cursor-pointer"
+              font-medium text-white bg-time-accent hover:bg-time-accent/90 cursor-pointer"
           >
             <span className={cn(
               "absolute inset-0 flex items-center justify-center",
