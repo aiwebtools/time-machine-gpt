@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 interface TimelineSectionProps {
   className?: string;
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
 }
 
 const TimelineSection = ({ className, addToRefs }: TimelineSectionProps) => {

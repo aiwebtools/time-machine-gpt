@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 interface FeaturesProps {
   className?: string;
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
 }
 
 const Features = ({ className, addToRefs }: FeaturesProps) => {

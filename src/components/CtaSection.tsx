@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 interface CtaSectionProps {
   className?: string;
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
   timeDestinationUrl: string;
 }
 

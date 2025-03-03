@@ -1,10 +1,11 @@
+
 import React, { useRef } from 'react';
 import TimePortal from '@/components/TimePortal';
 import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
   className?: string;
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
   onStartJourney: (destination: string, date: string) => void;
   timeDestinationUrl: string;
   setHeroSectionRef: (el: HTMLElement | null) => void;
@@ -22,7 +23,7 @@ const HeroSection = ({
     <section 
       ref={(el) => { 
         if (el) setHeroSectionRef(el); 
-        addToRefs(el);
+        if (addToRefs) addToRefs(el);
       }} 
       className={cn("relative min-h-screen flex flex-col justify-center hero-section overflow-hidden space-bg", className)}
     >

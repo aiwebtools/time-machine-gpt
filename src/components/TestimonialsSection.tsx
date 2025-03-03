@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 interface TestimonialsSectionProps {
   className?: string;
-  addToRefs: (el: HTMLElement | null) => void;
+  addToRefs?: (el: HTMLElement | null) => void;
 }
 
 const TestimonialsSection = ({ className, addToRefs }: TestimonialsSectionProps) => {
