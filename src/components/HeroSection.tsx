@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import TimePortal from '@/components/TimePortal';
 import { cn } from '@/lib/utils';
@@ -29,7 +28,7 @@ const HeroSection = ({
     >
       <div className="absolute inset-0 bg-gradient-to-b from-time-dark via-time-medium to-time-dark z-0 opacity-80"></div>
       
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none z-0">
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none z-1">
         <div className="relative">
           <div className="w-[600px] h-[600px] rounded-full border-2 border-time-accent/20 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
           <div className="w-[400px] h-[400px] rounded-full border border-time-accent/30 animate-clock-spin absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{
