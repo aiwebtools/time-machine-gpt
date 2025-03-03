@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -126,36 +125,6 @@ const Index = () => {
     heroSectionRef.current = el;
   };
 
-  // Updated the time travel click handler to ensure it works properly
-  const handleTimeTravelClick = () => {
-    console.log("Time travel button clicked!");
-    try {
-      // Use window.open with proper parameters and error handling
-      const newWindow = window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
-      
-      // Handle popup blockers
-      if (newWindow === null) {
-        toast.error("Popup was blocked", {
-          description: "Please allow popups and try again",
-          duration: 3000
-        });
-        return;
-      }
-      
-      // Show success toast if window opened successfully
-      toast.success("Launching Time Machine!", {
-        description: "Prepare for an extraordinary journey through time",
-        duration: 3000
-      });
-    } catch (error) {
-      console.error("Error opening Time Machine URL:", error);
-      toast.error("Could not launch Time Machine", {
-        description: "Please try again later",
-        duration: 3000
-      });
-    }
-  };
-
   return (
     <div className={cn("min-h-screen flex flex-col transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
       <div className="progress-container">
@@ -172,30 +141,6 @@ const Index = () => {
       />
       
       <TimelineSection addToRefs={addToRefs} />
-      
-      {/* Time Travel CTA Button Section */}
-      <div 
-        ref={addToRefs}
-        className="reveal bg-gradient-to-b from-time-dark/80 to-time-dark py-16 text-center relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4">
-          <button
-            onClick={handleTimeTravelClick}
-            className="btn-glow px-10 py-4 bg-time-accent text-white text-lg rounded-md font-medium 
-                     hover:bg-time-accent/90 transition-all duration-300 hover:scale-105 
-                     hover:shadow-[0_0_25px_rgba(194,160,110,0.6)] relative overflow-hidden group"
-          >
-            <span className="relative z-10">Begin Time Travel Experience Now</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-time-accent/0 via-time-accent/30 to-time-accent/0 
-                           -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-          </button>
-        </div>
-        
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/c73d4e37-b0c3-4d03-9e63-4d000f6b90ad.png')] opacity-10 bg-cover bg-center"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-time-dark to-transparent"></div>
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-time-dark to-transparent"></div>
-      </div>
       
       <TestimonialsSection addToRefs={addToRefs} />
       
