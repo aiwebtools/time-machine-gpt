@@ -1,0 +1,48 @@
+
+/* Facebook in-app browser compatibility fixes */
+@supports (-webkit-overflow-scrolling: touch) {
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Force hardware acceleration for animations */
+  .hero-section, .time-portal-bg, .reveal {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+  }
+  
+  /* Fix for animation jank in mobile browsers */
+  .animate-clock-spin, .animate-clock-spin-slow, .animate-pulse {
+    will-change: transform;
+  }
+  
+  /* Fix for Facebook in-app browser specifically */
+  @media all and (max-width: 800px) {
+    .glass-effect {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Simplify background effects for better performance */
+    .time-portal-bg {
+      background: theme('colors.time.dark');
+    }
+  }
+}
+
+/* Fix for various WebKit browsers */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .star {
+    transform: translateZ(0);
+  }
+}
