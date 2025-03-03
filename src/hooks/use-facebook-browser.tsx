@@ -23,6 +23,22 @@ export function useFacebookBrowser() {
         window.scrollTo(0, 1);
         window.scrollTo(0, 0);
       }, 100);
+      
+      // Apply critical Facebook browser fixes
+      document.documentElement.style.height = '100%';
+      document.body.style.height = '100%';
+      document.body.style.position = 'relative';
+      
+      // Fix for position:fixed elements in Facebook browser
+      const fixPositionFixed = () => {
+        window.scrollTo(0, 0);
+      };
+      
+      window.addEventListener('scroll', fixPositionFixed, { passive: true });
+      
+      return () => {
+        window.removeEventListener('scroll', fixPositionFixed);
+      };
     }
   }, []);
   
