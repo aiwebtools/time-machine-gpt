@@ -71,11 +71,63 @@ const StreakingStars = () => {
   );
 };
 
+// Function to hide Lovable badge by targeting all possible selectors
+const hideLovableBadge = () => {
+  useEffect(() => {
+    const hideBadge = () => {
+      // Target all possible badge selectors
+      const badgeSelectors = [
+        '.gpte-badge', 
+        '.gpt-engineer-badge', 
+        '.lovable-badge', 
+        '#lovable-badge',
+        '[data-lovable-badge]',
+        '.gpt-badge',
+        '#gpte-badge'
+      ];
+      
+      badgeSelectors.forEach(selector => {
+        const badges = document.querySelectorAll(selector);
+        badges.forEach(badge => {
+          if (badge instanceof HTMLElement) {
+            badge.style.display = 'none';
+            badge.style.visibility = 'hidden';
+            badge.style.opacity = '0';
+            badge.style.height = '0';
+            badge.style.width = '0';
+            badge.style.margin = '0';
+            badge.style.padding = '0';
+            badge.style.pointerEvents = 'none';
+          }
+        });
+      });
+    };
+
+    // Run immediately
+    hideBadge();
+    
+    // Also run after a delay to catch dynamically added badges
+    setTimeout(hideBadge, 500);
+    setTimeout(hideBadge, 1500);
+    
+    // Set up a mutation observer to catch dynamically added badges
+    const observer = new MutationObserver(hideBadge);
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true 
+    });
+    
+    return () => observer.disconnect();
+  }, []);
+};
+
 const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   // Use the hook to detect Facebook browser
   useFacebookBrowser();
+  // Hide Lovable badge
+  hideLovableBadge();
   
   return (
     <>

@@ -64,25 +64,27 @@ const Index = () => {
       
       <StarryBackground containerRef={heroSectionRef} />
       
-      <ScrollReveal>
-        <HeroSection 
-          onStartJourney={handleStartJourney}
-          timeDestinationUrl={TIME_MACHINE_URL}
-          setHeroSectionRef={setHeroSectionRef}
-        />
-        
-        <TimelineSection />
-        
-        <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
-        
-        <TestimonialsSection />
-        
-        <Features />
-        
-        <CtaSection 
-          timeDestinationUrl={TIME_MACHINE_URL}
-        />
-      </ScrollReveal>
+      <div>
+        <ScrollReveal>
+          <HeroSection 
+            onStartJourney={handleStartJourney}
+            timeDestinationUrl={TIME_MACHINE_URL}
+            setHeroSectionRef={setHeroSectionRef}
+          />
+          
+          <TimelineSection />
+          
+          <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
+          
+          <TestimonialsSection />
+          
+          <Features />
+          
+          <CtaSection 
+            timeDestinationUrl={TIME_MACHINE_URL}
+          />
+        </ScrollReveal>
+      </div>
       
       <Footer />
     </div>
