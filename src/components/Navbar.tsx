@@ -25,7 +25,7 @@ const Navbar = () => {
     )}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <div className="relative w-7 h-7 rounded-full overflow-hidden border border-time-accent mr-2">
+          <div className="relative w-7 h-7 rounded-full overflow-hidden border border-time-accent mr-2 flex-shrink-0">
             <div className="absolute inset-0 bg-time-medium animate-pulse"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 rounded-full border-2 border-time-accent relative animate-clock-spin-slow">
@@ -34,24 +34,24 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start max-w-[110px]">
             <span className={cn(
-              "font-serif text-sm md:text-lg font-medium transition-colors leading-tight", 
+              "font-serif text-xs sm:text-sm md:text-lg font-medium transition-colors leading-tight whitespace-nowrap text-ellipsis overflow-hidden", 
               scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold"
             )}>
-              TIME MACHINE GPT
+              TIME MACHINE
             </span>
             <span className={cn(
-              "text-[8px] md:text-[10px] font-medium transition-colors max-w-[120px] md:max-w-none text-left", 
+              "text-[7px] sm:text-[8px] md:text-[10px] font-medium transition-colors text-left", 
               scrollPosition > 50 ? "text-time-dark/70" : "text-time-accent/90"
             )}>
-              Presented By: AiWebTools.Ai
+              By: AiWebTools.Ai
             </span>
           </div>
         </Link>
         
         <button 
-          className="md:hidden" 
+          className="md:hidden p-2" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >

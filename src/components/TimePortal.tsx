@@ -30,6 +30,29 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     }, 3000);
   };
   
+  // Add useEffect for handling resize events for better responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      // Force iframe to resize properly on orientation change
+      const iframe = document.querySelector('iframe');
+      if (iframe) {
+        iframe.style.height = 'auto';
+        iframe.style.height = iframe.offsetWidth * (9/16) + 'px';
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
+    // Initial call
+    handleResize();
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
+  
   return (
     <div className={cn(
       "relative overflow-hidden rounded-xl",
@@ -57,9 +80,8 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       </div>
       
       <div className="relative z-10">
-        {/* Full-width video container with no constraints */}
+        {/* Responsive video container */}
         <div className="w-full">
-          {/* Very large aspect ratio for maximum video display */}
           <div className="aspect-video w-full">
             <iframe 
               className="w-full h-full shadow-xl"
@@ -73,12 +95,13 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           </div>
         </div>
         
-        {/* Button with proper spacing */}
-        <div className="py-6 px-4 max-w-md mx-auto">
+        {/* Improved mobile-friendly button with proper spacing */}
+        <div className="py-4 sm:py-6 px-3 sm:px-4 max-w-md mx-auto">
           <button
             onClick={handleStartJourney}
             className="w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden
-              font-medium text-white bg-time-accent hover:bg-time-accent/90 cursor-pointer"
+              font-medium text-white bg-time-accent hover:bg-time-accent/90 cursor-pointer
+              shadow-md hover:shadow-lg active:shadow-sm active:translate-y-0.5"
           >
             <span className={cn(
               "absolute inset-0 flex items-center justify-center",

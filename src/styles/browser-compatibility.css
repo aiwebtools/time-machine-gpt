@@ -1,3 +1,4 @@
+
 /* Facebook in-app browser compatibility fixes */
 @supports (-webkit-overflow-scrolling: touch) {
   html, body {
@@ -41,17 +42,32 @@
     
     /* Fix for overlapping text in header */
     header .font-serif {
-      font-size: 0.875rem !important;
+      font-size: 0.75rem !important;
       line-height: 1.1rem !important;
+      white-space: nowrap !important;
+      text-overflow: ellipsis !important;
+      overflow: hidden !important;
     }
     
     /* Improve header layout on small screens */
     header .flex.items-center {
-      gap: 0.5rem !important;
+      gap: 0.35rem !important;
     }
     
     header .flex.flex-col.items-start {
-      max-width: 160px !important;
+      max-width: 110px !important;
+    }
+    
+    /* Better touch targets for mobile */
+    button, a {
+      min-height: 44px;
+      padding: 0.75rem !important;
+    }
+    
+    /* Proper spacing for mobile UI elements */
+    .container {
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
     }
   }
 }
@@ -92,9 +108,12 @@
   
   /* Fix header text wrapping */
   & header .font-serif {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
     white-space: nowrap !important;
     line-height: 1.1 !important;
+    max-width: 100% !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
   }
   
   & header .text-\[8px\] {
@@ -106,12 +125,35 @@
   & header .flex.items-center {
     gap: 0.35rem !important;
   }
+  
+  /* Fix button and link tap targets */
+  & button, & a.btn-glow, & .time-marker {
+    min-height: 44px !important;
+  }
+  
+  /* Fix iframe sizing and boundaries */
+  & iframe {
+    max-width: 100% !important;
+    border-radius: 0.5rem !important;
+  }
 }
 
 /* Fix for various WebKit browsers */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .star {
     transform: translateZ(0);
+  }
+  
+  /* Improved touch scrolling */
+  html, body {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Fix for Safari's iframe sizing */
+  iframe {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
   }
 }
 
@@ -132,6 +174,9 @@ iframe {
   header .font-serif {
     font-size: 0.75rem;
     line-height: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   
   header .flex.items-center {
@@ -139,7 +184,7 @@ iframe {
   }
   
   header .flex.items-center > div.flex.flex-col {
-    max-width: 120px;
+    max-width: 110px;
   }
   
   /* Ensure proper text alignment */
@@ -150,5 +195,29 @@ iframe {
   /* Improved spacing between logo and text */
   header .flex.items-center > div.relative {
     flex-shrink: 0;
+  }
+  
+  /* Better button rendering on mobile */
+  button, .btn-glow {
+    transform: translateZ(0);
+  }
+  
+  /* Fix timeline markers on mobile */
+  .time-marker {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
+/* Fix for iPhone notch areas */
+@supports (padding: max(0px)) {
+  header {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+  }
+  
+  .container {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
   }
 }
