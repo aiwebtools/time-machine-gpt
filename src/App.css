@@ -140,6 +140,20 @@ iframe {
   width: 100% !important;
 }
 
+/* Main content improvements */
+main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Better spacing for sections */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
 /* Hide Lovable Badge */
 .gpte-badge, .gpt-engineer-badge, .lovable-badge, #lovable-badge {
   display: none !important;

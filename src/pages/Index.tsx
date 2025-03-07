@@ -21,6 +21,9 @@ const Index = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    // Update document title with more detailed name
+    document.title = "Time Machine GPT - Interactive Time Travel Experience";
+    
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 500);
@@ -44,7 +47,7 @@ const Index = () => {
   const handleTimeTravelClick = () => {
     try {
       window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
-      toast.success("Launching Time Machine!", {
+      toast.success("Launching Time Machine GPT!", {
         description: "Prepare for an extraordinary journey through time",
         duration: 3000
       });
@@ -64,7 +67,7 @@ const Index = () => {
       
       <StarryBackground containerRef={heroSectionRef} />
       
-      <div>
+      <main className="flex-1">
         <ScrollReveal>
           <HeroSection 
             onStartJourney={handleStartJourney}
@@ -84,7 +87,7 @@ const Index = () => {
             timeDestinationUrl={TIME_MACHINE_URL}
           />
         </ScrollReveal>
-      </div>
+      </main>
       
       <Footer />
     </div>
