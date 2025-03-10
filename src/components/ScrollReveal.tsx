@@ -53,8 +53,10 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     <>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
+          // Fix: Use a different approach for adding refs to children
           return React.cloneElement(child, {
-            ref: addToRefs
+            // Only pass ref if it's a DOM element or a forwardRef component
+            ...(typeof child.type !== 'string' ? { addToRefs } : { ref: addToRefs })
           });
         }
         return child;

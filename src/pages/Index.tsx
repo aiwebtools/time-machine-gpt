@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import Navbar from '@/components/Navbar';
@@ -13,6 +12,7 @@ import ProgressBar from '@/components/ProgressBar';
 import TimeJourneySection from '@/components/TimeJourneySection';
 import StarryBackground from '@/components/StarryBackground';
 import DisclaimerPopup from '@/components/DisclaimerPopup';
+import FaqSection from '@/components/FaqSection';
 import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
@@ -22,7 +22,6 @@ const Index = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Update document title with more detailed name
     document.title = "Time Machine GPT - Interactive Time Travel Experience";
     
     const timer = setTimeout(() => {
@@ -81,6 +80,8 @@ const Index = () => {
         <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
         
         <TestimonialsSection />
+        
+        <FaqSection />
         
         <Features />
         
