@@ -27,6 +27,25 @@
     will-change: transform;
   }
   
+  /* Better popup rendering on mobile devices */
+  [class*="DisclaimerPopup"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: opacity;
+  }
+  
+  [class*="DisclaimerPopup"] .space-y-4 {
+    height: auto !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+    padding-right: 5px !important;
+  }
+  
+  /* Fix scrolling issues on iOS */
+  [class*="DisclaimerPopup"] .space-y-4::-webkit-scrollbar {
+    width: 3px !important;
+  }
+  
   /* Fix for Facebook in-app browser specifically */
   @media all and (max-width: 800px) {
     .glass-effect {
@@ -136,6 +155,27 @@
     max-width: 100% !important;
     border-radius: 0.5rem !important;
   }
+  
+  /* Better DisclaimerPopup sizing for FB browser */
+  & [class*="DisclaimerPopup"] {
+    padding: 10px !important;
+  }
+  
+  & [class*="DisclaimerPopup"] h2 {
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  & [class*="DisclaimerPopup"] button {
+    font-size: 14px !important;
+    min-height: 44px !important;
+    padding: 10px 15px !important;
+  }
+  
+  & [class*="DisclaimerPopup"] p, 
+  & [class*="DisclaimerPopup"] li {
+    font-size: 13px !important;
+  }
 }
 
 /* Fix for various WebKit browsers */
@@ -154,6 +194,11 @@
     width: 100% !important;
     height: auto !important;
     aspect-ratio: 16/9;
+  }
+  
+  /* Fix for iOS rendering of fixed elements */
+  [class*="DisclaimerPopup"] {
+    transform: translateZ(0);
   }
 }
 
@@ -217,6 +262,19 @@ iframe {
   }
   
   .container {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+  }
+  
+  /* Fix bottom padding for notched devices */
+  footer {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+  }
+  
+  /* Fix DisclaimerPopup positioning for notched devices */
+  [class*="DisclaimerPopup"] {
+    padding-top: max(1rem, env(safe-area-inset-top)) !important;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
     padding-left: max(1rem, env(safe-area-inset-left)) !important;
     padding-right: max(1rem, env(safe-area-inset-right)) !important;
   }

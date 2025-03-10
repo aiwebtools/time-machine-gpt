@@ -3,54 +3,63 @@ import React, { useEffect, useRef } from 'react';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
+  threshold?: number;
+  rootMargin?: string;
 }
 
-const ScrollReveal = ({ children }: ScrollRevealProps) => {
-  const revealRefs = useRef<HTMLElement[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-    
-    revealRefs.current.forEach(el => observer.observe(el));
-    
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
+const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  threshold = 0.1,
+  rootMargin = '0px 0px -100px 0px'
+}) => {
+  const refs = useRef<(HTMLElement | null)[]>([]);
+  
   const addToRefs = (el: HTMLElement | null) => {
-    if (el && !revealRefs.current.includes(el)) {
-      revealRefs.current.push(el);
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
     }
   };
-
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            target.classList.add('active');
+            observer.unobserve(target);
+          }
+        });
+      },
+      {
+        threshold,
+        rootMargin
+      }
+    );
+    
+    refs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+    
+    return () => {
+      refs.current.forEach(ref => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, [threshold, rootMargin]);
+  
+  // Clone children and add the ref
   return (
-    <React.Fragment>
+    <>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          // Only pass addToRefs to components that accept it
-          const childProps = { ...child.props };
-          
-          // Check if the component type accepts addToRefs
-          // This is a safer approach that handles both custom components and built-in elements
-          if (typeof child.type !== 'string') {
-            childProps.addToRefs = addToRefs;
-          }
-          
-          return React.cloneElement(child, childProps);
+          return React.cloneElement(child, {
+            ref: addToRefs
+          });
         }
         return child;
       })}
-    </React.Fragment>
+    </>
   );
 };
 

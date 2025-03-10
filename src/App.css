@@ -92,6 +92,26 @@
   .time-portal-bg {
     opacity: 0.6 !important; /* Better visibility on mobile */
   }
+  
+  /* Mobile popup optimization */
+  [class*="DisclaimerPopup"] .p-4 {
+    padding: 1rem !important;
+  }
+  
+  [class*="DisclaimerPopup"] h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  [class*="DisclaimerPopup"] button {
+    font-size: 0.875rem !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+  
+  /* Improve touch targets on mobile */
+  button, a {
+    min-height: 44px; /* Apple's recommended minimum tap target size */
+  }
 }
 
 /* Smaller screens require more aggressive adjustments */
@@ -112,6 +132,19 @@
   .hero-section .flex.flex-col.sm\:flex-row {
     gap: 0.5rem !important;
   }
+  
+  /* Better DisclaimerPopup sizing for small screens */
+  [class*="DisclaimerPopup"] {
+    max-height: 85vh !important;
+  }
+  
+  [class*="DisclaimerPopup"] .space-y-4 {
+    margin-top: 0.5rem !important;
+  }
+  
+  [class*="DisclaimerPopup"] p, [class*="DisclaimerPopup"] li {
+    font-size: 0.75rem !important;
+  }
 }
 
 /* Orientation changes for mobile devices */
@@ -124,6 +157,16 @@
   .hero-section .container {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  
+  /* Improve DisclaimerPopup in landscape */
+  [class*="DisclaimerPopup"] {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  
+  [class*="DisclaimerPopup"] .space-y-4 {
+    margin-top: 0 !important;
   }
 }
 
@@ -152,6 +195,29 @@ main {
 section {
   position: relative;
   overflow: hidden;
+}
+
+/* Define animations for the DisclaimerPopup */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 5s infinite linear;
+  background-size: 200% 100%;
+}
+
+/* Ensure buttons have proper touch targets on mobile */
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Improved mobile scrolling */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 /* Hide Lovable Badge */

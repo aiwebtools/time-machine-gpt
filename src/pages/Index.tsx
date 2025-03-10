@@ -12,6 +12,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import ProgressBar from '@/components/ProgressBar';
 import TimeJourneySection from '@/components/TimeJourneySection';
 import StarryBackground from '@/components/StarryBackground';
+import DisclaimerPopup from '@/components/DisclaimerPopup';
 import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
@@ -62,31 +63,30 @@ const Index = () => {
 
   return (
     <div className={cn("min-h-screen flex flex-col transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
+      <DisclaimerPopup />
       <ProgressBar />
       <Navbar />
       
       <StarryBackground containerRef={heroSectionRef} />
       
       <main className="flex-1">
-        <ScrollReveal>
-          <HeroSection 
-            onStartJourney={handleStartJourney}
-            timeDestinationUrl={TIME_MACHINE_URL}
-            setHeroSectionRef={setHeroSectionRef}
-          />
-          
-          <TimelineSection />
-          
-          <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
-          
-          <TestimonialsSection />
-          
-          <Features />
-          
-          <CtaSection 
-            timeDestinationUrl={TIME_MACHINE_URL}
-          />
-        </ScrollReveal>
+        <HeroSection 
+          onStartJourney={handleStartJourney}
+          timeDestinationUrl={TIME_MACHINE_URL}
+          setHeroSectionRef={setHeroSectionRef}
+        />
+        
+        <TimelineSection />
+        
+        <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
+        
+        <TestimonialsSection />
+        
+        <Features />
+        
+        <CtaSection 
+          timeDestinationUrl={TIME_MACHINE_URL}
+        />
       </main>
       
       <Footer />
