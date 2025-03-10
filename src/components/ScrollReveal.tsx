@@ -87,8 +87,8 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         ];
         
         if (knownComponents.includes(componentName)) {
-          // Pass addToRefs to known components that support it
-          return React.cloneElement(child, { addToRefs });
+          // Use type assertion to safely pass addToRefs prop
+          return React.cloneElement(child, { addToRefs } as React.ComponentProps<any>);
         }
         
         // For other components, wrap in a div with ref
