@@ -12,30 +12,20 @@ import ScrollReveal from '@/components/ScrollReveal';
 import ProgressBar from '@/components/ProgressBar';
 import TimeJourneySection from '@/components/TimeJourneySection';
 import StarryBackground from '@/components/StarryBackground';
-import DisclaimerPopup from '@/components/DisclaimerPopup';
 import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
-const DISCLAIMER_KEY = "time-machine-disclaimer-accepted";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showDisclaimer, setShowDisclaimer] = useState(false);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     // Update document title with more detailed name
     document.title = "Time Machine GPT - Interactive Time Travel Experience";
     
-    // Check if user has already accepted the disclaimer
-    const hasAcceptedDisclaimer = localStorage.getItem(DISCLAIMER_KEY) === "true";
-    
     const timer = setTimeout(() => {
       setIsLoaded(true);
-      // Only show disclaimer if user hasn't accepted it before
-      if (!hasAcceptedDisclaimer) {
-        setShowDisclaimer(true);
-      }
     }, 500);
     
     return () => {
@@ -70,16 +60,6 @@ const Index = () => {
     }
   };
 
-  const handleAcceptDisclaimer = () => {
-    // Save acceptance to localStorage
-    localStorage.setItem(DISCLAIMER_KEY, "true");
-    setShowDisclaimer(false);
-    toast.success("Welcome, time traveler!", {
-      description: "Your journey through history awaits.",
-      duration: 3000
-    });
-  };
-
   return (
     <div className={cn("min-h-screen flex flex-col transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
       <ProgressBar />
@@ -110,11 +90,6 @@ const Index = () => {
       </main>
       
       <Footer />
-      
-      <DisclaimerPopup 
-        isOpen={showDisclaimer}
-        onAccept={handleAcceptDisclaimer}
-      />
     </div>
   );
 };
