@@ -7,6 +7,11 @@ interface ScrollRevealProps {
   rootMargin?: string;
 }
 
+// Define an interface for components that can accept addToRefs prop
+interface RefAwareComponentProps {
+  addToRefs?: (el: HTMLElement | null) => void;
+}
+
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   threshold = 0.1,
@@ -53,10 +58,14 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     <>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          // Check if the component has been designed to accept addToRefs
+          // Check if the component has addToRefs in its props interface
+          // We can't directly check the interface, but we can check if the component
+          // already has an addToRefs prop defined
           const childProps = child.props as any;
-          if (childProps && typeof childProps.addToRefs !== 'undefined') {
-            // The component accepts addToRefs prop
+          const hasAddToRefsProp = 'addToRefs' in childProps;
+          
+          if (hasAddToRefsProp) {
+            // The component already has addToRefs prop defined, so it's designed to accept it
             return React.cloneElement(child, { addToRefs });
           } else {
             // The component doesn't accept addToRefs, wrap it in a div that uses the ref
