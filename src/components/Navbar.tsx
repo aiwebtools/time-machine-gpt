@@ -153,7 +153,7 @@ const Navbar = () => {
             className="w-full py-2 text-center bg-time-medium text-white rounded-md hover:bg-time-dark transition-colors" 
             onClick={() => setIsMenuOpen(false)}
           >
-            Begin Journey
+            Begin Time Travel Journey
           </a>
         </nav>
       </div>
