@@ -1,6 +1,23 @@
 
 import React, { useEffect, useRef } from 'react';
 
+// Import component types at the top to avoid circular dependency issues
+import type TimelineSection from './TimelineSection';
+import type TestimonialsSection from './TestimonialsSection';
+import type Features from './Features';
+import type CtaSection from './CtaSection';
+import type FaqSection from './FaqSection';
+import type TimeJourneySection from './TimeJourneySection';
+
+// Create a type that includes all components that can accept addToRefs
+type ComponentWithAddToRefs = 
+  | typeof TimelineSection
+  | typeof TestimonialsSection
+  | typeof Features
+  | typeof CtaSection
+  | typeof FaqSection
+  | typeof TimeJourneySection;
+
 interface ScrollRevealProps {
   children: React.ReactNode;
   threshold?: number;
@@ -51,46 +68,35 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <>
       {React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-          // Check if the component accepts addToRefs prop by checking its props type
-          // This is safer than checking for presence of a property
-          const childType = child.type as any;
-          
-          // Check if the component has propTypes that include addToRefs
-          // or if it's a functional component that accepts addToRefs
-          // We'll use a safer approach by checking if the component is one of our known components
-          const isKnownComponent = 
-            child.type === TimelineSection ||
-            child.type === TestimonialsSection ||
-            child.type === Features ||
-            child.type === CtaSection ||
-            child.type === FaqSection ||
-            child.type === TimeJourneySection;
-          
-          if (isKnownComponent) {
-            // For known components, we can pass the addToRefs prop safely
-            return React.cloneElement(child, { addToRefs } as any);
-          } else {
-            // For unknown components, wrap in a div with ref
-            return (
-              <div ref={addToRefs} className="scroll-reveal-wrapper">
-                {child}
-              </div>
-            );
-          }
+        if (!React.isValidElement(child)) {
+          return child;
         }
-        return child;
+        
+        // Define a safer way to check component types
+        const componentName = (child.type as any)?.displayName || (child.type as any)?.name;
+        const isKnownComponent = [
+          'TimelineSection',
+          'TestimonialsSection',
+          'Features',
+          'CtaSection',
+          'FaqSection',
+          'TimeJourneySection'
+        ].includes(componentName);
+        
+        // If it's a known component that accepts addToRefs, pass it directly
+        if (isKnownComponent) {
+          return React.cloneElement(child, { addToRefs } as any);
+        }
+        
+        // For other components, wrap in a div with ref
+        return (
+          <div ref={addToRefs} className="scroll-reveal-wrapper">
+            {child}
+          </div>
+        );
       })}
     </>
   );
 };
-
-// Import the component types to use for checking
-import TimelineSection from './TimelineSection';
-import TestimonialsSection from './TestimonialsSection';
-import Features from './Features';
-import CtaSection from './CtaSection';
-import FaqSection from './FaqSection';
-import TimeJourneySection from './TimeJourneySection';
 
 export default ScrollReveal;
