@@ -7,11 +7,6 @@ interface ScrollRevealProps {
   rootMargin?: string;
 }
 
-// Define an interface for components that can accept addToRefs prop
-interface RefAwareComponentProps {
-  addToRefs?: (el: HTMLElement | null) => void;
-}
-
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   threshold = 0.1,
@@ -53,22 +48,30 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     };
   }, [threshold, rootMargin]);
   
-  // Clone children and check if they accept addToRefs prop
   return (
     <>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          // Check if the component has addToRefs in its props interface
-          // We can't directly check the interface, but we can check if the component
-          // already has an addToRefs prop defined
-          const childProps = child.props as any;
-          const hasAddToRefsProp = 'addToRefs' in childProps;
+          // Check if the component accepts addToRefs prop by checking its props type
+          // This is safer than checking for presence of a property
+          const childType = child.type as any;
           
-          if (hasAddToRefsProp) {
-            // The component already has addToRefs prop defined, so it's designed to accept it
-            return React.cloneElement(child, { addToRefs });
+          // Check if the component has propTypes that include addToRefs
+          // or if it's a functional component that accepts addToRefs
+          // We'll use a safer approach by checking if the component is one of our known components
+          const isKnownComponent = 
+            child.type === TimelineSection ||
+            child.type === TestimonialsSection ||
+            child.type === Features ||
+            child.type === CtaSection ||
+            child.type === FaqSection ||
+            child.type === TimeJourneySection;
+          
+          if (isKnownComponent) {
+            // For known components, we can pass the addToRefs prop safely
+            return React.cloneElement(child, { addToRefs } as any);
           } else {
-            // The component doesn't accept addToRefs, wrap it in a div that uses the ref
+            // For unknown components, wrap in a div with ref
             return (
               <div ref={addToRefs} className="scroll-reveal-wrapper">
                 {child}
@@ -81,5 +84,13 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     </>
   );
 };
+
+// Import the component types to use for checking
+import TimelineSection from './TimelineSection';
+import TestimonialsSection from './TestimonialsSection';
+import Features from './Features';
+import CtaSection from './CtaSection';
+import FaqSection from './FaqSection';
+import TimeJourneySection from './TimeJourneySection';
 
 export default ScrollReveal;
