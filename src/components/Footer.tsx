@@ -61,6 +61,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <a href="https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Time Machine GPT
+                </a>
+              </li>
+              <li>
                 <a href="http://collegedegreegpt.xyz/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   College Degree GPT
                 </a>
