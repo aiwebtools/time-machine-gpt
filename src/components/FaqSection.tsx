@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from '@/lib/utils';
@@ -33,23 +32,23 @@ const FaqSection = ({
   }];
 
   return (
-    <section ref={addToRefs} className={cn("py-20 bg-gradient-to-b from-time-medium to-time-dark relative overflow-hidden", className)}>
+    <section ref={addToRefs} className={cn("py-12 md:py-20 bg-gradient-to-b from-time-medium to-time-dark relative overflow-hidden", className)}>
       <div className="absolute inset-0 bg-[url('/lovable-uploads/e798e2e5-5c6b-43ab-9e0b-24319bbab7ac.png')] opacity-10 bg-cover bg-center"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-time-medium/90 to-time-dark/70 backdrop-blur-sm"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl md:text-5xl font-serif text-center text-white mb-12 font-bold">
+        <h2 className="text-3xl md:text-5xl font-serif text-center text-white mb-8 md:mb-12 font-bold">
           Frequently Asked <span className="text-time-accent">Questions</span>
         </h2>
         
-        <div className="max-w-3xl mx-auto bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-time-accent/20">
+        <div className="max-w-3xl mx-auto bg-black/30 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-time-accent/20">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b border-time-accent/20 last:border-b-0">
-                <AccordionTrigger className="text-white hover:text-time-accent text-lg py-4">
+                <AccordionTrigger className="text-white hover:text-time-accent text-base md:text-lg py-3 md:py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-300">
+                <AccordionContent className="text-gray-300 text-sm md:text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

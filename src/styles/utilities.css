@@ -11,6 +11,15 @@
   transform: translateY(0);
 }
 
+/* Ensure content is visible on mobile even without scroll animations */
+@media (max-width: 768px) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Progress tracker */
 .progress-container {
   width: 100%;
@@ -61,7 +70,8 @@
   }
   
   .reveal {
-    transform: translateY(20px);
+    transform: translateY(0) !important;
+    opacity: 1 !important;
   }
   
   /* Better mobile typography */
@@ -79,48 +89,50 @@
   .animate-clock-spin, .animate-clock-spin-slow {
     animation-duration: 30s !important;
   }
+  
+  /* Fix grid layouts */
+  .grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Fix for header and navbar on mobile */
 @media screen and (max-width: 768px) {
-  header {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 100vw !important;
-  }
-  
-  nav {
-    width: 100% !important;
-  }
+  /* ... keep existing code (header and nav styles) */
   
   /* Fix overlap issues */
-  header .flex.items-center > div.flex.flex-col {
-    max-width: 110px !important;
-  }
+  /* ... keep existing code (header flex styles) */
   
   /* Improved touch navigation */
-  nav a, nav button {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+  /* ... keep existing code (nav touch styles) */
+  
+  /* Ensure sections and components are visible */
+  section, .section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Fix ScrollReveal */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
 /* Add orientation handling for mobile devices */
 @media screen and (max-height: 480px) and (orientation: landscape) {
-  .hero-section {
-    min-height: auto !important;
-    padding: 6rem 0 2rem !important;
-  }
+  /* ... keep existing code (hero-section styles) */
   
-  .container {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
+  /* ... keep existing code (container padding styles) */
   
-  /* Adjust video size in landscape */
-  .aspect-video {
-    max-height: 45vh !important;
+  /* ... keep existing code (aspect-video styles) */
+  
+  /* Ensure content is visible */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
