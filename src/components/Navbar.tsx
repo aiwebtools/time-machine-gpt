@@ -34,18 +34,18 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start max-w-[110px]">
+          <div className="flex flex-col items-start max-w-[150px]">
             <span className={cn(
-              "font-serif text-xs sm:text-sm md:text-lg font-medium transition-colors leading-tight whitespace-nowrap text-ellipsis overflow-hidden", 
+              "font-serif text-xs sm:text-sm md:text-lg font-medium transition-colors leading-tight whitespace-nowrap text-ellipsis overflow-hidden navbar-title", 
               scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold"
             )}>
-              TIME MACHINE
+              TIME MACHINE GPT
             </span>
             <span className={cn(
               "text-[7px] sm:text-[8px] md:text-[10px] font-medium transition-colors text-left", 
               scrollPosition > 50 ? "text-time-dark/70" : "text-time-accent/90"
             )}>
-              By: AiWebTools.Ai
+              Presented by AiWebTools.Ai
             </span>
           </div>
         </Link>
