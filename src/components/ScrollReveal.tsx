@@ -72,20 +72,23 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           return child;
         }
         
-        // Define a safer way to check component types
-        const componentName = (child.type as any)?.displayName || (child.type as any)?.name;
-        const isKnownComponent = [
+        // Get component type information for comparison
+        const childType = child.type;
+        const componentName = (childType as any)?.displayName || (childType as any)?.name;
+        
+        // List of components that accept addToRefs prop
+        const knownComponents = [
           'TimelineSection',
-          'TestimonialsSection',
+          'TestimonialsSection', 
           'Features',
           'CtaSection',
           'FaqSection',
           'TimeJourneySection'
-        ].includes(componentName);
+        ];
         
-        // If it's a known component that accepts addToRefs, pass it directly
-        if (isKnownComponent) {
-          return React.cloneElement(child, { addToRefs } as any);
+        if (knownComponents.includes(componentName)) {
+          // Pass addToRefs to known components that support it
+          return React.cloneElement(child, { addToRefs });
         }
         
         // For other components, wrap in a div with ref
