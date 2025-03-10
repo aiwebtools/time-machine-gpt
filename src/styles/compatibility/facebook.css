@@ -1,0 +1,45 @@
+
+/* Facebook in-app browser specific fixes */
+.facebook-browser {
+  /* Force layout containment */
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  
+  /* Fix position fixed elements */
+  /* ... keep existing code (header and progress container styles) */
+  
+  /* Scale content properly */
+  /* ... keep existing code (container styles) */
+  
+  /* Fix scrolling issues */
+  & .reveal {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Show all sections and content */
+  & section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Fix header text wrapping */
+  /* ... keep existing code (header font styles) */
+  
+  /* Additional spacing adjustments */
+  /* ... keep existing code (header flex styles) */
+  
+  /* Fix button and link tap targets */
+  /* ... keep existing code (button styles) */
+  
+  /* Fix iframe sizing and boundaries */
+  /* ... keep existing code (iframe styles) */
+  
+  /* Better DisclaimerPopup sizing for FB browser */
+  /* ... keep existing code (DisclaimerPopup styles) */
+}
+
+/* Fix iframe width issues in Facebook browser */
+/* ... keep existing code (iframe max-width styles) */

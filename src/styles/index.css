@@ -6,5 +6,6 @@
 @import './timeline.css';
 @import './text-effects.css';
 @import './components.css';
+@import './compatibility/index.css';
 
 /* Any remaining global styles can go here */

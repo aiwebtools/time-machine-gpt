@@ -1,0 +1,31 @@
+
+/* Fix for various WebKit browsers */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* ... keep existing code (star transform styles) */
+  
+  /* Improved touch scrolling */
+  /* ... keep existing code (tap-highlight styles) */
+  
+  /* Fix for Safari's iframe sizing */
+  /* ... keep existing code (iframe styles) */
+  
+  /* Fix for iOS rendering of fixed elements */
+  /* ... keep existing code (DisclaimerPopup transform styles) */
+  
+  /* Fix section visibility */
+  section, .section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Ensure ScrollReveal items are visible */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Fix progress bar visibility in all browsers */
+/* ... keep existing code (progress-container styles) */
