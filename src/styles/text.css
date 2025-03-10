@@ -1,0 +1,9 @@
+
+/* Enhanced text shadows for better readability on dark backgrounds */
+.text-shadow-enhanced {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-title {
+  text-shadow: 0 0 10px rgba(194, 160, 110, 0.5);
+}

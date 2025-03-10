@@ -1,0 +1,6 @@
+
+/* Fix iframe aspect ratio issues on mobile */
+iframe {
+  aspect-ratio: 16/9;
+  width: 100% !important;
+}

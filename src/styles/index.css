@@ -7,5 +7,12 @@
 @import './text-effects.css';
 @import './components.css';
 @import './compatibility/index.css';
+@import './logo.css';
+@import './layout.css';
+@import './text.css';
+@import './responsive.css';
+@import './iframe.css';
+@import './interactions.css';
+@import './utility.css';
 
 /* Any remaining global styles can go here */

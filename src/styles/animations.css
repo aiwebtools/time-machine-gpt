@@ -1,66 +1,11 @@
 
-@keyframes streakingStar {
-  0% {
-    transform: translateX(-100vw) translateY(-100vh) rotate(-45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100vw) translateY(100vh) rotate(-45deg);
-    opacity: 0;
-  }
+/* Define animations for the DisclaimerPopup */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-@keyframes twinkle {
-  0% { opacity: 0; transform: scale(0.8); }
-  50% { opacity: 0.8; transform: scale(1.2); }
-  100% { opacity: 0; transform: scale(0.8); }
-}
-
-@keyframes shoot {
-  0% { transform: translateX(-100px) translateY(-100px) rotate(-45deg); opacity: 0; }
-  10% { opacity: 1; }
-  20% { transform: translateX(300px) translateY(300px) rotate(-45deg); opacity: 0; }
-  100% { opacity: 0; }
-}
-
-@keyframes pulse {
-  0% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes textShimmer {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes textGlow {
-  0% { text-shadow: 0 0 10px rgba(194, 160, 110, 0.3); }
-  100% { text-shadow: 0 0 20px rgba(194, 160, 110, 0.8), 0 0 30px rgba(194, 160, 110, 0.6); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes orbit {
-  from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
-  to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
-}
-
-.floating-element {
-  animation: float 6s ease-in-out infinite;
-}
-
-.orbit {
-  border-radius: 50%;
-  position: relative;
-  animation: orbit 20s linear infinite;
+.animate-shimmer {
+  animation: shimmer 5s infinite linear;
+  background-size: 200% 100%;
 }

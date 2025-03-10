@@ -1,0 +1,12 @@
+
+/* Ensure buttons have proper touch targets on mobile */
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Improved mobile scrolling */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}

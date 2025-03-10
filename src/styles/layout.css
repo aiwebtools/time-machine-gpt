@@ -1,0 +1,31 @@
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  border: none; /* Ensure no borders at root level */
+  overflow-x: hidden;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Main content improvements */
+main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Better spacing for sections */
+section {
+  position: relative;
+  overflow: hidden;
+}
