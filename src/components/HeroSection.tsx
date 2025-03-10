@@ -49,6 +49,8 @@ const HeroSection = ({
       <div className="container mx-auto px-4 md:px-6 relative z-10 py-10 md:py-20 flex-grow">
         <div className="grid grid-cols-1 gap-12 items-center">
           <div className="text-white space-y-6 max-w-2xl mx-auto text-center">
+            <div className="pt-16 md:pt-20"></div>
+            
             <div ref={addToRefs} className="reveal inline-block px-3 py-1 bg-time-accent/10 border border-time-accent/30 rounded-full text-time-accent text-sm font-medium animate-pulse">
               Interactive Time Travel Experience
             </div>

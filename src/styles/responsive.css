@@ -34,6 +34,11 @@
     line-height: 1.2 !important;
   }
   
+  /* Fix spacing between navbar and hero content */
+  .hero-section .pt-16 {
+    padding-top: 4.5rem !important; /* Increase padding on mobile */
+  }
+  
   /* Improve time portal dimensions on mobile */
   .time-portal-bg {
     opacity: 0.6 !important; /* Better visibility on mobile */
@@ -74,6 +79,11 @@
     max-width: 90px;
   }
   
+  /* Additional spacing for very small screens */
+  .hero-section .pt-16 {
+    padding-top: 5rem !important;
+  }
+  
   /* Stacked hero buttons on very small screens */
   .hero-section .flex.flex-col.sm\:flex-row {
     gap: 0.5rem !important;
@@ -103,6 +113,11 @@
   .hero-section .container {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  
+  /* Improve spacing in landscape */
+  .hero-section .pt-16 {
+    padding-top: 3rem !important;
   }
   
   /* Improve DisclaimerPopup in landscape */
