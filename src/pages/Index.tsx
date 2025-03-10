@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import Navbar from '@/components/Navbar';
@@ -75,19 +76,14 @@ const Index = () => {
           setHeroSectionRef={setHeroSectionRef}
         />
         
-        <TimelineSection />
-        
-        <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
-        
-        <TestimonialsSection />
-        
-        <FaqSection />
-        
-        <Features />
-        
-        <CtaSection 
-          timeDestinationUrl={TIME_MACHINE_URL}
-        />
+        <ScrollReveal>
+          <TimelineSection />
+          <TimeJourneySection onTimeTravel={handleTimeTravelClick} />
+          <TestimonialsSection />
+          <FaqSection />
+          <Features />
+          <CtaSection timeDestinationUrl={TIME_MACHINE_URL} />
+        </ScrollReveal>
       </main>
       
       <Footer />
