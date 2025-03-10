@@ -48,15 +48,24 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     };
   }, [threshold, rootMargin]);
   
-  // Clone children and add the ref properly
+  // Clone children and check if they accept addToRefs prop
   return (
     <>
       {React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            // Pass addToRefs as a prop for any component that accepts it
-            addToRefs
-          });
+          // Check if the component has been designed to accept addToRefs
+          const childProps = child.props as any;
+          if (childProps && typeof childProps.addToRefs !== 'undefined') {
+            // The component accepts addToRefs prop
+            return React.cloneElement(child, { addToRefs });
+          } else {
+            // The component doesn't accept addToRefs, wrap it in a div that uses the ref
+            return (
+              <div ref={addToRefs} className="scroll-reveal-wrapper">
+                {child}
+              </div>
+            );
+          }
         }
         return child;
       })}
