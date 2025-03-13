@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import NavLogo from './navigation/NavLogo';
+import DesktopNav from './navigation/DesktopNav';
+import MobileMenu from './navigation/MobileMenu';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 const HISTORY_GPT_URL = "https://talk-to-history-gpt.lovable.app/";
@@ -25,31 +27,7 @@ const Navbar = () => {
       scrollPosition > 50 ? "bg-white/80 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
     )}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <div className="relative w-7 h-7 rounded-full overflow-hidden border border-time-accent mr-2 flex-shrink-0">
-            <div className="absolute inset-0 bg-time-medium animate-pulse"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full border-2 border-time-accent relative animate-clock-spin-slow">
-                <div className="clock-hand hour-hand"></div>
-                <div className="clock-hand minute-hand"></div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-start max-w-[150px]">
-            <span className={cn(
-              "font-serif text-xs sm:text-sm md:text-lg font-medium transition-colors leading-tight whitespace-nowrap text-ellipsis overflow-hidden navbar-title", 
-              scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-bold"
-            )}>
-              TIME MACHINE GPT
-            </span>
-            <span className={cn(
-              "text-[7px] sm:text-[8px] md:text-[10px] font-medium transition-colors text-left", 
-              scrollPosition > 50 ? "text-time-dark/70" : "text-time-accent/90"
-            )}>
-              Presented by AiWebTools.Ai
-            </span>
-          </div>
-        </Link>
+        <NavLogo scrollPosition={scrollPosition} />
         
         <button 
           className="md:hidden p-2" 
@@ -75,141 +53,23 @@ const Navbar = () => {
           </svg>
         </button>
         
-        <nav className="hidden md:flex items-center space-x-4">
-          <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
-          <NavItem to="/about" label="About" isScrolled={scrollPosition > 50} />
-          <a 
-            href="https://www.aiwebtools.ai" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-time-accent", 
-              scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
-            )}
-          >
-            MORE AI TOOLS
-          </a>
-          <div className="flex items-center space-x-2">
-            <a 
-              href={IMAGINATION_TRAVELER_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={cn(
-                "px-3 py-1.5 rounded-full text-sm transition-all",
-                "border border-time-dark",
-                "bg-time-dark hover:bg-time-dark/90",
-                "text-white font-medium"
-              )}
-            >
-              IMAGINATION TRAVELER GPT
-            </a>
-            <a 
-              href={HISTORY_GPT_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={cn(
-                "px-3 py-1.5 rounded-full text-sm transition-all",
-                "border border-time-dark",
-                "bg-time-dark hover:bg-time-dark/90",
-                "text-white font-medium"
-              )}
-            >
-              TALK TO HISTORY GPT
-            </a>
-            <a 
-              href={TIME_MACHINE_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className={cn(
-                "px-3 py-1.5 rounded-full text-sm transition-all",
-                "border border-time-dark",
-                "bg-time-dark hover:bg-time-dark/90",
-                "text-white font-medium"
-              )}
-            >
-              TIME MACHINE GPT
-            </a>
-          </div>
-        </nav>
+        <DesktopNav 
+          scrollPosition={scrollPosition}
+          imageTravelerUrl={IMAGINATION_TRAVELER_URL}
+          historyGptUrl={HISTORY_GPT_URL}
+          timeMachineUrl={TIME_MACHINE_URL}
+        />
       </div>
       
-      <div className={cn(
-        "md:hidden absolute w-full left-0 px-4 py-3 shadow-lg",
-        "bg-white/95 backdrop-blur-md",
-        "transition-all duration-300 ease-in-out",
-        isMenuOpen ? "opacity-100 top-full" : "opacity-0 -top-40 pointer-events-none"
-      )}>
-        <nav className="flex flex-col space-y-3 text-time-dark">
-          <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
-          <MobileNavItem to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
-          <a 
-            href="https://www.aiwebtools.ai" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full py-2 hover:bg-gray-100 px-2 rounded text-time-dark transition-colors" 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            MORE AI TOOLS
-          </a>
-          <a 
-            href={IMAGINATION_TRAVELER_URL} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            IMAGINATION TRAVELER GPT
-          </a>
-          <a 
-            href={HISTORY_GPT_URL} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            TALK TO HISTORY GPT
-          </a>
-          <a 
-            href={TIME_MACHINE_URL} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            TIME MACHINE GPT
-          </a>
-        </nav>
-      </div>
+      <MobileMenu 
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        imageTravelerUrl={IMAGINATION_TRAVELER_URL}
+        historyGptUrl={HISTORY_GPT_URL}
+        timeMachineUrl={TIME_MACHINE_URL}
+      />
     </header>
   );
 };
-
-interface NavItemProps {
-  to: string;
-  label: string;
-  isScrolled: boolean;
-}
-
-const NavItem: React.FC<NavItemProps> = ({
-  to,
-  label,
-  isScrolled
-}) => <Link to={to} className={cn("relative font-medium hover:text-time-accent transition-colors", "after:absolute after:w-0 after:h-0.5 after:bg-time-accent after:left-0 after:-bottom-1", "hover:after:w-full after:transition-all after:duration-300", isScrolled ? "text-time-dark" : "text-time-accent")}>
-  {label}
-</Link>;
-
-interface MobileNavItemProps {
-  to: string;
-  label: string;
-  onClick: () => void;
-}
-
-const MobileNavItem: React.FC<MobileNavItemProps> = ({
-  to,
-  label,
-  onClick
-}) => <Link to={to} className="w-full py-2 hover:bg-gray-100 px-2 rounded text-time-dark transition-colors" onClick={onClick}>
-  {label}
-</Link>;
 
 export default Navbar;
