@@ -1,0 +1,65 @@
+
+/* 3D Text Effects for Timeline Section */
+.text-3d {
+  color: #fff;
+  text-shadow: 
+    0 1px 0 #c2a06e,
+    0 2px 0 #b79864,
+    0 3px 0 #a68c5a,
+    0 4px 0 #957f51,
+    0 5px 0 #846f47,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25);
+  transform: perspective(500px) rotateX(5deg);
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+.subtitle-3d {
+  color: #ffffff;
+  text-shadow: 
+    0 2px 4px rgba(0,0,0,0.3),
+    0 8px 16px rgba(0,0,0,0.3);
+  animation: glow-subtle 3s ease-in-out infinite alternate;
+}
+
+@keyframes float-3d {
+  0%, 100% {
+    transform: perspective(500px) rotateX(5deg) translateY(0);
+  }
+  50% {
+    transform: perspective(500px) rotateX(8deg) translateY(-10px);
+  }
+}
+
+@keyframes glow-subtle {
+  0% {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 8px 16px rgba(0,0,0,0.3);
+  }
+  100% {
+    text-shadow: 0 2px 10px rgba(194, 160, 110, 0.7), 0 8px 20px rgba(194, 160, 110, 0.5);
+  }
+}
+
+/* For more visual pop on the text */
+.timeline-title-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+
+.timeline-title-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -20px;
+  right: -20px;
+  bottom: -5px;
+  background: linear-gradient(to right, transparent, rgba(194, 160, 110, 0.1), transparent);
+  border-radius: 50%;
+  filter: blur(15px);
+  z-index: -1;
+}
+
