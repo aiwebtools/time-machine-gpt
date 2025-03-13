@@ -23,8 +23,8 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({
       className={cn(
         "w-full py-3 px-4 rounded-lg transition-colors flex items-center",
         isActive 
-          ? "bg-gray-100 text-time-accent font-medium" 
-          : "hover:bg-gray-50 text-time-dark"
+          ? "bg-gray-700/50 text-time-accent font-medium" 
+          : "hover:bg-gray-700/30 text-gray-200"
       )}
       onClick={onClick}
     >
