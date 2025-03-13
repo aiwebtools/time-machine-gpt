@@ -27,15 +27,55 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
         heroSection.appendChild(star);
       }
       
-      // Add a few shooting stars
-      for (let i = 0; i < 5; i++) {
+      // Create dynamically moving shooting stars
+      const createShootingStar = () => {
+        if (!heroSection) return;
+        
         const shootingStar = document.createElement('div');
         shootingStar.className = 'star shooting';
-        shootingStar.style.left = `${Math.random() * 100}%`;
-        shootingStar.style.top = `${Math.random() * 50}%`;
-        shootingStar.style.animationDelay = `${Math.random() * 15}s`;
+        
+        // Random starting position
+        const startX = Math.random() * 20; // Start from left side slightly off-screen
+        const startY = Math.random() * 40; // Start from top portion of the screen
+        
+        shootingStar.style.left = `${startX}%`;
+        shootingStar.style.top = `${startY}%`;
+        
+        // Randomize the animation speed
+        const animationDuration = (Math.random() * 3 + 2); // 2-5 seconds
+        shootingStar.style.animationDuration = `${animationDuration}s`;
+        
+        // Add some size variety
+        const size = Math.random() * 3 + 2;
+        shootingStar.style.width = `${size}px`;
+        shootingStar.style.height = `${Math.max(1, size/4)}px`;
+        
+        // Add some rotation variety
+        const rotation = -45 + (Math.random() * 20 - 10); // -55 to -35 degrees
+        shootingStar.style.transform = `rotate(${rotation}deg)`;
+        
+        // Add to container
         heroSection.appendChild(shootingStar);
+        
+        // Remove after animation completes to prevent memory build-up
+        setTimeout(() => {
+          if (shootingStar.parentNode === heroSection) {
+            shootingStar.remove();
+          }
+        }, animationDuration * 1000 + 100);
+      };
+      
+      // Create initial batch of shooting stars
+      for (let i = 0; i < 5; i++) {
+        createShootingStar();
       }
+      
+      // Create new shooting stars at random intervals
+      const shootingStarInterval = setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          createShootingStar();
+        }
+      }, 1500);
       
       // Modified parallax effect to avoid mouse jitter
       const parallaxEffect = (e: MouseEvent) => {
@@ -70,6 +110,7 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
       
       return () => {
         window.removeEventListener('mousemove', throttledParallaxEffect);
+        clearInterval(shootingStarInterval);
       };
     }
   }, [containerRef]);
