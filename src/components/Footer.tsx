@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Instagram } from 'lucide-react';
+import { Instagram, Mail, Phone } from 'lucide-react';
 
 // Custom TikTok icon since it's not available in lucide-react
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -42,9 +42,28 @@ const Footer: React.FC = () => {
               </div>
               <span className="font-serif text-xl font-medium">TIME MACHINE GPT</span>
             </div>
-            <p className="text-white/70 text-sm max-w-xs">
-              Experience history like never before with our immersive time travel experience. Journey through the ages and discover the past with vivid detail.
-            </p>
+            
+            <div className="space-y-3">
+              <p className="text-white/70 text-sm max-w-xs">
+                Experience history like never before with our immersive time travel experience.
+              </p>
+              
+              <div className="space-y-2">
+                <h4 className="text-time-accent font-medium text-sm">CONTACT INFORMATION</h4>
+                <div className="flex items-center space-x-2">
+                  <Phone size={16} className="text-time-accent" />
+                  <a href="tel:+14758008096" className="text-white/70 hover:text-time-accent transition-colors text-sm">
+                    (475) 800-8096
+                  </a>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail size={16} className="text-time-accent" />
+                  <a href="mailto:Contact@ai-webtools.com" className="text-white/70 hover:text-time-accent transition-colors text-sm">
+                    Contact@ai-webtools.com
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
           
           <div>
