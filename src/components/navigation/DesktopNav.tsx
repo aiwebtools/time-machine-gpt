@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import NavItem from './NavItem';
+import { Button } from '../ui/button';
 
 interface DesktopNavProps {
   scrollPosition: number;
@@ -64,12 +65,14 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           rel="noopener noreferrer" 
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
-            "border border-time-dark",
+            "border border-time-accent",
             "bg-time-dark hover:bg-time-dark/90",
-            "text-white font-medium"
+            "text-time-accent font-medium hover:text-time-accent/80",
+            "btn-glow relative overflow-hidden group"
           )}
         >
-          TIME MACHINE GPT
+          <span className="relative z-10">TIME MACHINE GPT</span>
+          <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/80 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
         </a>
       </div>
     </nav>

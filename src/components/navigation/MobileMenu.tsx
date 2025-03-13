@@ -59,10 +59,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           href={timeMachineUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
+          className="w-full py-2 text-center bg-time-dark rounded-md hover:bg-time-dark/90 transition-all relative overflow-hidden group" 
           onClick={() => setIsMenuOpen(false)}
         >
-          TIME MACHINE GPT
+          <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
+          <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
         </a>
       </nav>
     </div>
