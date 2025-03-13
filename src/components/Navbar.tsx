@@ -100,7 +100,7 @@ const Navbar = () => {
                 "text-white font-medium"
               )}
             >
-              HISTORY GPT
+              TALK TO HISTORY GPT
             </a>
             <a 
               href={TIME_MACHINE_URL} 
@@ -113,7 +113,7 @@ const Navbar = () => {
                 scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-medium"
               )}
             >
-              TIME MACHINE
+              TIME MACHINE GPT
             </a>
           </div>
         </nav>
@@ -153,7 +153,7 @@ const Navbar = () => {
             className="w-full py-2 text-center bg-time-medium text-white rounded-md hover:bg-time-dark transition-colors" 
             onClick={() => setIsMenuOpen(false)}
           >
-            Begin Time Travel Journey
+            TIME MACHINE GPT
           </a>
         </nav>
       </div>
