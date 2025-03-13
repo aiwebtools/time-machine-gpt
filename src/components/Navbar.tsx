@@ -108,9 +108,9 @@ const Navbar = () => {
               rel="noopener noreferrer" 
               className={cn(
                 "px-3 py-1.5 rounded-full text-sm transition-all",
-                "border border-time-accent",
-                "hover:bg-time-accent/10",
-                scrollPosition > 50 ? "text-time-dark" : "text-time-accent font-medium"
+                "border border-time-dark",
+                "bg-time-dark hover:bg-time-dark/90",
+                "text-white font-medium"
               )}
             >
               TIME MACHINE GPT
@@ -150,7 +150,7 @@ const Navbar = () => {
             href={TIME_MACHINE_URL} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full py-2 text-center bg-time-medium text-white rounded-md hover:bg-time-dark transition-colors" 
+            className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
             onClick={() => setIsMenuOpen(false)}
           >
             TIME MACHINE GPT
