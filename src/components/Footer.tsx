@@ -30,17 +30,22 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-time-accent">
-                <div className="absolute inset-0 bg-time-medium"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-5 h-5 rounded-full border-2 border-time-accent relative animate-clock-spin-slow">
-                    <div className="clock-hand hour-hand"></div>
-                    <div className="clock-hand minute-hand"></div>
+            <div className="flex flex-col items-start">
+              <div className="flex items-center space-x-2">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-time-accent">
+                  <div className="absolute inset-0 bg-time-medium"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-5 h-5 rounded-full border-2 border-time-accent relative animate-clock-spin-slow">
+                      <div className="clock-hand hour-hand"></div>
+                      <div className="clock-hand minute-hand"></div>
+                    </div>
                   </div>
                 </div>
+                <span className="font-serif text-xl font-medium">TIME MACHINE GPT</span>
               </div>
-              <span className="font-serif text-xl font-medium">TIME MACHINE GPT</span>
+              <span className="text-[10px] font-medium text-time-accent/90 ml-10">
+                Presented by AiWebTools.Ai
+              </span>
             </div>
             
             <div className="space-y-3">
