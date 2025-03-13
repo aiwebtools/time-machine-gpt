@@ -66,13 +66,18 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="http://collegedegreegpt.xyz/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  College Degree GPT
+                <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Talk to History GPT
                 </a>
               </li>
               <li>
-                <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  Talk to History GPT
+                <a href="https://imaginationtravelergpt.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Imagination Traveler GPT
+                </a>
+              </li>
+              <li>
+                <a href="http://collegedegreegpt.xyz/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  College Degree GPT
                 </a>
               </li>
               <li>
