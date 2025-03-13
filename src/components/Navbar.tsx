@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 const HISTORY_GPT_URL = "https://talk-to-history-gpt.lovable.app/";
+const IMAGINATION_TRAVELER_URL = "https://imaginationtravelergpt.lovable.app/?via=aiwebtools";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -90,6 +91,19 @@ const Navbar = () => {
           </a>
           <div className="flex items-center space-x-2">
             <a 
+              href={IMAGINATION_TRAVELER_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={cn(
+                "px-3 py-1.5 rounded-full text-sm transition-all",
+                "border border-time-dark",
+                "bg-time-dark hover:bg-time-dark/90",
+                "text-white font-medium"
+              )}
+            >
+              IMAGINATION TRAVELER GPT
+            </a>
+            <a 
               href={HISTORY_GPT_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
@@ -136,6 +150,15 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             MORE AI TOOLS
+          </a>
+          <a 
+            href={IMAGINATION_TRAVELER_URL} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            IMAGINATION TRAVELER GPT
           </a>
           <a 
             href={HISTORY_GPT_URL} 
