@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Instagram, Mail, Phone } from 'lucide-react';
 
@@ -26,6 +26,8 @@ const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+
   return <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -75,12 +77,24 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-medium mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-white/70 hover:text-time-accent transition-colors">
+                <Link 
+                  to="/" 
+                  className={cn(
+                    "text-white/70 hover:text-time-accent transition-colors",
+                    location.pathname === "/" && "text-time-accent"
+                  )}
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-white/70 hover:text-time-accent transition-colors">
+                <Link 
+                  to="/about" 
+                  className={cn(
+                    "text-white/70 hover:text-time-accent transition-colors",
+                    location.pathname === "/about" && "text-time-accent"
+                  )}
+                >
                   About
                 </Link>
               </li>

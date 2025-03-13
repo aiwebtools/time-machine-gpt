@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface MobileNavItemProps {
   to: string;
@@ -12,14 +13,22 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({
   to,
   label,
   onClick
-}) => (
-  <Link 
-    to={to} 
-    className="w-full py-2 hover:bg-gray-100 px-2 rounded text-time-dark transition-colors" 
-    onClick={onClick}
-  >
-    {label}
-  </Link>
-);
+}) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        "w-full py-2 px-2 rounded transition-colors",
+        isActive ? "bg-gray-100 text-time-accent" : "hover:bg-gray-100 text-time-dark"
+      )}
+      onClick={onClick}
+    >
+      {label}
+    </Link>
+  );
+};
 
 export default MobileNavItem;
