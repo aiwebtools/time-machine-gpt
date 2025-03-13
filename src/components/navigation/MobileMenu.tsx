@@ -2,6 +2,12 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import MobileNavItem from './MobileNavItem';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -20,51 +26,72 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   return (
     <div className={cn(
-      "md:hidden absolute w-full left-0 px-4 py-3 shadow-lg",
-      "bg-white/95 backdrop-blur-md",
+      "md:hidden absolute w-full left-0 shadow-lg",
+      "bg-white/95 backdrop-blur-md rounded-b-xl",
       "transition-all duration-300 ease-in-out",
-      isMenuOpen ? "opacity-100 top-full" : "opacity-0 -top-40 pointer-events-none"
+      isMenuOpen ? "opacity-100 top-full max-h-[80vh] overflow-y-auto py-4 px-5" : "opacity-0 -top-40 pointer-events-none max-h-0"
     )}>
-      <nav className="flex flex-col space-y-3 text-time-dark">
+      <nav className="flex flex-col space-y-4 text-time-dark">
         <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
         <MobileNavItem to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
-        <a 
-          href="https://www.aiwebtools.ai" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-full py-2 hover:bg-gray-100 px-2 rounded text-time-dark transition-colors" 
-          onClick={() => setIsMenuOpen(false)}
-        >
-          MORE AI TOOLS
-        </a>
-        <a 
-          href={imageTravelerUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
-          onClick={() => setIsMenuOpen(false)}
-        >
-          IMAGINATION TRAVELER GPT
-        </a>
-        <a 
-          href={historyGptUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-full py-2 text-center bg-time-dark text-white rounded-md hover:bg-time-dark/80 transition-colors" 
-          onClick={() => setIsMenuOpen(false)}
-        >
-          TALK TO HISTORY GPT
-        </a>
-        <a 
-          href={timeMachineUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-full py-2 text-center bg-time-dark rounded-md hover:bg-time-dark/90 transition-all relative overflow-hidden group" 
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
-        </a>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger className="w-full text-left py-2 px-2 rounded transition-colors hover:bg-gray-100 text-time-dark flex items-center justify-between">
+            <span>More AI Tools</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-full min-w-[calc(100vw-2.5rem)] bg-white border border-gray-100 shadow-lg rounded-lg py-2 mt-1">
+            <DropdownMenuItem asChild>
+              <a 
+                href="https://www.aiwebtools.ai" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-full py-3 px-4 rounded flex items-center text-time-dark hover:bg-gray-50 transition-colors" 
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="flex-1">AI Web Tools</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
+                  <path d="M7 7h10v10M7 17 17 7"/>
+                </svg>
+              </a>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        
+        <div className="pt-2 space-y-3">
+          <a 
+            href={imageTravelerUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full flex items-center justify-center py-3 bg-time-dark text-white rounded-lg shadow-md hover:bg-time-dark/90 transition-all transform hover:translate-y-[-2px]" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>IMAGINATION TRAVELER GPT</span>
+          </a>
+          
+          <a 
+            href={historyGptUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full flex items-center justify-center py-3 bg-time-dark text-white rounded-lg shadow-md hover:bg-time-dark/90 transition-all transform hover:translate-y-[-2px]" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>TALK TO HISTORY GPT</span>
+          </a>
+          
+          <a 
+            href={timeMachineUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full flex items-center justify-center py-3 rounded-lg shadow-md transition-all relative overflow-hidden group transform hover:translate-y-[-2px]" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
+            <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
+          </a>
+        </div>
       </nav>
     </div>
   );
