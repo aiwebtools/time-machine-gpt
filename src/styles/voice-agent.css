@@ -1,0 +1,21 @@
+
+/* Voice agent styles */
+.voice-agent-bubble {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.voice-agent-bubble:hover {
+  transform: scale(1.05);
+}
+
+#elevenlabs-convai-container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#elevenlabs-convai-container elevenlabs-convai {
+  --elevenlabs-primary-color: #c2a06e; /* Match the Time Machine theme */
+  --elevenlabs-secondary-color: #222;
+  --elevenlabs-background-color: rgba(255, 255, 255, 0.98);
+  --elevenlabs-text-color: #333;
+}
