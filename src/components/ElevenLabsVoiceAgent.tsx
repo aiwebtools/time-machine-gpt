@@ -98,16 +98,18 @@ const ElevenLabsVoiceAgent = ({
           <Mic className="h-6 w-6" />
         )}
       </button>
-      <style jsx>{`
-        /* Custom styles for the ElevenLabs widget */
-        :global(#elevenlabs-convai-container) {
-          position: fixed;
-          bottom: 5rem;
-          right: 1.5rem;
-          z-index: 49;
-          display: ${isOpen ? 'block' : 'none'};
-        }
-      `}</style>
+      <style>
+        {`
+          /* Custom styles for the ElevenLabs widget */
+          #elevenlabs-convai-container {
+            position: fixed;
+            bottom: 5rem;
+            right: 1.5rem;
+            z-index: 49;
+            display: ${isOpen ? 'block' : 'none'};
+          }
+        `}
+      </style>
     </div>
   );
 };
