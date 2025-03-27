@@ -87,17 +87,24 @@ const ElevenLabsVoiceAgent = ({
 
   return (
     <div className={cn("fixed bottom-6 right-6 z-50", className)}>
-      <button
-        onClick={toggleWidget}
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-time-accent text-white shadow-lg hover:bg-time-accent/90 transition-all duration-300 animate-pulse hover:animate-none"
-        aria-label={isOpen ? "Close voice assistant" : "Open voice assistant"}
-      >
-        {isOpen ? (
-          <MicOff className="h-6 w-6" />
-        ) : (
-          <Mic className="h-6 w-6" />
+      <div className="flex items-center gap-3">
+        {!isOpen && (
+          <div className="bg-time-accent/90 text-white px-3 py-2 rounded-lg shadow-lg">
+            <span className="text-sm font-medium">Time Machine Live Hotline</span>
+          </div>
         )}
-      </button>
+        <button
+          onClick={toggleWidget}
+          className="flex items-center justify-center w-14 h-14 rounded-full bg-time-accent text-white shadow-lg hover:bg-time-accent/90 transition-all duration-300 animate-pulse hover:animate-none"
+          aria-label={isOpen ? "Close voice assistant" : "Open voice assistant"}
+        >
+          {isOpen ? (
+            <MicOff className="h-6 w-6" />
+          ) : (
+            <Mic className="h-6 w-6" />
+          )}
+        </button>
+      </div>
       <style>
         {`
           /* Custom styles for the ElevenLabs widget */
