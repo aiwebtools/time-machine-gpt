@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface TimePortalProps {
   onStartJourney: (destination: string, date: string) => void;
@@ -11,6 +12,144 @@ interface TimePortalProps {
 const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestinationUrl, className }) => {
   const [portalActive, setPortalActive] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(true);
+  const [exploding, setExploding] = useState(false);
+  
+  useEffect(() => {
+    // Clean up any explosion particles when component unmounts
+    return () => {
+      const explosionElements = document.querySelectorAll('.explosion-particle');
+      explosionElements.forEach(el => el.remove());
+      
+      const lightningElements = document.querySelectorAll('.lightning-bolt');
+      lightningElements.forEach(el => el.remove());
+    };
+  }, []);
+  
+  const createExplosion = () => {
+    setExploding(true);
+    
+    // Create container for the effect
+    const container = document.createElement('div');
+    container.className = 'fixed inset-0 z-50 pointer-events-none overflow-hidden';
+    document.body.appendChild(container);
+    
+    // Generate explosion particles
+    const colors = ['#8B5CF6', '#D946EF', '#F97316', '#0EA5E9', '#ea384c'];
+    
+    // Create lightning bolts
+    for (let i = 0; i < 8; i++) {
+      createLightningBolt(container);
+    }
+    
+    // Create particles
+    for (let i = 0; i < 80; i++) {
+      setTimeout(() => {
+        createExplosionParticle(container, colors);
+      }, i * 10);
+    }
+    
+    // Full screen flash
+    const flash = document.createElement('div');
+    flash.className = 'fixed inset-0 bg-white z-40 pointer-events-none';
+    flash.style.animation = 'flash-fade 2s forwards';
+    document.body.appendChild(flash);
+    
+    // Clean up after animation completes
+    setTimeout(() => {
+      container.remove();
+      flash.remove();
+      setExploding(false);
+      
+      // Now redirect to time machine
+      window.open(timeDestinationUrl, '_blank');
+    }, 2000);
+  };
+  
+  const createExplosionParticle = (container: HTMLElement, colors: string[]) => {
+    const particle = document.createElement('div');
+    const size = Math.random() * 30 + 10;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    particle.className = 'explosion-particle absolute rounded-full pointer-events-none';
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.background = color;
+    particle.style.boxShadow = `0 0 ${size/2}px ${color}`;
+    
+    // Position at center
+    particle.style.left = '50%';
+    particle.style.top = '50%';
+    
+    // Random starting position adjustment
+    const offset = 50;
+    const startX = (Math.random() * offset * 2) - offset;
+    const startY = (Math.random() * offset * 2) - offset;
+    
+    // Random ending position - explode outward
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 100 + Math.random() * 900;
+    const endX = Math.cos(angle) * distance;
+    const endY = Math.sin(angle) * distance;
+    
+    // Animation
+    particle.style.transform = `translate(calc(${startX}px - 50%), calc(${startY}px - 50%))`;
+    particle.style.opacity = '0';
+    
+    container.appendChild(particle);
+    
+    // Trigger animation
+    setTimeout(() => {
+      particle.style.transition = `transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 1.5s ease-out`;
+      particle.style.transform = `translate(calc(${endX}px - 50%), calc(${endY}px - 50%))`;
+      particle.style.opacity = '0.8';
+      
+      // Fade out
+      setTimeout(() => {
+        particle.style.opacity = '0';
+      }, 700);
+      
+      // Remove from DOM after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 1500);
+    }, 10);
+  };
+  
+  const createLightningBolt = (container: HTMLElement) => {
+    const lightning = document.createElement('div');
+    lightning.className = 'lightning-bolt absolute pointer-events-none';
+    
+    // Random position and rotation
+    const startAngle = Math.random() * 360;
+    const width = Math.random() * 10 + 5;
+    const length = Math.random() * 500 + 300;
+    
+    lightning.style.width = `${width}px`;
+    lightning.style.height = `${length}px`;
+    lightning.style.background = 'linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(120,210,255,0.5))';
+    lightning.style.left = '50%';
+    lightning.style.top = '50%';
+    lightning.style.transform = `translate(-50%, -50%) rotate(${startAngle}deg)`;
+    lightning.style.borderRadius = '4px';
+    lightning.style.filter = 'blur(2px)';
+    lightning.style.opacity = '0';
+    
+    container.appendChild(lightning);
+    
+    // Animate the lightning
+    setTimeout(() => {
+      lightning.style.transition = 'opacity 0.1s ease-in';
+      lightning.style.opacity = '1';
+      
+      setTimeout(() => {
+        lightning.style.opacity = '0';
+        
+        setTimeout(() => {
+          lightning.remove();
+        }, 100);
+      }, 100);
+    }, Math.random() * 1000);
+  };
   
   const handleStartJourney = () => {
     // Set default values since we no longer have input fields
@@ -19,13 +158,17 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     
     setPortalActive(true);
     
+    // Notify user
+    toast.success("Initiating time travel sequence...", {
+      duration: 3000,
+    });
+    
+    // Create explosion and lightning effect, then redirect
+    createExplosion();
+    
     // Simulate portal activation
     setTimeout(() => {
       onStartJourney(destination, date);
-      
-      // Open the AI tool URL in a new window
-      window.open(timeDestinationUrl, '_blank');
-      
       setPortalActive(false);
     }, 3000);
   };
@@ -99,9 +242,11 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
         <div className="py-4 sm:py-6 px-3 sm:px-4 max-w-md mx-auto">
           <button
             onClick={handleStartJourney}
+            disabled={exploding}
             className="w-full py-3 rounded-md transition-all duration-300 relative overflow-hidden
               font-medium text-white bg-time-accent hover:bg-time-accent/90 cursor-pointer
-              shadow-md hover:shadow-lg active:shadow-sm active:translate-y-0.5"
+              shadow-md hover:shadow-lg active:shadow-sm active:translate-y-0.5
+              disabled:opacity-70 disabled:pointer-events-none"
           >
             <span className={cn(
               "absolute inset-0 flex items-center justify-center",

@@ -9,3 +9,36 @@
   animation: shimmer 5s infinite linear;
   background-size: 200% 100%;
 }
+
+/* Time travel explosion effect animations */
+@keyframes flash-fade {
+  0% { opacity: 0; }
+  10% { opacity: 0.9; }
+  30% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+  70% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+
+.explosion-particle {
+  will-change: transform, opacity;
+  z-index: 999;
+}
+
+.lightning-bolt {
+  will-change: opacity;
+  z-index: 998;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Additional animation keyframes for smoother transitions */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 5px rgba(194, 160, 110, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(194, 160, 110, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(194, 160, 110, 0.5); }
+}
+
+/* Add animation for the button */
+.btn-pulse {
+  animation: pulse-glow 2s infinite;
+}
