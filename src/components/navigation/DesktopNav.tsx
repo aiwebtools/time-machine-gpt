@@ -20,18 +20,20 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   return (
     <nav className="hidden md:flex items-center space-x-4">
       <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
-      <a 
-        href="https://nativeamericantimemachine.lovable.app/?via=aiwebtools" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={cn(
-          "text-sm font-medium transition-colors hover:text-time-accent", 
-          scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
-        )}
-      >
-        NATIVE AMERICAN HISTORY TIME MACHINE
-      </a>
       <div className="flex items-center space-x-2">
+        <a 
+          href="https://nativeamericantimemachine.lovable.app/?via=aiwebtools" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={cn(
+            "px-3 py-1.5 rounded-full text-sm transition-all",
+            "border border-time-dark",
+            "bg-time-dark hover:bg-time-dark/90",
+            "text-white font-medium"
+          )}
+        >
+          NATIVE AMERICAN HISTORY TIME MACHINE
+        </a>
         <a 
           href={imageTravelerUrl} 
           target="_blank" 
