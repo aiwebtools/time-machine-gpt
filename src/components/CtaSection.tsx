@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface CtaSectionProps {
   className?: string;
@@ -9,6 +10,11 @@ interface CtaSectionProps {
 }
 
 const CtaSection = ({ className, addToRefs, timeDestinationUrl }: CtaSectionProps) => {
+  const handleStartJourney = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(timeDestinationUrl);
+  };
+
   return (
     <section 
       ref={addToRefs} 
@@ -21,7 +27,11 @@ const CtaSection = ({ className, addToRefs, timeDestinationUrl }: CtaSectionProp
         <p className="text-white/80 max-w-2xl mx-auto mb-8">
           Start exploring the past with unprecedented detail and accuracy. Begin your adventure through history with Father Time.
         </p>
-        <a href={timeDestinationUrl} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors inline-block">
+        <a 
+          href={timeDestinationUrl} 
+          onClick={handleStartJourney}
+          className="px-8 py-4 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors inline-block"
+        >
           Access Time Machine GPT
         </a>
       </div>

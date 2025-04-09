@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import TimePortal from '@/components/TimePortal';
 import { cn } from '@/lib/utils';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface HeroSectionProps {
   className?: string;
@@ -18,6 +19,11 @@ const HeroSection = ({
   timeDestinationUrl,
   setHeroSectionRef
 }: HeroSectionProps) => {
+  
+  const handleStartJourney = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(timeDestinationUrl);
+  };
   
   return (
     <section 
@@ -69,7 +75,11 @@ const HeroSection = ({
             </p>
             
             <div ref={addToRefs} className="reveal flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href={timeDestinationUrl} target="_blank" rel="noopener noreferrer" className="btn-glow px-6 py-3 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <a 
+                href={timeDestinationUrl} 
+                onClick={handleStartJourney}
+                className="btn-glow px-6 py-3 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              >
                 Start Your Journey
               </a>
               <a href="/about" className="btn-glow px-6 py-3 bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg">

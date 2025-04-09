@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface TimeJourneySectionProps {
   addToRefs?: (el: HTMLElement | null) => void;
@@ -7,6 +8,13 @@ interface TimeJourneySectionProps {
 }
 
 const TimeJourneySection = ({ addToRefs, onTimeTravel }: TimeJourneySectionProps) => {
+  const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+  
+  const handleTimeTravel = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(TIME_MACHINE_URL);
+  };
+  
   return (
     <section 
       ref={addToRefs as React.RefCallback<HTMLDivElement>} 
@@ -18,7 +26,7 @@ const TimeJourneySection = ({ addToRefs, onTimeTravel }: TimeJourneySectionProps
           The Time Machine is ready for your instructions. Where and when would you like to travel?
         </p>
         <button
-          onClick={onTimeTravel}
+          onClick={handleTimeTravel}
           className="px-6 md:px-10 py-3 md:py-4 bg-time-accent text-white text-sm md:text-lg rounded-md font-medium 
                    hover:bg-time-accent/90 transition-colors duration-300 
                    shadow-[0_0_15px_rgba(194,160,110,0.4)]"

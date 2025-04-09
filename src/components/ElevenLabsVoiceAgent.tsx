@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 // This is your ElevenLabs API key - typically this should be handled server-side
 // but since this is client-only, we'll use it directly as provided
@@ -18,6 +19,7 @@ const ElevenLabsVoiceAgent = ({
 }: ElevenLabsVoiceAgentProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 
   // Initialize the widget once the component mounts
   useEffect(() => {
@@ -68,6 +70,12 @@ const ElevenLabsVoiceAgent = ({
 
   // Toggle the widget visibility
   const toggleWidget = () => {
+    if (!isOpen) {
+      // If widget is being opened, play the time travel effect first
+      createTimePortalEffect(TIME_MACHINE_URL);
+      return;
+    }
+    
     setIsOpen(prev => !prev);
     
     // Find the widget container and toggle its visibility

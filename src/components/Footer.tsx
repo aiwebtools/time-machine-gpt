@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Instagram, Mail, Phone } from 'lucide-react';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 // Custom TikTok icon since it's not available in lucide-react
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -27,6 +28,12 @@ const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const Footer: React.FC = () => {
   const location = useLocation();
+  const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+  
+  const handleTimeMachineClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(TIME_MACHINE_URL);
+  };
 
   return <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
@@ -99,7 +106,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                <a 
+                  href={TIME_MACHINE_URL}
+                  onClick={handleTimeMachineClick}
+                  className="text-white/70 hover:text-time-accent transition-colors"
+                >
                   Time Machine GPT
                 </a>
               </li>

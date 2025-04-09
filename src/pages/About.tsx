@@ -2,10 +2,16 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 
 const About = () => {
+  const handleStartJourney = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(TIME_MACHINE_URL);
+  };
+  
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-time-dark to-time-medium">
       <Navbar />
@@ -68,9 +74,8 @@ const About = () => {
           
           <div className="mt-12 text-center space-y-6">
             <a 
-              href={TIME_MACHINE_URL} 
-              target="_blank" 
-              rel="noopener noreferrer"
+              href={TIME_MACHINE_URL}
+              onClick={handleStartJourney}
               className="inline-flex items-center px-8 py-4 bg-time-accent text-white rounded-full hover:bg-time-accent/90 transition-colors text-lg font-medium animate-pulse hover:animate-none"
             >
               <span className="mr-2">START YOUR JOURNEY THROUGH TIME NOW</span>
