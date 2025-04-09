@@ -1,8 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Mic, MicOff } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { createTimePortalEffect } from '@/utils/timeEffects';
 
 // This is your ElevenLabs API key - typically this should be handled server-side
 // but since this is client-only, we'll use it directly as provided
@@ -17,9 +15,7 @@ const ElevenLabsVoiceAgent = ({
   className,
   agentId = "lVve4L6TI9TtoX33JfAI" // Default agent ID
 }: ElevenLabsVoiceAgentProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
-  const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 
   // Initialize the widget once the component mounts
   useEffect(() => {
@@ -68,59 +64,7 @@ const ElevenLabsVoiceAgent = ({
     };
   }, [agentId, isInitialized]);
 
-  // Toggle the widget visibility
-  const toggleWidget = () => {
-    setIsOpen(prev => !prev);
-    
-    // Find the widget container and toggle its visibility
-    const widgetContainer = document.getElementById('elevenlabs-convai-container');
-    if (widgetContainer) {
-      if (isOpen) {
-        widgetContainer.style.display = 'none';
-      } else {
-        widgetContainer.style.display = 'block';
-        
-        // Dispatch a custom event that the widget script can listen for
-        const event = new CustomEvent('elevenlabs-convai-open');
-        document.dispatchEvent(event);
-      }
-    }
-  };
-
-  return (
-    <div className={cn("fixed bottom-6 right-6 z-50", className)}>
-      <div className="flex items-center gap-3">
-        {!isOpen && (
-          <div className="bg-time-accent/90 text-white px-3 py-2 rounded-lg shadow-lg">
-            <span className="text-sm font-medium">Time Machine Live Hotline</span>
-          </div>
-        )}
-        <button
-          onClick={toggleWidget}
-          className="flex items-center justify-center w-14 h-14 rounded-full bg-time-accent text-white shadow-lg hover:bg-time-accent/90 transition-all duration-300 animate-pulse hover:animate-none"
-          aria-label={isOpen ? "Close voice assistant" : "Open voice assistant"}
-        >
-          {isOpen ? (
-            <MicOff className="h-6 w-6" />
-          ) : (
-            <Mic className="h-6 w-6" />
-          )}
-        </button>
-      </div>
-      <style>
-        {`
-          /* Custom styles for the ElevenLabs widget */
-          #elevenlabs-convai-container {
-            position: fixed;
-            bottom: 5rem;
-            right: 1.5rem;
-            z-index: 49;
-            display: ${isOpen ? 'block' : 'none'};
-          }
-        `}
-      </style>
-    </div>
-  );
+  return null; // No custom UI, using only the default Eleven Labs widget
 };
 
 export default ElevenLabsVoiceAgent;
