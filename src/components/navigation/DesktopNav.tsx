@@ -3,6 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import NavItem from './NavItem';
 import { Button } from '../ui/button';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface DesktopNavProps {
   scrollPosition: number;
@@ -17,6 +18,11 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   historyGptUrl,
   timeMachineUrl
 }) => {
+  const handleTimeMachineClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(timeMachineUrl);
+  };
+
   return (
     <nav className="hidden md:flex items-center space-x-4">
       <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
@@ -62,8 +68,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         </a>
         <a 
           href={timeMachineUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          onClick={handleTimeMachineClick}
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-accent",

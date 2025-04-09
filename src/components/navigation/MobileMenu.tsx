@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import MobileNavItem from './MobileNavItem';
+import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -18,6 +19,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   historyGptUrl,
   timeMachineUrl
 }) => {
+  const handleTimeMachineClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    createTimePortalEffect(timeMachineUrl);
+  };
+
   return (
     <div className={cn(
       "md:hidden absolute w-full left-0 shadow-lg",
@@ -61,10 +68,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           <a 
             href={timeMachineUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+            onClick={handleTimeMachineClick}
             className="w-full flex items-center justify-center py-3 rounded-lg shadow-md transition-all relative overflow-hidden group transform hover:translate-y-[-2px]" 
-            onClick={() => setIsMenuOpen(false)}
           >
             <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
             <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>

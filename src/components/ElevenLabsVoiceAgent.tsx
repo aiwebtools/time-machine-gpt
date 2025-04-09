@@ -70,12 +70,6 @@ const ElevenLabsVoiceAgent = ({
 
   // Toggle the widget visibility
   const toggleWidget = () => {
-    if (!isOpen) {
-      // If widget is being opened, play the time travel effect first
-      createTimePortalEffect(TIME_MACHINE_URL);
-      return;
-    }
-    
     setIsOpen(prev => !prev);
     
     // Find the widget container and toggle its visibility
