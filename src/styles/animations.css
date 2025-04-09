@@ -67,7 +67,7 @@
   border-bottom-color: #0EA5E9;
   width: 100px;
   height: 100px;
-  animation: vortex-spin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  animation: vortex-spin 2.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
   pointer-events: none;
   z-index: 1000;
 }
@@ -80,7 +80,7 @@
   background: radial-gradient(circle, rgba(234,56,76,0.7) 0%, rgba(15,58,172,0) 70%);
   width: 100px;
   height: 100px;
-  animation: energy-pulse 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: energy-pulse 2.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   pointer-events: none;
   z-index: 999;
 }
@@ -93,5 +93,17 @@
 }
 
 .time-warp {
-  animation: time-warp 2s linear;
+  animation: time-warp 2.8s linear;
+}
+
+/* Portal pulse animation */
+@keyframes portal-pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+}
+
+.swirling-particle {
+  z-index: 980;
+  will-change: transform, opacity;
 }
