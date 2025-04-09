@@ -22,7 +22,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
       <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
       <div className="flex items-center space-x-2">
         <a 
-          href="https://nativeamericantimemachine.lovable.app/?via=aiwebtools" 
+          href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
           target="_blank" 
           rel="noopener noreferrer" 
           className={cn(

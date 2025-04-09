@@ -30,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         
         <div className="pt-2 space-y-3">
           <a 
-            href="https://nativeamericantimemachine.lovable.app/?via=aiwebtools" 
+            href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
