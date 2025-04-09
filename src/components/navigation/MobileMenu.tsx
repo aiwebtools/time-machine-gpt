@@ -41,19 +41,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </svg>
         </a>
         
-        <a 
-          href="https://www.aiwebtools.ai" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-full py-3 px-4 rounded-lg transition-colors flex items-center justify-between text-gray-200 hover:bg-gray-700/30"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <span>More AI Tools</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M7 7h10v10M7 17 17 7"/>
-          </svg>
-        </a>
-        
         <div className="pt-2 space-y-3">
           <a 
             href={imageTravelerUrl} 
@@ -84,6 +71,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           >
             <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
             <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
+          </a>
+        </div>
+        
+        <div className="mt-6 pt-4 border-t border-gray-700/30">
+          <a 
+            href="https://www.aiwebtools.ai" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full py-3 px-4 rounded-lg transition-colors flex items-center justify-between text-gray-200 hover:bg-gray-700/30"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>MORE AI TOOLS</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 7h10v10M7 17 17 7"/>
+            </svg>
           </a>
         </div>
       </nav>

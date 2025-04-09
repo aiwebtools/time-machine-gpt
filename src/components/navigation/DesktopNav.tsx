@@ -31,17 +31,6 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
       >
         NATIVE AMERICAN HISTORY TIME MACHINE
       </a>
-      <a 
-        href="https://www.aiwebtools.ai" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={cn(
-          "text-sm font-medium transition-colors hover:text-time-accent", 
-          scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
-        )}
-      >
-        MORE AI TOOLS
-      </a>
       <div className="flex items-center space-x-2">
         <a 
           href={imageTravelerUrl} 
@@ -83,6 +72,19 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         >
           <span className="relative z-10">TIME MACHINE GPT</span>
           <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/80 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
+        </a>
+      </div>
+      <div className="ml-auto">
+        <a 
+          href="https://www.aiwebtools.ai" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={cn(
+            "text-sm font-medium transition-colors hover:text-time-accent", 
+            scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
+          )}
+        >
+          MORE AI TOOLS
         </a>
       </div>
     </nav>
