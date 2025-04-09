@@ -42,3 +42,56 @@
 .btn-pulse {
   animation: pulse-glow 2s infinite;
 }
+
+/* Enhanced time travel animations */
+@keyframes vortex-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) rotate(720deg) scale(3); opacity: 0; }
+}
+
+@keyframes energy-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0.9; }
+  70% { opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+}
+
+.vortex-ring {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: #D946EF;
+  border-bottom-color: #0EA5E9;
+  width: 100px;
+  height: 100px;
+  animation: vortex-spin 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.energy-wave {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(234,56,76,0.7) 0%, rgba(15,58,172,0) 70%);
+  width: 100px;
+  height: 100px;
+  animation: energy-pulse 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Time warp effect */
+@keyframes time-warp {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  50% { filter: hue-rotate(180deg) brightness(1.5); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+.time-warp {
+  animation: time-warp 2s linear;
+}
