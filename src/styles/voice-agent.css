@@ -31,3 +31,18 @@
 #elevenlabs-convai-container elevenlabs-convai [class*="call-bubble"] button span {
   display: none !important;
 }
+
+/* Add "Time Machine Live Hotline" text */
+#elevenlabs-convai-container elevenlabs-convai .call-bubble::before,
+#elevenlabs-convai-container elevenlabs-convai [class*="call-bubble"]::before {
+  content: "Time Machine Live Hotline";
+  display: block;
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-weight: 500;
+  color: #c2a06e;
+  font-size: 14px;
+}

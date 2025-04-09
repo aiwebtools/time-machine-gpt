@@ -27,7 +27,19 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
-        <MobileNavItem to="/about" label="About" onClick={() => setIsMenuOpen(false)} />
+        
+        <a 
+          href="https://nativeamericantimemachine.lovable.app/?via=aiwebtools" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="w-full py-3 px-4 rounded-lg transition-colors flex items-center justify-between text-gray-200 hover:bg-gray-700/30"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <span>NATIVE AMERICAN HISTORY TIME MACHINE</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 7h10v10M7 17 17 7"/>
+          </svg>
+        </a>
         
         <a 
           href="https://www.aiwebtools.ai" 
