@@ -120,6 +120,15 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a 
+                  href={BOOK_WRITER_URL} 
+                  onClick={handleBookWriterClick} 
+                  className="text-white/70 hover:text-time-accent transition-colors"
+                >
+                  Interactive Time Machine Book Writer
+                </a>
+              </li>
+              <li>
                 <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   Talk to History GPT
                 </a>
@@ -137,11 +146,6 @@ const Footer: React.FC = () => {
               <li>
                 <a href="https://www.aiwebtools.ai" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   MORE AI TOOLS
-                </a>
-              </li>
-              <li>
-                <a href={BOOK_WRITER_URL} onClick={handleBookWriterClick} className="text-white/70 hover:text-time-accent transition-colors">
-                  Interactive Time Machine Book Writer
                 </a>
               </li>
             </ul>
