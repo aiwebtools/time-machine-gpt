@@ -82,7 +82,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             onClick={handleTimeMachineClick}
             className="w-full flex items-center justify-center py-3 rounded-lg shadow-md transition-all relative overflow-hidden group transform hover:translate-y-[-2px]" 
           >
-            <span className="relative z-10 text-time-accent font-medium">TIME MACHINE GPT</span>
+            <span className="relative z-10 text-time-accent font-medium">THE ORIGINAL TIME MACHINE GPT</span>
             <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
           </a>
         </div>

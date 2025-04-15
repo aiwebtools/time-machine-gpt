@@ -34,7 +34,8 @@ const Footer: React.FC = () => {
     createTimePortalEffect(TIME_MACHINE_URL);
   };
 
-  return <footer className="bg-time-dark text-white py-12">
+  return (
+    <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -110,7 +111,7 @@ const Footer: React.FC = () => {
                   onClick={handleTimeMachineClick}
                   className="text-white/70 hover:text-time-accent transition-colors"
                 >
-                  Time Machine GPT
+                  The Original Time Machine GPT
                 </a>
               </li>
               <li>
@@ -180,7 +181,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
 
 export default Footer;

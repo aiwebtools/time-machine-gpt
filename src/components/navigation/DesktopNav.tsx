@@ -91,7 +91,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
             "btn-glow relative overflow-hidden group"
           )}
         >
-          <span className="relative z-10">TIME MACHINE GPT</span>
+          <span className="relative z-10">THE ORIGINAL TIME MACHINE GPT</span>
           <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/80 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
         </a>
       </div>
