@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import MobileNavItem from './MobileNavItem';
 import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface MobileMenuProps {
@@ -52,8 +51,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       isMenuOpen ? "opacity-100 top-full max-h-[80vh] overflow-y-auto py-4 px-5" : "opacity-0 -top-40 pointer-events-none max-h-0"
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
-        <MobileNavItem to="/" label="Home" onClick={() => setIsMenuOpen(false)} />
-        
         <div className="pt-2 space-y-3">
           <a 
             href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 

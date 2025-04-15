@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
-import NavItem from './NavItem';
 import { createTimePortalEffect } from '@/utils/timeEffects';
 
 interface DesktopNavProps {
@@ -41,7 +39,6 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
 
   return (
     <nav className="hidden md:flex items-center space-x-4">
-      <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
       <div className="flex items-center space-x-2">
         <a 
           href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
