@@ -3,12 +3,12 @@
   position: absolute;
   width: 1px;
   height: 1px;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
-  animation: streakingStar 8s linear infinite;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+  animation: streakingStar 10s linear infinite;
   z-index: 0;
   pointer-events: none;
   transform: rotate(-45deg);
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 @keyframes streakingStar {
@@ -17,10 +17,10 @@
     opacity: 0;
   }
   10% {
-    opacity: 0.8;
+    opacity: 0.7;
   }
   90% {
-    opacity: 0.6;
+    opacity: 0.4;
   }
   100% {
     transform: translate(calc(100vw + 300px), calc(100vh + 300px)) rotate(-45deg);
@@ -29,41 +29,16 @@
 }
 
 .star {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   position: absolute;
   opacity: 0;
-  animation: twinkle 4s infinite ease-in-out;
+  animation: twinkle 5s infinite ease-in-out;
   z-index: 1;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
+  0%, 100% { opacity: 0; transform: scale(0.3); }
   50% { opacity: 0.8; transform: scale(1); }
-}
-
-.star.shooting {
-  width: 2px !important;
-  height: 1px !important;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0));
-  border-radius: 0;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
-  transform: rotate(-45deg);
-  animation: shoot 6s infinite linear;
-  opacity: 1;
-}
-
-@keyframes shoot {
-  0% {
-    transform: translate(-100px, -100px) rotate(-45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(calc(100vw + 300px), calc(100vh + 300px)) rotate(-45deg);
-    opacity: 0;
-  }
 }
