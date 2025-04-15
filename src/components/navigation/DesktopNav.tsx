@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import NavItem from './NavItem';
@@ -24,6 +25,21 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     createTimePortalEffect(timeMachineUrl);
   };
 
+  const handleBookWriterClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(bookWriterUrl);
+  };
+
+  const handleHistoryGptClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(historyGptUrl);
+  };
+
+  const handleImageTravelerClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(imageTravelerUrl);
+  };
+
   return (
     <nav className="hidden md:flex items-center space-x-4">
       <NavItem to="/" label="Home" isScrolled={scrollPosition > 50} />
@@ -43,8 +59,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         </a>
         <a 
           href={imageTravelerUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          onClick={handleImageTravelerClick}
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-dark",
@@ -56,8 +71,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         </a>
         <a 
           href={historyGptUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          onClick={handleHistoryGptClick}
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-dark",
@@ -68,9 +82,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           TALK TO HISTORY GPT
         </a>
         <a 
-          href={bookWriterUrl} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          href={bookWriterUrl}
+          onClick={handleBookWriterClick}
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-dark",

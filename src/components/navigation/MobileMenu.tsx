@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import MobileNavItem from './MobileNavItem';
@@ -26,6 +27,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     createTimePortalEffect(timeMachineUrl);
   };
 
+  const handleBookWriterClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    createTimePortalEffect(bookWriterUrl);
+  };
+
+  const handleHistoryGptClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    createTimePortalEffect(historyGptUrl);
+  };
+
+  const handleImageTravelerClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    createTimePortalEffect(imageTravelerUrl);
+  };
+
   return (
     <div className={cn(
       "md:hidden absolute w-full left-0 shadow-lg",
@@ -49,30 +68,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           <a 
             href={imageTravelerUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
-            onClick={() => setIsMenuOpen(false)}
+            onClick={handleImageTravelerClick}
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>IMAGINATION TRAVELER GPT</span>
           </a>
           
           <a 
             href={historyGptUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
-            onClick={() => setIsMenuOpen(false)}
+            onClick={handleHistoryGptClick}
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>TALK TO HISTORY GPT</span>
           </a>
           
           <a 
-            href={bookWriterUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
-            onClick={() => setIsMenuOpen(false)}
+            href={bookWriterUrl}
+            onClick={handleBookWriterClick} 
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>INTERACTIVE TIME MACHINE BOOK WRITER</span>
           </a>

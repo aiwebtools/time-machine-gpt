@@ -34,6 +34,11 @@ const Footer: React.FC = () => {
     createTimePortalEffect(TIME_MACHINE_URL);
   };
 
+  const handleBookWriterClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect(BOOK_WRITER_URL);
+  };
+
   return (
     <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
@@ -111,7 +116,7 @@ const Footer: React.FC = () => {
                   onClick={handleTimeMachineClick}
                   className="text-white/70 hover:text-time-accent transition-colors"
                 >
-                  The Original Time Machine GPT
+                  THE ORIGINAL TIME MACHINE GPT
                 </a>
               </li>
               <li>
@@ -140,7 +145,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href={BOOK_WRITER_URL} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                <a href={BOOK_WRITER_URL} onClick={handleBookWriterClick} className="text-white/70 hover:text-time-accent transition-colors">
                   Interactive Time Machine Book Writer
                 </a>
               </li>
