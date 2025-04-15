@@ -28,7 +28,9 @@ const Navbar = () => {
       scrollPosition > 50 ? "bg-white/80 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4"
     )}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <NavLogo scrollPosition={scrollPosition} />
+        <div className="flex-shrink-0 mr-4">
+          <NavLogo scrollPosition={scrollPosition} />
+        </div>
         
         <button 
           className="md:hidden p-2" 
@@ -54,13 +56,15 @@ const Navbar = () => {
           </svg>
         </button>
         
-        <DesktopNav 
-          scrollPosition={scrollPosition}
-          imageTravelerUrl={IMAGINATION_TRAVELER_URL}
-          historyGptUrl={HISTORY_GPT_URL}
-          timeMachineUrl={TIME_MACHINE_URL}
-          bookWriterUrl={BOOK_WRITER_URL}
-        />
+        <div className="flex-grow overflow-hidden">
+          <DesktopNav 
+            scrollPosition={scrollPosition}
+            imageTravelerUrl={IMAGINATION_TRAVELER_URL}
+            historyGptUrl={HISTORY_GPT_URL}
+            timeMachineUrl={TIME_MACHINE_URL}
+            bookWriterUrl={BOOK_WRITER_URL}
+          />
+        </div>
       </div>
       
       <MobileMenu 

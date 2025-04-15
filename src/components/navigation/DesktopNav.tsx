@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
@@ -38,7 +39,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   };
 
   return (
-    <nav className="hidden md:flex items-center space-x-4">
+    <nav className="hidden md:flex items-center space-x-4 ml-8">
       <div className="flex items-center space-x-2">
         <a 
           href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
