@@ -1,17 +1,14 @@
 
-.time-portal-bg {
-  background: radial-gradient(circle at center, theme('colors.time.medium') 0%, theme('colors.time.dark') 100%);
-}
-
 .streaking-star {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 1px;
+  height: 1px;
   background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
-  animation: streakingStar 6s linear infinite;
+  animation: streakingStar 8s linear infinite;
   z-index: 0;
   pointer-events: none;
   transform: rotate(-45deg);
+  opacity: 0.7;
 }
 
 @keyframes streakingStar {
@@ -20,10 +17,10 @@
     opacity: 0;
   }
   10% {
-    opacity: 1;
+    opacity: 0.8;
   }
   90% {
-    opacity: 1;
+    opacity: 0.6;
   }
   100% {
     transform: translate(calc(100vw + 300px), calc(100vh + 300px)) rotate(-45deg);
@@ -32,28 +29,28 @@
 }
 
 .star {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   position: absolute;
   opacity: 0;
-  animation: twinkle 3s infinite ease-in-out;
+  animation: twinkle 4s infinite ease-in-out;
   z-index: 1;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes twinkle {
-  0% { opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0; }
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1); }
 }
 
 .star.shooting {
-  width: 4px !important;
+  width: 2px !important;
   height: 1px !important;
   background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0));
   border-radius: 0;
-  box-shadow: 0 0 5px 1px white;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
   transform: rotate(-45deg);
-  animation: shoot 5s infinite linear;
+  animation: shoot 6s infinite linear;
   opacity: 1;
 }
 
@@ -69,28 +66,4 @@
     transform: translate(calc(100vw + 300px), calc(100vh + 300px)) rotate(-45deg);
     opacity: 0;
   }
-}
-
-.glass-effect {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* Space background effect */
-.space-bg {
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-  overflow: hidden;
-}
-
-/* Space constellation effect */
-.constellation {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }

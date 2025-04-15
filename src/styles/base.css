@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono&display=swap');
 
 @tailwind base;
@@ -7,8 +6,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 10% 3.9%; /* Deep black background */
+    --foreground: 0 0% 98%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -48,8 +47,8 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 1.9%; /* Even deeper black for dark mode */
+    --foreground: 0 0% 98%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -88,7 +87,6 @@
 }
 
 @layer base {
-  /* Complete removal of any border styles from the global selector */
   * {
     border: none !important;
     box-sizing: border-box;
@@ -109,18 +107,15 @@
   }
 }
 
-/* Explicitly target the header to ensure no borders */
 header {
   border: none !important;
   outline: none !important;
 }
 
-/* Explicitly target navigation elements to ensure no borders */
 nav, nav * {
   border: none !important;
 }
 
-/* Responsive fixes */
 @media screen and (max-width: 768px) {
   .container {
     max-width: 100% !important;
