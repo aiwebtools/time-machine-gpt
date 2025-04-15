@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 240 10% 1.9%; /* Even deeper black for dark mode */
+    --background: 240 10% 3.9%; /* Deep black background */
     --foreground: 0 0% 98%;
 
     --card: 0 0% 100%;
@@ -47,7 +47,7 @@
   }
 
   .dark {
-    --background: 240 5% 0.5%; /* Ultra deep black for space-like appearance */
+    --background: 240 10% 1.9%; /* Even deeper black for dark mode */
     --foreground: 0 0% 98%;
 
     --card: 222.2 84% 4.9%;

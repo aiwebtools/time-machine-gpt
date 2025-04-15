@@ -14,18 +14,18 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
       existingStars.forEach(star => star.remove());
       
       // Add more stars with enhanced variety
-      for (let i = 0; i < 300; i++) {
+      for (let i = 0; i < 200; i++) {
         const star = document.createElement('div');
-        const size = Math.random() * 2 + 0.5;
-        const opacity = Math.random() * 0.6 + 0.2;
+        const size = Math.random() * 3 + 1;
+        const opacity = Math.random() * 0.7 + 0.3;
         
         star.className = 'star';
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.left = `${Math.random() * 100}%`;
         star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 6}s`;
-        star.style.animationDuration = `${Math.random() * 5 + 4}s`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        star.style.animationDuration = `${Math.random() * 4 + 3}s`;
         star.style.opacity = `${opacity}`;
         
         heroSection.appendChild(star);
@@ -45,14 +45,14 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
         shootingStar.style.left = `${startX}%`;
         shootingStar.style.top = `${startY}%`;
         
-        const animationDuration = (Math.random() * 5 + 4);
+        const animationDuration = (Math.random() * 4 + 3);
         shootingStar.style.animationDuration = `${animationDuration}s`;
         
-        const size = Math.random() * 3 + 1;
+        const size = Math.random() * 4 + 2;
         shootingStar.style.width = `${size}px`;
-        shootingStar.style.height = `${Math.max(1, size/3)}px`;
+        shootingStar.style.height = `${Math.max(1, size/4)}px`;
         
-        const rotation = -45 + (Math.random() * 40 - 20);
+        const rotation = -45 + (Math.random() * 30 - 15);
         shootingStar.style.transform = `rotate(${rotation}deg)`;
         
         heroSection.appendChild(shootingStar);
@@ -65,7 +65,7 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
       };
       
       // Create initial batch of shooting stars
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 10; i++) {
         createShootingStar();
       }
       
@@ -74,7 +74,7 @@ const StarryBackground = ({ containerRef }: StarryBackgroundProps) => {
         if (document.visibilityState === 'visible') {
           createShootingStar();
         }
-      }, 1500);
+      }, 1000);
       
       return () => {
         clearInterval(shootingStarInterval);
