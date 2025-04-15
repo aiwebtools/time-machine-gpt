@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Instagram, Mail, Phone } from 'lucide-react';
 import { createTimePortalEffect } from '@/utils/timeEffects';
 
-// Custom TikTok icon since it's not available in lucide-react
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -29,6 +27,7 @@ const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const Footer: React.FC = () => {
   const location = useLocation();
   const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+  const BOOK_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-book-writer-v9";
   
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -139,6 +138,11 @@ const Footer: React.FC = () => {
                   MORE AI TOOLS
                 </a>
               </li>
+              <li>
+                <a href={BOOK_WRITER_URL} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Interactive Time Machine Book Writer
+                </a>
+              </li>
             </ul>
           </div>
           
@@ -178,4 +182,5 @@ const Footer: React.FC = () => {
       </div>
     </footer>;
 };
+
 export default Footer;

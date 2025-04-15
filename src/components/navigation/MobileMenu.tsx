@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import MobileNavItem from './MobileNavItem';
@@ -10,6 +9,7 @@ interface MobileMenuProps {
   imageTravelerUrl: string;
   historyGptUrl: string;
   timeMachineUrl: string;
+  bookWriterUrl: string;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -17,7 +17,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   setIsMenuOpen,
   imageTravelerUrl,
   historyGptUrl,
-  timeMachineUrl
+  timeMachineUrl,
+  bookWriterUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,6 +65,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             onClick={() => setIsMenuOpen(false)}
           >
             <span>TALK TO HISTORY GPT</span>
+          </a>
+          
+          <a 
+            href={bookWriterUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>INTERACTIVE TIME MACHINE BOOK WRITER</span>
           </a>
           
           <a 

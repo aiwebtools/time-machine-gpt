@@ -8,6 +8,7 @@ import MobileMenu from './navigation/MobileMenu';
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 const HISTORY_GPT_URL = "https://talk-to-history-gpt.lovable.app/";
 const IMAGINATION_TRAVELER_URL = "https://imaginationtravelergpt.lovable.app/?via=aiwebtools";
+const BOOK_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-book-writer-v9";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -58,6 +59,7 @@ const Navbar = () => {
           imageTravelerUrl={IMAGINATION_TRAVELER_URL}
           historyGptUrl={HISTORY_GPT_URL}
           timeMachineUrl={TIME_MACHINE_URL}
+          bookWriterUrl={BOOK_WRITER_URL}
         />
       </div>
       
@@ -67,6 +69,7 @@ const Navbar = () => {
         imageTravelerUrl={IMAGINATION_TRAVELER_URL}
         historyGptUrl={HISTORY_GPT_URL}
         timeMachineUrl={TIME_MACHINE_URL}
+        bookWriterUrl={BOOK_WRITER_URL}
       />
     </header>
   );
