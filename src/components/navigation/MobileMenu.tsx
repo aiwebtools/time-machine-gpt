@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
@@ -16,19 +17,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   setIsMenuOpen,
   imageTravelerUrl,
   historyGptUrl,
-  timeMachineUrl,
-  bookWriterUrl
+  timeMachineUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
     createTimePortalEffect(timeMachineUrl);
-  };
-
-  const handleBookWriterClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    createTimePortalEffect(bookWriterUrl);
   };
 
   const handleHistoryGptClick = (e: React.MouseEvent) => {
@@ -76,14 +70,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>TALK TO HISTORY GPT</span>
-          </a>
-          
-          <a 
-            href={bookWriterUrl}
-            onClick={handleBookWriterClick} 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>INTERACTIVE TIME MACHINE BOOK WRITER</span>
           </a>
           
           <a 

@@ -15,17 +15,11 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   scrollPosition,
   imageTravelerUrl,
   historyGptUrl,
-  timeMachineUrl,
-  bookWriterUrl
+  timeMachineUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
     createTimePortalEffect(timeMachineUrl);
-  };
-
-  const handleBookWriterClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    createTimePortalEffect(bookWriterUrl);
   };
 
   const handleHistoryGptClick = (e: React.MouseEvent) => {
@@ -77,18 +71,6 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           )}
         >
           TALK TO HISTORY GPT
-        </a>
-        <a 
-          href={bookWriterUrl}
-          onClick={handleBookWriterClick}
-          className={cn(
-            "px-3 py-1.5 rounded-full text-sm transition-all",
-            "border border-time-dark",
-            "bg-time-dark hover:bg-time-dark/90",
-            "text-white font-medium"
-          )}
-        >
-          INTERACTIVE TIME MACHINE BOOK WRITER
         </a>
         <a 
           href={timeMachineUrl} 
