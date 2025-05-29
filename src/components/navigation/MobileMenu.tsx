@@ -37,6 +37,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     createTimePortalEffect(imageTravelerUrl);
   };
 
+  const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
+  };
+
   return (
     <div className={cn(
       "md:hidden absolute w-full left-0 shadow-lg",
@@ -48,10 +54,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className="pt-2 space-y-3">
           <a 
             href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
+            onClick={handleNativeAmericanHistoryClick}
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]" 
-            onClick={() => setIsMenuOpen(false)}
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>NATIVE AMERICAN HISTORY TIME MACHINE</span>
           </a>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
@@ -32,11 +31,17 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     createTimePortalEffect(imageTravelerUrl);
   };
 
+  const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
+  };
+
   return (
     <nav className="hidden md:flex items-center space-x-4 ml-8">
       <div className="flex items-center space-x-2">
         <a 
           href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
+          onClick={handleNativeAmericanHistoryClick}
           target="_blank" 
           rel="noopener noreferrer" 
           className={cn(
