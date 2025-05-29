@@ -59,6 +59,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <a 
             href={imageTravelerUrl} 
             onClick={handleImageTravelerClick}
+            target="_blank" 
+            rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>IMAGINATION TRAVELER GPT</span>
@@ -67,6 +69,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <a 
             href={historyGptUrl} 
             onClick={handleHistoryGptClick}
+            target="_blank" 
+            rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>TALK TO HISTORY GPT</span>
@@ -75,6 +79,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <a 
             href={timeMachineUrl} 
             onClick={handleTimeMachineClick}
+            target="_blank" 
+            rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 rounded-lg shadow-md transition-all relative overflow-hidden group transform hover:translate-y-[-2px]" 
           >
             <span className="relative z-10 text-time-accent font-medium">THE ORIGINAL TIME MACHINE GPT</span>

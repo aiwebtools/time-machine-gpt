@@ -51,6 +51,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         <a 
           href={imageTravelerUrl} 
           onClick={handleImageTravelerClick}
+          target="_blank" 
+          rel="noopener noreferrer"
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-dark",
@@ -63,6 +65,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         <a 
           href={historyGptUrl} 
           onClick={handleHistoryGptClick}
+          target="_blank" 
+          rel="noopener noreferrer"
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-dark",
@@ -75,6 +79,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         <a 
           href={timeMachineUrl} 
           onClick={handleTimeMachineClick}
+          target="_blank" 
+          rel="noopener noreferrer"
           className={cn(
             "px-3 py-1.5 rounded-full text-sm transition-all",
             "border border-time-accent",

@@ -52,6 +52,14 @@ const DisclaimerPopup: React.FC = () => {
               Welcome to <span className="text-time-accent font-medium">Time Machine GPT</span>, your portal to history's most fascinating moments.
             </p>
             
+            <div className="bg-time-accent/10 border border-time-accent/30 rounded-lg p-3 mb-4">
+              <h3 className="font-bold text-time-accent mb-2">Usage Information:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li><span className="font-medium text-time-accent">ChatGPT Plus subscribers:</span> Enjoy unlimited, unrestricted access to Time Machine GPT</li>
+                <li><span className="font-medium text-gray-300">Free accounts:</span> Limited interactions every few hours</li>
+              </ul>
+            </div>
+            
             <p>
               By proceeding, you acknowledge that:
             </p>

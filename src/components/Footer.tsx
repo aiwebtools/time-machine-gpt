@@ -114,6 +114,8 @@ const Footer: React.FC = () => {
                 <a 
                   href={TIME_MACHINE_URL}
                   onClick={handleTimeMachineClick}
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="text-white/70 hover:text-time-accent transition-colors"
                 >
                   THE ORIGINAL TIME MACHINE GPT
@@ -123,6 +125,8 @@ const Footer: React.FC = () => {
                 <a 
                   href={BOOK_WRITER_URL} 
                   onClick={handleBookWriterClick} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="text-white/70 hover:text-time-accent transition-colors"
                 >
                   Interactive Time Machine Book Writer
