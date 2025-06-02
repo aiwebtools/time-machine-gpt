@@ -31,75 +31,59 @@ const DisclaimerPopup: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className={cn(
         "relative bg-gradient-to-br from-time-dark via-time-medium to-time-dark",
-        "p-4 md:p-6 rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto",
+        "p-4 rounded-xl shadow-2xl max-w-sm w-full",
         "border border-time-accent/30 text-white"
       )}>
         <button 
           onClick={handleAccept}
-          className="absolute top-3 right-3 text-gray-300 hover:text-white transition-colors"
+          className="absolute top-2 right-2 text-gray-300 hover:text-white transition-colors"
           aria-label="Close"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
         
-        <div className="space-y-4">
-          <h2 className="text-xl md:text-2xl font-serif font-bold text-center mb-4 animate-text-shimmer bg-clip-text text-transparent bg-gradient-to-r from-time-accent via-white to-time-accent bg-[length:200%_auto]">
+        <div className="space-y-3">
+          <h2 className="text-lg font-serif font-bold text-center animate-text-shimmer bg-clip-text text-transparent bg-gradient-to-r from-time-accent via-white to-time-accent bg-[length:200%_auto]">
             Time Travel Disclaimer
           </h2>
           
-          <div className="space-y-3 text-sm md:text-base">
+          <div className="space-y-2 text-sm">
             <p>
-              Welcome to <span className="text-time-accent font-medium">Time Machine GPT</span>, your portal to history's most fascinating moments.
+              Welcome to <span className="text-time-accent font-medium">Time Machine GPT</span> - your portal to history.
             </p>
             
-            <div className="bg-time-accent/10 border border-time-accent/30 rounded-lg p-3 mb-4">
-              <h3 className="font-bold text-time-accent mb-2">Usage Information:</h3>
-              <ul className="list-disc pl-5 space-y-1 text-sm">
-                <li><span className="font-medium text-time-accent">ChatGPT Plus subscribers:</span> Enjoy unlimited, unrestricted access to Time Machine GPT</li>
-                <li><span className="font-medium text-gray-300">Free accounts:</span> Limited interactions every few hours</li>
-              </ul>
+            <div className="bg-time-accent/10 border border-time-accent/30 rounded-lg p-2">
+              <p className="text-xs">
+                <span className="font-medium text-time-accent">ChatGPT Plus:</span> Unlimited access
+                <br />
+                <span className="font-medium text-gray-300">Free accounts:</span> Limited use
+              </p>
             </div>
             
-            <p>
-              By proceeding, you acknowledge that:
-            </p>
-            
-            <ul className="list-disc pl-5 space-y-2">
-              <li>Historical narratives are created using AI and may include creative elements alongside factual information</li>
-              <li>This experience is designed for educational entertainment</li>
-              <li>For academic research, please consult primary historical sources</li>
-            </ul>
-            
-            <p className="text-xs md:text-sm italic text-gray-300 mt-4">
-              Time Machine GPT strives for accuracy but emphasizes immersive storytelling. Enjoy your journey through time!
-            </p>
-            
-            <p className="text-xs text-gray-400 mt-4">
-              By using this service, you agree to our{' '}
+            <p className="text-xs">
+              AI-generated historical narratives for educational entertainment. 
               <a 
                 href="https://aiwebtools.lovable.app/disclaimers" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-time-accent hover:underline"
+                className="text-time-accent hover:underline ml-1"
               >
-                Terms of Service and Disclaimers
+                Full terms here.
               </a>
             </p>
           </div>
           
-          <div className="mt-6 flex justify-center">
+          <div className="flex justify-center pt-2">
             <button
               onClick={handleAccept}
               className={cn(
-                "btn-glow px-6 py-3 rounded-md font-medium transition-all duration-300",
+                "btn-glow px-4 py-2 rounded-md text-sm font-medium transition-all duration-300",
                 "bg-time-accent hover:bg-time-accent/90 text-white",
                 "border border-time-accent/50 hover:border-time-accent",
-                "hover:scale-105 hover:shadow-lg shadow-time-accent/30",
-                "animate-shimmer bg-[length:200%_auto]",
-                "bg-gradient-to-r from-time-accent via-white/10 to-time-accent"
+                "hover:scale-105"
               )}
             >
-              I Understand & Accept
+              Got it!
             </button>
           </div>
         </div>
