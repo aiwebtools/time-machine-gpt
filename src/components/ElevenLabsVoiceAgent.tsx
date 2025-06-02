@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -91,7 +90,7 @@ const ElevenLabsVoiceAgent = ({
     <div className={cn("fixed bottom-6 right-6 z-50", className)}>
       <div className="flex items-center gap-3">
         {!isOpen && (
-          <div className="bg-time-accent/90 text-white px-3 py-2 rounded-lg shadow-lg">
+          <div className="bg-time-accent/90 text-blue-900 px-3 py-2 rounded-lg shadow-lg">
             <span className="text-sm font-medium">Time Machine Live Hotline</span>
           </div>
         )}
