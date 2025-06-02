@@ -73,6 +73,18 @@ const DisclaimerPopup: React.FC = () => {
             <p className="text-xs md:text-sm italic text-gray-300 mt-4">
               Time Machine GPT strives for accuracy but emphasizes immersive storytelling. Enjoy your journey through time!
             </p>
+            
+            <p className="text-xs text-gray-400 mt-4">
+              By using this service, you agree to our{' '}
+              <a 
+                href="https://aiwebtools.lovable.app/disclaimers" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-time-accent hover:underline"
+              >
+                Terms of Service and Disclaimers
+              </a>
+            </p>
           </div>
           
           <div className="mt-6 flex justify-center">
