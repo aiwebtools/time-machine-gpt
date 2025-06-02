@@ -13,6 +13,7 @@ import ProgressBar from '@/components/ProgressBar';
 import TimeJourneySection from '@/components/TimeJourneySection';
 import StarryBackground from '@/components/StarryBackground';
 import DisclaimerPopup from '@/components/DisclaimerPopup';
+import InformationalDisclaimer from '@/components/InformationalDisclaimer';
 import FaqSection from '@/components/FaqSection';
 import { cn } from '@/lib/utils';
 
@@ -84,6 +85,8 @@ const Index = () => {
           <Features />
           <CtaSection timeDestinationUrl={TIME_MACHINE_URL} />
         </ScrollReveal>
+        
+        <InformationalDisclaimer />
       </main>
       
       <Footer />
