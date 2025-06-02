@@ -94,7 +94,7 @@ const HeroSection = ({
               <a 
                 href={timeDestinationUrl} 
                 onClick={handleStartJourney}
-                className="btn-glow px-10 py-4 bg-gradient-to-r from-time-accent to-time-divine text-white rounded-lg font-semibold hover:from-time-divine hover:to-time-accent transition-all duration-500 hover:scale-110 hover:shadow-2xl animate-divine-glow text-lg"
+                className="btn-glow px-10 py-4 bg-gradient-to-r from-time-accent to-time-divine text-blue-900 rounded-lg font-semibold hover:from-time-divine hover:to-time-accent transition-all duration-500 hover:scale-110 hover:shadow-2xl animate-divine-glow text-lg"
               >
                 Start Your Journey
               </a>
