@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { createTimePortalEffect } from '@/utils/timeEffects';
@@ -7,6 +7,40 @@ import { createTimePortalEffect } from '@/utils/timeEffects';
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 
 const About = () => {
+  useEffect(() => {
+    // SEO optimization for About page
+    document.title = "About AI Web Tools - Leading AI Tools Provider | Time Machine GPT Creator";
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn about AI Web Tools LLC, creators of Time Machine GPT and innovative AI educational tools. Discover our mission to revolutionize learning through artificial intelligence technology.');
+    }
+    
+    // Add page-specific structured data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "About AI Web Tools",
+      "description": "Learn about AI Web Tools LLC and our innovative AI educational tools",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "AI Web Tools LLC",
+        "description": "Leading provider of free AI tools and educational technology"
+      }
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+    
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
     createTimePortalEffect(TIME_MACHINE_URL);
@@ -14,9 +48,15 @@ const About = () => {
   
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-time-dark to-time-medium">
+      {/* SEO Hidden Content */}
+      <div className="sr-only">
+        <h1>About AI Web Tools - Premier AI Tools Development Company</h1>
+        <p>AI Web Tools LLC specializes in creating innovative artificial intelligence applications including Time Machine GPT, educational AI tools, and research-focused AI solutions for students and professionals worldwide.</p>
+      </div>
+      
       <Navbar />
       
-      <main className="flex-grow container mx-auto px-4 py-16 md:py-24">
+      <main className="flex-grow container mx-auto px-4 py-16 md:py-24" role="main">
         <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl p-6 md:p-10 shadow-xl">
           <h1 className="font-serif text-4xl md:text-5xl text-time-accent mb-6 text-center text-shadow-enhanced">
             Greetings, Traveler!
@@ -77,6 +117,7 @@ const About = () => {
               href={TIME_MACHINE_URL}
               onClick={handleStartJourney}
               className="inline-flex items-center px-8 py-4 bg-time-accent text-white rounded-full hover:bg-time-accent/90 transition-colors text-lg font-medium animate-pulse hover:animate-none"
+              aria-label="Start your journey through time with Time Machine GPT"
             >
               <span className="mr-2">START YOUR JOURNEY THROUGH TIME NOW</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
