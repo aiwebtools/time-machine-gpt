@@ -6,15 +6,11 @@ import { cn } from '@/lib/utils';
 const InformationalDisclaimer: React.FC = () => {
   return (
     <div className={cn(
-      "bg-gradient-to-r from-time-dark/90 via-time-accent/20 to-time-dark/90",
-      "border-2 border-time-accent/40 rounded-lg p-4 mx-4 mb-6",
-      "flex items-center gap-3 text-sm text-white shadow-2xl",
-      "backdrop-blur-md bg-opacity-80",
-      "animate-glow relative overflow-hidden"
+      "bg-time-dark/80 border border-time-accent/20 rounded-lg p-3 mx-4 mb-4",
+      "flex items-center gap-2 text-xs text-gray-300"
     )}>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-time-accent/10 to-transparent animate-shimmer"></div>
-      <Info size={16} className="text-time-accent flex-shrink-0 animate-pulse" />
-      <p className="text-center flex-1 font-medium relative z-10">
+      <Info size={14} className="text-time-accent flex-shrink-0" />
+      <p className="text-center flex-1">
         For informational, educational, and research purposes only.
       </p>
     </div>

@@ -24,34 +24,7 @@ const Index = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Enhanced SEO title for better rankings
-    document.title = "AI Web Tools - Free AI Tools | Time Machine GPT | Best AI Tools 2025";
-    
-    // Add additional meta tags for SEO
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Discover the best free AI tools at AI Web Tools. Experience Time Machine GPT - revolutionary AI-powered time travel through history. Educational AI tools for research, learning, and exploration.');
-    }
-    
-    // Add structured data for better search visibility
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "AI Web Tools - Free AI Tools Collection",
-      "description": "Comprehensive collection of free AI tools including Time Machine GPT for educational time travel experiences",
-      "url": window.location.href,
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Time Machine GPT",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web Browser"
-      }
-    };
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(structuredData);
-    document.head.appendChild(script);
+    document.title = "Time Machine GPT - Interactive Time Travel Experience";
     
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -59,7 +32,6 @@ const Index = () => {
     
     return () => {
       clearTimeout(timer);
-      document.head.removeChild(script);
     };
   }, []);
 
@@ -92,20 +64,13 @@ const Index = () => {
 
   return (
     <div className={cn("min-h-screen flex flex-col transition-opacity duration-700", isLoaded ? "opacity-100" : "opacity-0")}>
-      {/* SEO Hidden Content for Keywords */}
-      <div className="sr-only">
-        <h1>AI Web Tools - Best Free AI Tools Collection 2025</h1>
-        <p>Discover powerful artificial intelligence tools including Time Machine GPT, educational AI research tools, and innovative ChatGPT applications. AI Web Tools provides the most comprehensive collection of free AI tools for students, researchers, and professionals.</p>
-        <span>Keywords: AI tools, free AI tools, AI web tools, artificial intelligence, ChatGPT tools, educational AI, research AI, Time Machine GPT, AI applications, machine learning tools, AI chat tools, best AI tools 2025</span>
-      </div>
-      
       <DisclaimerPopup />
       <ProgressBar />
       <Navbar />
       
       <StarryBackground containerRef={heroSectionRef} />
       
-      <main className="flex-1" role="main">
+      <main className="flex-1">
         <HeroSection 
           onStartJourney={handleStartJourney}
           timeDestinationUrl={TIME_MACHINE_URL}

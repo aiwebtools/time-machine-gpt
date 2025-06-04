@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -41,14 +40,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-time-dark text-white py-12" role="contentinfo">
-      {/* SEO Hidden Content in Footer */}
-      <div className="sr-only">
-        <h2>AI Web Tools - Complete AI Tools Directory</h2>
-        <p>Access the most comprehensive collection of free AI tools including Time Machine GPT, educational AI applications, research tools, and innovative artificial intelligence solutions. Best AI tools 2025.</p>
-        <span>AI tools, free AI tools, AI web tools, artificial intelligence, ChatGPT, educational AI, research AI</span>
-      </div>
-      
+    <footer className="bg-time-dark text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -151,8 +143,8 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="https://aiwebtools.lovable.app/disclaimers" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  User Terms & Disclaimers
+                <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  User Terms of Usage
                 </a>
               </li>
               <li>
@@ -188,10 +180,10 @@ const Footer: React.FC = () => {
             © 2025 AI WEB TOOLS LLC. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
-            <a href="https://www.instagram.com/aiwebtools.ai" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors" aria-label="Follow AI Web Tools on Instagram">
+            <a href="https://www.instagram.com/aiwebtools.ai" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
               <Instagram size={20} />
             </a>
-            <a href="https://www.tiktok.com/@aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors" aria-label="Follow AI Web Tools on TikTok">
+            <a href="https://www.tiktok.com/@aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
               <TikTokIcon width={20} height={20} />
             </a>
           </div>
