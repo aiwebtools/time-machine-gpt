@@ -65,7 +65,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
             "text-white font-medium"
           )}
         >
-          IMAGINATION TRAVELER GPT
+          BLACK HISTORY MATTERS TIME MACHINE
         </a>
         <a 
           href={historyGptUrl} 

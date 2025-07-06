@@ -69,7 +69,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
-            <span>IMAGINATION TRAVELER GPT</span>
+            <span>BLACK HISTORY MATTERS TIME MACHINE</span>
           </a>
           
           <a 
