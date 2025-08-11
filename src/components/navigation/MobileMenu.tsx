@@ -108,13 +108,13 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           </a>
 
           <a 
-            href={bookWriterUrl} 
-            onClick={handleBookWriterClick}
+            href={storyWriterUrl} 
+            onClick={handleStoryWriterClick}
             target="_blank" 
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
-            <span>INTERACTIVE BOOK WRITER V9</span>
+            <span>TIME MACHINE INTERACTIVE STORY WRITER V9</span>
           </a>
 
           <a 

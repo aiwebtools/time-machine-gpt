@@ -183,7 +183,7 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => {
           <Card className="backdrop-blur-sm bg-time-dark/40 border border-time-accent/10 hover:bg-time-medium/30 hover:border-time-accent/30 transition-all group hover:scale-[1.02]">
             <CardHeader>
               <CardTitle className="text-time-accent group-hover:text-time-accent/90 transition-colors">
-                Interactive Book Writer V9
+                Time Machine Interactive Story Writer V9
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -193,14 +193,14 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => {
                 <li>Difference: Long-form structure, chapters, export-ready drafts</li>
               </ul>
               <a
-                href={BOOK_WRITER_URL}
-                onClick={handleOpenBookWriter}
+                href={STORY_WRITER_URL}
+                onClick={handleOpenStoryWriter}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open Time Machine Interactive Book Writer V9"
+                aria-label="Open Time Machine Interactive Story Writer V9"
                 className="mt-6 inline-block px-5 py-3 rounded-md bg-time-accent text-time-dark font-medium hover:bg-time-accent/90 transition-colors btn-glow"
               >
-                Open Book Writer V9
+                Open Story Writer V9
               </a>
             </CardContent>
           </Card>
