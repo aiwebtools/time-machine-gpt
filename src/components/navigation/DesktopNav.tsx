@@ -16,6 +16,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   imageTravelerUrl,
   historyGptUrl,
   timeMachineUrl,
+  bookWriterUrl,
   storyWriterUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
@@ -36,6 +37,11 @@ const handleImageTravelerClick = (e: React.MouseEvent) => {
 const handleStoryWriterClick = (e: React.MouseEvent) => {
   e.preventDefault();
   createTimePortalEffect(storyWriterUrl);
+};
+
+const handleBookWriterClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  createTimePortalEffect(bookWriterUrl);
 };
 
 const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
@@ -88,48 +94,64 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
         >
           TALK TO HISTORY GPT
         </a>
-        <a 
-          href={storyWriterUrl} 
-          onClick={handleStoryWriterClick}
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={cn(
-            "px-3 py-1.5 rounded-full text-sm transition-all",
-            "border border-time-dark",
-            "bg-time-dark hover:bg-time-dark/90",
-            "text-white font-medium"
-          )}
-        >
-          INTERACTIVE STORY WRITER V9
-        </a>
-        <a 
-          href={timeMachineUrl} 
-          onClick={handleTimeMachineClick}
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={cn(
-            "px-3 py-1.5 rounded-full text-sm transition-all",
-            "border border-time-accent",
-            "bg-time-dark hover:bg-time-dark/90",
-            "text-time-accent font-medium hover:text-time-accent/80",
-            "btn-glow relative overflow-hidden group"
-          )}
-        >
-          <span className="relative z-10">THE ORIGINAL TIME MACHINE GPT</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/80 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
-        </a>
+      <a 
+        href={storyWriterUrl} 
+        onClick={handleStoryWriterClick}
+        target="_blank" 
+        rel="noopener noreferrer"
+        className={cn(
+          "px-3 py-1.5 rounded-full text-sm transition-all",
+          "border border-time-dark",
+          "bg-time-dark hover:bg-time-dark/90",
+          "text-white font-medium"
+        )}
+      >
+        INTERACTIVE STORY WRITER V9
+      </a>
+      <a 
+        href={bookWriterUrl} 
+        onClick={handleBookWriterClick}
+        target="_blank" 
+        rel="noopener noreferrer"
+        className={cn(
+          "px-3 py-1.5 rounded-full text-sm transition-all",
+          "border border-time-dark",
+          "bg-time-dark hover:bg-time-dark/90",
+          "text-white font-medium"
+        )}
+      >
+        INTERACTIVE BOOK WRITER V9
+      </a>
+      <a 
+        href={timeMachineUrl} 
+        onClick={handleTimeMachineClick}
+        target="_blank" 
+        rel="noopener noreferrer"
+        className={cn(
+          "px-3 py-1.5 rounded-full text-sm transition-all",
+          "border border-time-accent",
+          "bg-time-dark hover:bg-time-dark/90",
+          "text-time-accent font-medium hover:text-time-accent/80",
+          "btn-glow relative overflow-hidden group"
+        )}
+      >
+        <span className="relative z-10">THE ORIGINAL TIME MACHINE GPT</span>
+        <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/80 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
+      </a>
       </div>
       <div className="ml-auto">
         <a 
-          href="https://www.aiwebtools.ai" 
+          href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
           target="_blank" 
           rel="noopener noreferrer" 
           className={cn(
-            "text-sm font-medium transition-colors hover:text-time-accent", 
-            scrollPosition > 50 ? "text-time-dark" : "text-time-accent"
+            "px-4 py-1.5 rounded-full text-sm font-semibold transition-all",
+            "border border-time-accent",
+            "bg-time-accent/90 text-time-dark hover:bg-time-accent",
+            "btn-glow"
           )}
         >
-          MORE AI TOOLS
+          AI TOOLS
         </a>
       </div>
     </nav>

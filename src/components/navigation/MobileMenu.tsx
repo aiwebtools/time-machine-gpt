@@ -19,6 +19,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   imageTravelerUrl,
   historyGptUrl,
   timeMachineUrl,
+  bookWriterUrl,
   storyWriterUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
@@ -43,6 +44,12 @@ const handleStoryWriterClick = (e: React.MouseEvent) => {
   e.preventDefault();
   setIsMenuOpen(false);
   createTimePortalEffect(storyWriterUrl);
+};
+
+const handleBookWriterClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  setIsMenuOpen(false);
+  createTimePortalEffect(bookWriterUrl);
 };
 
 const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
@@ -99,7 +106,17 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           >
             <span>INTERACTIVE STORY WRITER V9</span>
           </a>
-          
+
+          <a 
+            href={bookWriterUrl} 
+            onClick={handleBookWriterClick}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
+          >
+            <span>INTERACTIVE BOOK WRITER V9</span>
+          </a>
+
           <a 
             href={timeMachineUrl} 
             onClick={handleTimeMachineClick}
@@ -114,13 +131,13 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
         
         <div className="mt-6 pt-4 border-t border-gray-700/30">
           <a 
-            href="https://www.aiwebtools.ai" 
+            href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full py-3 px-4 rounded-lg transition-colors flex items-center justify-between text-gray-200 hover:bg-gray-700/30"
+            className="w-full py-3 px-4 rounded-lg transition-all flex items-center justify-between text-time-dark bg-time-accent hover:bg-time-accent/90 btn-glow"
             onClick={() => setIsMenuOpen(false)}
           >
-            <span>MORE AI TOOLS</span>
+            <span>AI TOOLS</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 7h10v10M7 17 17 7"/>
             </svg>

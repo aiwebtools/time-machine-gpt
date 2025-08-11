@@ -153,13 +153,13 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  User Terms of Usage
+                <a href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  Native American History Time Machine
                 </a>
               </li>
               <li>
-                <a href="https://www.aiwebtools.ai" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  MORE AI TOOLS
+                <a href="https://aiwebtools.lovable.dev/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  AI TOOLS
                 </a>
               </li>
             </ul>
@@ -167,10 +167,10 @@ const Footer: React.FC = () => {
           
           <div className="flex flex-col items-center justify-center">
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="w-60 h-32 bg-time-accent hover:bg-time-accent/90 transition-colors flex flex-col items-center justify-center text-time-dark font-bold text-center p-4 rounded-md border-2 border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              className="w-60 h-32 bg-time-accent hover:bg-time-accent/90 transition-colors flex flex-col items-center justify-center text-time-dark font-bold text-center p-4 rounded-md border-2 border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 relative overflow-hidden btn-glow"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-time-accent/10 via-transparent to-black/20 z-0"></div>
               <div className="absolute inset-0 opacity-30">
@@ -180,7 +180,7 @@ const Footer: React.FC = () => {
                 <div className="absolute h-1 w-1 bg-white rounded-full top-[30%] left-[30%] animate-pulse"></div>
                 <div className="absolute h-1 w-1 bg-white rounded-full top-[60%] left-[50%] animate-pulse"></div>
               </div>
-              <span className="text-xl font-mono tracking-wide z-10 font-bold text-shadow-enhanced uppercase bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">GO TO AI WEB TOOLS MAINFRAME</span>
+              <span className="text-xl font-mono tracking-wide z-10 font-bold text-shadow-enhanced uppercase bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">GO TO AI TOOLS</span>
             </a>
           </div>
         </div>
