@@ -15,6 +15,7 @@ import StarryBackground from '@/components/StarryBackground';
 import DisclaimerPopup from '@/components/DisclaimerPopup';
 import InformationalDisclaimer from '@/components/InformationalDisclaimer';
 import FaqSection from '@/components/FaqSection';
+import ToolCards from '@/components/ToolCards';
 import { cn } from '@/lib/utils';
 
 const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
@@ -83,6 +84,7 @@ const Index = () => {
           <TestimonialsSection />
           <FaqSection />
           <Features />
+          <ToolCards />
           <CtaSection timeDestinationUrl={TIME_MACHINE_URL} />
         </ScrollReveal>
         

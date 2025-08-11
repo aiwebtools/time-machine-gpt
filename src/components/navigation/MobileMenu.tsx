@@ -10,6 +10,7 @@ interface MobileMenuProps {
   historyGptUrl: string;
   timeMachineUrl: string;
   bookWriterUrl: string;
+  storyWriterUrl: string;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -17,7 +18,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   setIsMenuOpen,
   imageTravelerUrl,
   historyGptUrl,
-  timeMachineUrl
+  timeMachineUrl,
+  storyWriterUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -31,17 +33,23 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     createTimePortalEffect(historyGptUrl);
   };
 
-  const handleImageTravelerClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    createTimePortalEffect(imageTravelerUrl);
-  };
+const handleImageTravelerClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  setIsMenuOpen(false);
+  createTimePortalEffect(imageTravelerUrl);
+};
 
-  const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
-  };
+const handleStoryWriterClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  setIsMenuOpen(false);
+  createTimePortalEffect(storyWriterUrl);
+};
+
+const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  setIsMenuOpen(false);
+  createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
+};
 
   return (
     <div className={cn(
@@ -80,6 +88,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
             <span>TALK TO HISTORY GPT</span>
+          </a>
+          
+          <a 
+            href={storyWriterUrl} 
+            onClick={handleStoryWriterClick}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
+          >
+            <span>INTERACTIVE STORY WRITER V9</span>
           </a>
           
           <a 

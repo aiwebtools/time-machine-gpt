@@ -133,6 +133,16 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a 
+                  href="https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-story-writer-v9" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white/70 hover:text-time-accent transition-colors"
+                >
+                  Time Machine Interactive Story Writer V9
+                </a>
+              </li>
+              <li>
                 <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   Talk to History GPT
                 </a>

@@ -8,13 +8,15 @@ interface DesktopNavProps {
   historyGptUrl: string;
   timeMachineUrl: string;
   bookWriterUrl: string;
+  storyWriterUrl: string;
 }
 
 const DesktopNav: React.FC<DesktopNavProps> = ({
   scrollPosition,
   imageTravelerUrl,
   historyGptUrl,
-  timeMachineUrl
+  timeMachineUrl,
+  storyWriterUrl
 }) => {
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -26,15 +28,20 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     createTimePortalEffect(historyGptUrl);
   };
 
-  const handleImageTravelerClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    createTimePortalEffect(imageTravelerUrl);
-  };
+const handleImageTravelerClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  createTimePortalEffect(imageTravelerUrl);
+};
 
-  const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
-  };
+const handleStoryWriterClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  createTimePortalEffect(storyWriterUrl);
+};
+
+const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
+  e.preventDefault();
+  createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
+};
 
   return (
     <nav className="hidden md:flex items-center space-x-4 ml-8">
@@ -80,6 +87,20 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           )}
         >
           TALK TO HISTORY GPT
+        </a>
+        <a 
+          href={storyWriterUrl} 
+          onClick={handleStoryWriterClick}
+          target="_blank" 
+          rel="noopener noreferrer"
+          className={cn(
+            "px-3 py-1.5 rounded-full text-sm transition-all",
+            "border border-time-dark",
+            "bg-time-dark hover:bg-time-dark/90",
+            "text-white font-medium"
+          )}
+        >
+          INTERACTIVE STORY WRITER V9
         </a>
         <a 
           href={timeMachineUrl} 
