@@ -67,8 +67,11 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           NATIVE AMERICAN HISTORY TIME MACHINE
         </a>
         <a 
-          href={imageTravelerUrl} 
-          onClick={handleImageTravelerClick}
+          href="https://blackhistorymattersgpt.lovable.app/?via=aiwebtools" 
+          onClick={(e) => {
+            e.preventDefault();
+            createTimePortalEffect('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools');
+          }}
           target="_blank" 
           rel="noopener noreferrer"
           className={cn(

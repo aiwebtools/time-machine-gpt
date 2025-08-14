@@ -148,7 +148,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="https://chatgpt.com/g/g-686a172232648191b2fe8d0224e5d997-black-history-matters-time-machine" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                <a href="https://blackhistorymattersgpt.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   Black History Matters Time Machine
                 </a>
               </li>

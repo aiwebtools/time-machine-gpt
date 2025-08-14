@@ -78,8 +78,12 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           </a>
           
           <a 
-            href={imageTravelerUrl} 
-            onClick={handleImageTravelerClick}
+            href="https://blackhistorymattersgpt.lovable.app/?via=aiwebtools" 
+            onClick={(e) => {
+              e.preventDefault();
+              setIsMenuOpen(false);
+              createTimePortalEffect('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools');
+            }}
             target="_blank" 
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
