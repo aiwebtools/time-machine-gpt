@@ -9,7 +9,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import { useFacebookBrowser } from "./hooks/use-facebook-browser";
 import { useEffect, useRef } from "react";
-import ElevenLabsVoiceAgent from "./components/ElevenLabsVoiceAgent";
+
 import "./App.css";
 
 // Component to generate streaking stars that will persist across all pages
@@ -139,7 +139,7 @@ const AppRoutes = () => {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ElevenLabsVoiceAgent />
+      
     </>
   );
 };
