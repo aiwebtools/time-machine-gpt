@@ -31,11 +31,13 @@ const Footer: React.FC = () => {
   
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(TIME_MACHINE_URL);
   };
 
   const handleBookWriterClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(BOOK_WRITER_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(BOOK_WRITER_URL);
   };
 

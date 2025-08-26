@@ -25,36 +25,42 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
+    window.open(timeMachineUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(timeMachineUrl);
   };
 
   const handleHistoryGptClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
+    window.open(historyGptUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(historyGptUrl);
   };
 
 const handleImageTravelerClick = (e: React.MouseEvent) => {
   e.preventDefault();
   setIsMenuOpen(false);
+  window.open(imageTravelerUrl, '_blank', 'noopener,noreferrer');
   createTimePortalEffect(imageTravelerUrl);
 };
 
 const handleStoryWriterClick = (e: React.MouseEvent) => {
   e.preventDefault();
   setIsMenuOpen(false);
+  window.open(storyWriterUrl, '_blank', 'noopener,noreferrer');
   createTimePortalEffect(storyWriterUrl);
 };
 
 const handleBookWriterClick = (e: React.MouseEvent) => {
   e.preventDefault();
   setIsMenuOpen(false);
+  window.open(bookWriterUrl, '_blank', 'noopener,noreferrer');
   createTimePortalEffect(bookWriterUrl);
 };
 
 const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
   e.preventDefault();
   setIsMenuOpen(false);
+  window.open('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
   createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
 };
 
@@ -82,6 +88,7 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
             onClick={(e) => {
               e.preventDefault();
               setIsMenuOpen(false);
+              window.open('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
               createTimePortalEffect('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools');
             }}
             target="_blank" 

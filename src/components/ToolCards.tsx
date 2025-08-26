@@ -17,26 +17,32 @@ const NATIVE_AMERICAN_URL = "https://nativeamerican-timemachine.lovable.app/?via
 const ToolCards: React.FC<ToolCardsProps> = ({ className }) => {
   const handleOpenStoryWriter = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(STORY_WRITER_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(STORY_WRITER_URL);
   };
   const handleOpenBookWriter = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(BOOK_WRITER_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(BOOK_WRITER_URL);
   };
   const handleOpenTimeMachine = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(TIME_MACHINE_URL);
   };
   const handleOpenHistoryGpt = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(HISTORY_GPT_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(HISTORY_GPT_URL);
   };
   const handleOpenBlackHistory = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(BLACK_HISTORY_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(BLACK_HISTORY_URL);
   };
   const handleOpenNativeAmerican = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(NATIVE_AMERICAN_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(NATIVE_AMERICAN_URL);
   };
 

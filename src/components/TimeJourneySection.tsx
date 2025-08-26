@@ -12,6 +12,7 @@ const TimeJourneySection = ({ addToRefs, onTimeTravel }: TimeJourneySectionProps
   
   const handleTimeTravel = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(TIME_MACHINE_URL);
   };
   

@@ -121,7 +121,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
       setExploding(false);
       
       // Now redirect to time machine
-      window.open(timeDestinationUrl, '_blank');
+      window.open(timeDestinationUrl, '_blank', 'noopener,noreferrer');
     }, 2000);
   };
   

@@ -12,6 +12,7 @@ interface CtaSectionProps {
 const CtaSection = ({ className, addToRefs, timeDestinationUrl }: CtaSectionProps) => {
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(timeDestinationUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(timeDestinationUrl);
   };
 

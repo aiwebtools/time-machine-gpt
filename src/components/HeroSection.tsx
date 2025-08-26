@@ -22,6 +22,7 @@ const HeroSection = ({
   
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
+    window.open(timeDestinationUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(timeDestinationUrl);
   };
   

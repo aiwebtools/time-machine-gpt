@@ -149,8 +149,7 @@ export const createTimePortalEffect = (destinationUrl: string) => {
     container.remove();
     flash.remove();
     
-    // Redirect to destination
-    window.open(destinationUrl, '_blank');
+    // Don't redirect here - let the caller handle it to avoid popup blockers
   }, 2800);
 };
 
