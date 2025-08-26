@@ -25,7 +25,7 @@ const Index = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    document.title = "Time Machine GPT - Interactive Time Travel Experience";
+    document.title = "🕰️ TIME MACHINE GPT - Epic AI Time Travel Adventures | Explore Any Era";
     
     const timer = setTimeout(() => {
       setIsLoaded(true);
