@@ -90,6 +90,22 @@
     animation-duration: 30s !important;
   }
   
+  /* Reduce or disable heavy animations on mobile */
+  .animate-pulse {
+    animation: none !important;
+  }
+  
+  /* Reduce heavy star effects */
+  .star, .streaking-star {
+    display: none;
+  }
+  
+  /* Simplify button effects */
+  .btn-glow, .btn-pulse {
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  
   /* Fix grid layouts */
   .grid {
     display: grid !important;

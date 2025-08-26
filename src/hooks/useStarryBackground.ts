@@ -16,16 +16,17 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     const existingStars = heroSection.querySelectorAll('.star, .streaking-star');
     existingStars.forEach(star => star.remove());
     
-    // Create basic stars
-    for (let i = 0; i < 200; i++) {
+    // Create fewer basic stars for better performance
+    const starCount = window.innerWidth < 768 ? 50 : 100; // Reduce stars on mobile
+    for (let i = 0; i < starCount; i++) {
       const starStyles = createBasicStar();
       const star = createStarElement(starStyles);
       heroSection.appendChild(star);
     }
     
-    // Create shooting stars
+    // Create shooting stars with performance optimization
     const createAndAppendShootingStar = () => {
-      if (!heroSection) return;
+      if (!heroSection || document.visibilityState !== 'visible') return;
       
       const shootingStarStyles = createShootingStar();
       const shootingStar = createShootingStarElement(shootingStarStyles);
@@ -38,17 +39,19 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
       }, parseFloat(shootingStarStyles.animationDuration) * 1000 + 100);
     };
     
-    // Create initial batch of shooting stars
-    for (let i = 0; i < 10; i++) {
-      createAndAppendShootingStar();
+    // Create fewer initial shooting stars
+    const initialCount = window.innerWidth < 768 ? 3 : 5;
+    for (let i = 0; i < initialCount; i++) {
+      setTimeout(() => createAndAppendShootingStar(), i * 200);
     }
     
-    // Create new shooting stars at intervals
+    // Reduce frequency of new shooting stars
+    const interval = window.innerWidth < 768 ? 3000 : 2000; // Less frequent on mobile
     const shootingStarInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
         createAndAppendShootingStar();
       }
-    }, 1000);
+    }, interval);
     
     return () => {
       clearInterval(shootingStarInterval);
