@@ -116,20 +116,6 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           "text-white font-medium"
         )}
       >
-        INTERACTIVE STORY WRITER V9
-      </a>
-      <a 
-        href={storyWriterUrl} 
-        onClick={handleStoryWriterClick}
-        target="_blank" 
-        rel="noopener noreferrer"
-        className={cn(
-          "px-3 py-1.5 rounded-full text-sm transition-all",
-          "border border-time-dark",
-          "bg-time-dark hover:bg-time-dark/90",
-          "text-white font-medium"
-        )}
-      >
         TIME MACHINE INTERACTIVE STORY WRITER V9
       </a>
       <a 

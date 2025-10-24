@@ -107,16 +107,6 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           >
             <span>TALK TO HISTORY GPT</span>
           </a>
-          
-          <a 
-            href={storyWriterUrl} 
-            onClick={handleStoryWriterClick}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>INTERACTIVE STORY WRITER V9</span>
-          </a>
 
           <a 
             href={storyWriterUrl} 
