@@ -151,7 +151,7 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
       </div>
       <div className="ml-auto">
         <a 
-          href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
+          href="https://aiwebtools.lovable.app/?via=aiwebtools" 
           target="_blank" 
           rel="noopener noreferrer" 
           className={cn(
@@ -161,7 +161,7 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
             "btn-glow"
           )}
         >
-          AI TOOLS
+          MORE AI TOOLS
         </a>
       </div>
     </nav>

@@ -160,8 +160,8 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="https://aiwebtools.lovable.dev/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  AI TOOLS
+                <a href="https://aiwebtools.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
+                  MORE AI TOOLS
                 </a>
               </li>
             </ul>
@@ -169,7 +169,7 @@ const Footer: React.FC = () => {
           
           <div className="flex flex-col items-center justify-center">
             <a 
-              href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-60 h-32 bg-time-accent hover:bg-time-accent/90 transition-colors flex flex-col items-center justify-center text-time-dark font-bold text-center p-4 rounded-md border-2 border-white/20 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 relative overflow-hidden btn-glow"
@@ -182,7 +182,7 @@ const Footer: React.FC = () => {
                 <div className="absolute h-1 w-1 bg-white rounded-full top-[30%] left-[30%] animate-pulse"></div>
                 <div className="absolute h-1 w-1 bg-white rounded-full top-[60%] left-[50%] animate-pulse"></div>
               </div>
-              <span className="text-xl font-mono tracking-wide z-10 font-bold text-shadow-enhanced uppercase bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">GO TO AI TOOLS</span>
+              <span className="text-xl font-mono tracking-wide z-10 font-bold text-shadow-enhanced uppercase bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">MORE AI TOOLS</span>
             </a>
           </div>
         </div>

@@ -142,13 +142,13 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
         
         <div className="mt-6 pt-4 border-t border-gray-700/30">
           <a 
-            href="https://aiwebtools.lovable.dev/?via=aiwebtools" 
+            href="https://aiwebtools.lovable.app/?via=aiwebtools" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="w-full py-3 px-4 rounded-lg transition-all flex items-center justify-between text-time-dark bg-time-accent hover:bg-time-accent/90 btn-glow"
             onClick={() => setIsMenuOpen(false)}
           >
-            <span>AI TOOLS</span>
+            <span>MORE AI TOOLS</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 7h10v10M7 17 17 7"/>
             </svg>
