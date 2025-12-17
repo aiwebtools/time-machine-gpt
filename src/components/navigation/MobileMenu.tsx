@@ -115,7 +115,7 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
           >
-            <span>TIME MACHINE INTERACTIVE STORY WRITER V9</span>
+            <span>TIME MACHINE OF UNWRITTEN HISTORY GPT</span>
           </a>
 
           <a 
