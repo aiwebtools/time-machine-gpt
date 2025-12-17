@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { 
   createBasicStar, 
@@ -8,23 +7,25 @@ import {
 } from '@/utils/starEffects';
 
 export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) => {
-  const shootingStarCount = useRef(0);
-  const maxShootingStars = 8; // Limit concurrent shooting stars for performance
+  const shootingStarCountRef = useRef(0);
+  const maxShootingStars = 8;
 
   useEffect(() => {
     const heroSection = containerRef.current;
     if (!heroSection) return;
 
+    // Reset counter
+    shootingStarCountRef.current = 0;
+
     // Clear existing stars
     const existingStars = heroSection.querySelectorAll('.star, .streaking-star');
     existingStars.forEach(star => star.remove());
     
-    // Create basic stars - more visible
+    // Create basic stars
     const starCount = window.innerWidth < 768 ? 60 : 120;
     for (let i = 0; i < starCount; i++) {
       const starStyles = createBasicStar();
       const star = createStarElement(starStyles);
-      // Add divine class to some stars
       if (Math.random() > 0.85) {
         star.classList.add('divine');
       }
@@ -34,14 +35,13 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     // Create shooting star with cleanup
     const createAndAppendShootingStar = () => {
       if (!heroSection || document.visibilityState !== 'visible') return;
-      if (shootingStarCount.current >= maxShootingStars) return;
+      if (shootingStarCountRef.current >= maxShootingStars) return;
       
-      shootingStarCount.current++;
+      shootingStarCountRef.current++;
       
       const shootingStarStyles = createShootingStar();
       const shootingStar = createShootingStarElement(shootingStarStyles);
       
-      // Add variant class randomly
       const variant = Math.random();
       if (variant > 0.7) {
         shootingStar.classList.add('fast');
@@ -51,7 +51,6 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
       
       heroSection.appendChild(shootingStar);
       
-      // Remove after animation completes
       const duration = shootingStar.classList.contains('fast') ? 1000 : 
                        shootingStar.classList.contains('slow') ? 2500 : 1500;
       
@@ -59,17 +58,17 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
         if (shootingStar.parentNode === heroSection) {
           shootingStar.remove();
         }
-        shootingStarCount.current--;
+        shootingStarCountRef.current = Math.max(0, shootingStarCountRef.current - 1);
       }, duration + 100);
     };
     
-    // Create initial burst of shooting stars
+    // Initial shooting stars
     const initialCount = window.innerWidth < 768 ? 2 : 4;
     for (let i = 0; i < initialCount; i++) {
       setTimeout(() => createAndAppendShootingStar(), i * 300);
     }
     
-    // Create shooting stars more frequently
+    // Regular shooting stars
     const interval = window.innerWidth < 768 ? 1200 : 800;
     const shootingStarInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
@@ -77,7 +76,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
       }
     }, interval);
     
-    // Occasional burst of multiple shooting stars
+    // Occasional burst
     const burstInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
         for (let i = 0; i < 3; i++) {
