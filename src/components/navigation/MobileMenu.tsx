@@ -66,10 +66,10 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
 
   return (
     <div className={cn(
-      "lg:hidden absolute w-full left-0 shadow-lg",
-      "bg-gradient-to-b from-time-dark/98 to-time-dark/95 backdrop-blur-md rounded-b-xl",
-      "transition-all duration-300 ease-in-out border-t border-time-accent/20",
-      isMenuOpen ? "opacity-100 top-full max-h-[80vh] overflow-y-auto py-4 px-5" : "opacity-0 -top-40 pointer-events-none max-h-0"
+      "md:hidden absolute w-full left-0 shadow-xl",
+      "bg-time-dark border-t border-time-accent/20 rounded-b-xl",
+      "transition-all duration-300 ease-in-out",
+      isMenuOpen ? "opacity-100 top-full max-h-[80vh] overflow-y-auto py-4 px-4" : "opacity-0 -top-40 pointer-events-none max-h-0"
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">
