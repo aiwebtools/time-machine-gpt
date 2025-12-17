@@ -27,7 +27,7 @@ const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 const Footer: React.FC = () => {
   const location = useLocation();
   const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
-  const BOOK_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-story-writer-v9";
+  const BOOK_WRITER_URL = "https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt";
   
   const handleTimeMachineClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -131,17 +131,7 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-white/70 hover:text-time-accent transition-colors"
                 >
-                  Time Machine Interactive Story Writer V9
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-story-writer-v9" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-white/70 hover:text-time-accent transition-colors"
-                >
-                  Time Machine Interactive Story Writer V9
+                  Time Machine of Unwritten History GPT
                 </a>
               </li>
               <li>

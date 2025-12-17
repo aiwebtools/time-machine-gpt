@@ -9,7 +9,7 @@ const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
 const HISTORY_GPT_URL = "https://talk-to-history-gpt.lovable.app/";
 const IMAGINATION_TRAVELER_URL = "https://chatgpt.com/g/g-686a172232648191b2fe8d0224e5d997-black-history-matters-time-machine";
 const BOOK_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-book-writer-v9";
-const STORY_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-story-writer-v9";
+const STORY_WRITER_URL = "https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);

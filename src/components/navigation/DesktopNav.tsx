@@ -116,7 +116,7 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
           "text-white font-medium"
         )}
       >
-        TIME MACHINE INTERACTIVE STORY WRITER V9
+        TIME MACHINE OF UNWRITTEN HISTORY GPT
       </a>
       <a 
         href={timeMachineUrl} 
