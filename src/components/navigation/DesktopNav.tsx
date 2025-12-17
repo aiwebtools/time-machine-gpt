@@ -52,10 +52,13 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
   const isScrolled = scrollPosition > 50;
 
   const navButtonClass = cn(
-    "px-3 py-1.5 rounded-md text-xs font-medium transition-all whitespace-nowrap",
-    isScrolled 
-      ? "bg-time-dark text-white hover:bg-time-dark/90" 
-      : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
+    "px-3 py-1.5 rounded-md text-xs font-medium transition-all whitespace-nowrap relative",
+    "bg-time-dark/90 text-time-accent border border-time-accent/60",
+    "hover:border-time-accent hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]",
+    "shadow-[0_0_8px_rgba(212,175,55,0.3)] hover:scale-105",
+    "before:absolute before:inset-0 before:rounded-md before:border before:border-time-accent/30",
+    "before:animate-[pulse_2s_ease-in-out_infinite]",
+    isScrolled && "bg-time-dark"
   );
 
   return (
@@ -80,18 +83,29 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         onClick={handleTimeMachineClick}
         size="sm"
         className={cn(
-          "font-semibold text-xs whitespace-nowrap",
-          "bg-time-dark border border-time-accent/50 hover:border-time-accent",
-          "text-time-accent hover:bg-time-dark/90"
+          "font-semibold text-xs whitespace-nowrap relative overflow-hidden",
+          "bg-gradient-to-b from-time-dark to-time-dark/80",
+          "border-2 border-time-accent text-time-accent",
+          "shadow-[0_0_20px_rgba(212,175,55,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]",
+          "hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]",
+          "hover:scale-105 transition-all duration-300",
+          "after:absolute after:inset-0 after:bg-gradient-to-t after:from-time-accent/10 after:to-transparent"
         )}
       >
-        Original Time Machine
+        <span className="relative z-10">Original Time Machine</span>
       </Button>
 
       <Button
         asChild
         size="sm"
-        className="bg-time-accent hover:bg-time-accent/90 text-time-dark font-semibold text-xs whitespace-nowrap"
+        className={cn(
+          "font-semibold text-xs whitespace-nowrap",
+          "bg-gradient-to-b from-time-accent to-time-accent/80",
+          "text-time-dark border border-time-accent",
+          "shadow-[0_0_20px_rgba(212,175,55,0.5),0_4px_15px_rgba(0,0,0,0.3)]",
+          "hover:shadow-[0_0_30px_rgba(212,175,55,0.7)]",
+          "hover:scale-105 transition-all duration-300"
+        )}
       >
         <a 
           href="https://aiwebtools.lovable.app/?via=aiwebtools" 
