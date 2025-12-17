@@ -35,7 +35,7 @@ const Navbar = () => {
         
         <button 
           className={cn(
-            "lg:hidden p-2.5 rounded-lg transition-all",
+            "md:hidden p-2 rounded-lg transition-all",
             scrollPosition > 50 
               ? "text-time-dark hover:bg-time-dark/10" 
               : "text-time-accent hover:bg-white/10"
