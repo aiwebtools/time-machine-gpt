@@ -14,8 +14,8 @@ interface ShootingStarStyle extends StarStyle {
 }
 
 export const createBasicStar = (): StarStyle => {
-  const size = Math.random() * 3 + 1;
-  const opacity = Math.random() * 0.7 + 0.3;
+  const size = Math.random() * 3 + 2; // Slightly larger stars
+  const opacity = Math.random() * 0.5 + 0.5; // More visible opacity
   
   return {
     width: `${size}px`,
@@ -23,23 +23,23 @@ export const createBasicStar = (): StarStyle => {
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
-    animationDuration: `${Math.random() * 4 + 3}s`,
+    animationDuration: `${Math.random() * 3 + 2}s`,
     opacity: `${opacity}`
   };
 };
 
 export const createShootingStar = (): ShootingStarStyle => {
-  const startX = Math.random() * 20;
-  const startY = Math.random() * 40;
-  const size = Math.random() * 4 + 2;
-  const rotation = -45 + (Math.random() * 30 - 15);
+  // Start from various positions in upper portion of screen
+  const startX = Math.random() * 60; // Can start from left 60% of screen
+  const startY = Math.random() * 30; // Start in top 30%
+  const rotation = -35 + (Math.random() * 20 - 10); // Slight angle variation
   
   return {
-    width: `${size}px`,
-    height: `${Math.max(1, size/4)}px`,
+    width: '100px',
+    height: '2px',
     left: `${startX}%`,
     top: `${startY}%`,
-    animationDuration: `${Math.random() * 4 + 3}s`,
+    animationDuration: '1.5s',
     animationDelay: '0s',
     opacity: '1',
     transform: `rotate(${rotation}deg)`
@@ -49,13 +49,28 @@ export const createShootingStar = (): ShootingStarStyle => {
 export const createStarElement = (styles: StarStyle): HTMLDivElement => {
   const star = document.createElement('div');
   star.className = 'star';
-  Object.assign(star.style, styles);
+  Object.assign(star.style, {
+    width: styles.width,
+    height: styles.height,
+    left: styles.left,
+    top: styles.top,
+    animationDelay: styles.animationDelay,
+    animationDuration: styles.animationDuration,
+    position: 'absolute',
+    pointerEvents: 'none'
+  });
   return star;
 };
 
 export const createShootingStarElement = (styles: ShootingStarStyle): HTMLDivElement => {
   const shootingStar = document.createElement('div');
   shootingStar.className = 'star shooting';
-  Object.assign(shootingStar.style, styles);
+  Object.assign(shootingStar.style, {
+    left: styles.left,
+    top: styles.top,
+    transform: styles.transform,
+    position: 'absolute',
+    pointerEvents: 'none'
+  });
   return shootingStar;
 };
