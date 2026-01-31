@@ -301,12 +301,13 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
           <div className="aspect-video w-full">
             <iframe 
               className="w-full h-full shadow-xl"
-              src={`https://www.youtube.com/embed/J31nNY5_PB4?rel=0&modestbranding=1&autoplay=0&fs=1&color=white&iv_load_policy=3&playsinline=1&enablejsapi=1&origin=${window.location.origin}`}
+              src="https://www.youtube.com/embed/J31nNY5_PB4?rel=0&modestbranding=1&autoplay=0&fs=1&color=white&iv_load_policy=3&playsinline=1&vq=hd720&disablekb=0"
               title="Time Machine Experience"
-              loading="lazy"
+              loading="eager"
               frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
             ></iframe>
           </div>
         </div>
