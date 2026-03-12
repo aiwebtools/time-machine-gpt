@@ -88,7 +88,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     
     return () => {
       clearInterval(shootingStarInterval);
-      clearInterval(burstInterval);
+      if (burstInterval) clearInterval(burstInterval);
     };
   }, [containerRef]);
 };
