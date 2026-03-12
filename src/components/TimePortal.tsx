@@ -25,7 +25,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
   }, []);
   
   const createExplosion = () => {
-    setExploding(true);
+    const isMobile = window.innerWidth < 768;
     
     // Create container for the effect
     const container = document.createElement('div');
