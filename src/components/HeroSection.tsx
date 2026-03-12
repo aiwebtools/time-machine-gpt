@@ -62,7 +62,7 @@ const HeroSection = ({
               Interactive Time Travel Experience
             </div>
             
-            <h1 ref={addToRefs} className="reveal text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-shadow leading-tight">
+            <h1 ref={addToRefs} className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-shadow leading-tight">
               <span className="text-glow">Journey Through Time</span><br />
               <span className="text-shimmer">With Father Time</span>
             </h1>
