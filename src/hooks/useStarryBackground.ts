@@ -78,7 +78,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     }, interval);
     
     // Occasional burst
-    const burstInterval = setInterval(() => {
+    const burstInterval = isMobile ? null : setInterval(() => {
       if (document.visibilityState === 'visible') {
         for (let i = 0; i < 3; i++) {
           setTimeout(() => createAndAppendShootingStar(), i * 150);
