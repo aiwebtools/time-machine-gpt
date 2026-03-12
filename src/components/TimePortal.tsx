@@ -25,6 +25,7 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
   }, []);
   
   const createExplosion = () => {
+    const isMobile = window.innerWidth < 768;
     setExploding(true);
     
     // Create container for the effect
@@ -57,14 +58,16 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     }
     
     // Create lightning bolts
-    for (let i = 0; i < 25; i++) {
+    const lightningCount = isMobile ? 10 : 25;
+    for (let i = 0; i < lightningCount; i++) {
       setTimeout(() => {
         createLightningBolt(container);
       }, i * 80);
     }
     
     // Create particles
-    for (let i = 0; i < 150; i++) {
+    const particleCount = isMobile ? 50 : 150;
+    for (let i = 0; i < particleCount; i++) {
       setTimeout(() => {
         createExplosionParticle(container, colors);
       }, i * 10);

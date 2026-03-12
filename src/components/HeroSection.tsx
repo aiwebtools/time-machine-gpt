@@ -36,20 +36,14 @@ const HeroSection = ({
     >
       <div className="absolute inset-0 bg-gradient-to-b from-time-dark via-time-medium to-time-dark z-0 opacity-80"></div>
       
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none z-1">
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none z-1 hidden md:block">
         <div className="relative">
-          <div className="w-[600px] h-[600px] rounded-full border-2 border-time-accent/20 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="w-[400px] h-[400px] rounded-full border border-time-accent/30 animate-clock-spin absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{
+          <div className="w-[400px] lg:w-[600px] h-[400px] lg:h-[600px] rounded-full border-2 border-time-accent/20 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="w-[260px] lg:w-[400px] h-[260px] lg:h-[400px] rounded-full border border-time-accent/30 animate-clock-spin absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{
           animationDirection: 'reverse'
         }}></div>
-          <div className="w-[200px] h-[200px] rounded-full border border-time-accent/50 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="w-[100px] h-[100px] rounded-full bg-time-accent/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse blur-md"></div>
-          <div className="w-[600px] h-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-clock-spin">
-            <div className="w-full h-1 bg-gradient-to-r from-transparent via-time-accent/20 to-transparent absolute top-1/2 -translate-y-1/2"></div>
-            <div className="h-full w-1 bg-gradient-to-b from-transparent via-time-accent/20 to-transparent absolute left-1/2 -translate-x-1/2"></div>
-            <div className="w-full h-1 bg-gradient-to-r from-transparent via-time-accent/10 to-transparent absolute top-1/2 -translate-y-1/2 rotate-45 origin-center"></div>
-            <div className="h-full w-1 bg-gradient-to-b from-transparent via-time-accent/10 to-transparent absolute left-1/2 -translate-x-1/2 rotate-45 origin-center"></div>
-          </div>
+          <div className="w-[140px] lg:w-[200px] h-[140px] lg:h-[200px] rounded-full border border-time-accent/50 animate-clock-spin-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="w-[70px] lg:w-[100px] h-[70px] lg:h-[100px] rounded-full bg-time-accent/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse blur-md"></div>
         </div>
       </div>
       
@@ -62,7 +56,7 @@ const HeroSection = ({
               Interactive Time Travel Experience
             </div>
             
-            <h1 ref={addToRefs} className="reveal text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-shadow leading-tight">
+            <h1 ref={addToRefs} className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-shadow leading-tight">
               <span className="text-glow">Journey Through Time</span><br />
               <span className="text-shimmer">With Father Time</span>
             </h1>

@@ -7,8 +7,9 @@ import {
 } from '@/utils/starEffects';
 
 export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const shootingStarCountRef = useRef(0);
-  const maxShootingStars = 8;
+  const maxShootingStars = isMobile ? 3 : 8;
 
   useEffect(() => {
     const heroSection = containerRef.current;
@@ -22,7 +23,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     existingStars.forEach(star => star.remove());
     
     // Create basic stars
-    const starCount = window.innerWidth < 768 ? 60 : 120;
+    const starCount = isMobile ? 40 : 120;
     for (let i = 0; i < starCount; i++) {
       const starStyles = createBasicStar();
       const star = createStarElement(starStyles);
@@ -63,13 +64,13 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     };
     
     // Initial shooting stars
-    const initialCount = window.innerWidth < 768 ? 2 : 4;
+    const initialCount = isMobile ? 1 : 4;
     for (let i = 0; i < initialCount; i++) {
       setTimeout(() => createAndAppendShootingStar(), i * 300);
     }
     
     // Regular shooting stars
-    const interval = window.innerWidth < 768 ? 1200 : 800;
+    const interval = isMobile ? 2000 : 800;
     const shootingStarInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
         createAndAppendShootingStar();
@@ -77,7 +78,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     }, interval);
     
     // Occasional burst
-    const burstInterval = setInterval(() => {
+    const burstInterval = isMobile ? null : setInterval(() => {
       if (document.visibilityState === 'visible') {
         for (let i = 0; i < 3; i++) {
           setTimeout(() => createAndAppendShootingStar(), i * 150);
@@ -87,7 +88,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     
     return () => {
       clearInterval(shootingStarInterval);
-      clearInterval(burstInterval);
+      if (burstInterval) clearInterval(burstInterval);
     };
   }, [containerRef]);
 };

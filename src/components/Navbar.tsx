@@ -28,7 +28,7 @@ const Navbar = () => {
       "fixed top-0 w-full z-50 transition-all duration-300", 
       scrollPosition > 50 ? "bg-white/95 backdrop-blur-md shadow-md py-2" : "bg-time-dark/80 backdrop-blur-sm py-3"
     )}>
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 flex items-center justify-between gap-2 sm:gap-4">
         <div className="flex-shrink-0 mr-4">
           <NavLogo scrollPosition={scrollPosition} />
         </div>
