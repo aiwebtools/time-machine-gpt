@@ -64,7 +64,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     };
     
     // Initial shooting stars
-    const initialCount = window.innerWidth < 768 ? 2 : 4;
+    const initialCount = isMobile ? 1 : 4;
     for (let i = 0; i < initialCount; i++) {
       setTimeout(() => createAndAppendShootingStar(), i * 300);
     }
