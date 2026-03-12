@@ -7,8 +7,9 @@ import {
 } from '@/utils/starEffects';
 
 export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const shootingStarCountRef = useRef(0);
-  const maxShootingStars = 8;
+  const maxShootingStars = isMobile ? 3 : 8;
 
   useEffect(() => {
     const heroSection = containerRef.current;
