@@ -57,7 +57,8 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     }
     
     // Create lightning bolts
-    for (let i = 0; i < 25; i++) {
+    const lightningCount = isMobile ? 10 : 25;
+    for (let i = 0; i < lightningCount; i++) {
       setTimeout(() => {
         createLightningBolt(container);
       }, i * 80);
