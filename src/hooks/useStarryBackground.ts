@@ -70,7 +70,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     }
     
     // Regular shooting stars
-    const interval = window.innerWidth < 768 ? 1200 : 800;
+    const interval = isMobile ? 2000 : 800;
     const shootingStarInterval = setInterval(() => {
       if (document.visibilityState === 'visible') {
         createAndAppendShootingStar();
