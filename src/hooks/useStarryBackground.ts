@@ -23,7 +23,7 @@ export const useStarryBackground = (containerRef: React.RefObject<HTMLElement>) 
     existingStars.forEach(star => star.remove());
     
     // Create basic stars
-    const starCount = window.innerWidth < 768 ? 60 : 120;
+    const starCount = isMobile ? 40 : 120;
     for (let i = 0; i < starCount; i++) {
       const starStyles = createBasicStar();
       const star = createStarElement(starStyles);
