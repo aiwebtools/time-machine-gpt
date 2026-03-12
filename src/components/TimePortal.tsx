@@ -65,7 +65,8 @@ const TimePortal: React.FC<TimePortalProps> = ({ onStartJourney, timeDestination
     }
     
     // Create particles
-    for (let i = 0; i < 150; i++) {
+    const particleCount = isMobile ? 50 : 150;
+    for (let i = 0; i < particleCount; i++) {
       setTimeout(() => {
         createExplosionParticle(container, colors);
       }, i * 10);
