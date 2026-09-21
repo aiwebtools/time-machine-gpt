@@ -59,10 +59,10 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				time: {
-					dark: '#0f172a',    // Deep navy blue
-					medium: '#1e3a8a',  // Medium blue
-					light: '#3b82f6',   // Light blue
-					accent: '#c2a06e',  // Gold accent
+					dark: '#050505',
+					medium: '#151515',
+					light: '#2b2b2b',
+					accent: '#c2a06e',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

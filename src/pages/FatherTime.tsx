@@ -191,7 +191,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               </div>
             </div>
 
-            <div className="h-[50vh] min-h-[320px] md:h-[58vh] md:min-h-[440px] overflow-y-auto px-3 md:px-5 py-5 space-y-5">
+            <div className="h-[48dvh] min-h-[320px] max-h-[560px] md:h-[52dvh] md:min-h-[420px] overflow-y-auto px-3 md:px-5 py-5 space-y-5">
               {turns.map((turn, index) => (
                 <div
                   key={index}
