@@ -135,6 +135,11 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="/father-time" className="text-time-accent/90 hover:text-time-accent transition-colors">
+                  Travel With Father Time (on this site)
+                </a>
+              </li>
+              <li>
                 <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   Talk to History GPT
                 </a>
