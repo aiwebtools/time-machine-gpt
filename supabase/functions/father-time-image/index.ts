@@ -34,9 +34,9 @@ Deno.serve(async (req) => {
         "X-Lovable-AIG-SDK": "fetch",
       },
       body: JSON.stringify({
-        model: "lovable/image-standard",
+        model: "openai/gpt-image-2.5-sunburst",
         prompt: safePrompt,
-        size: "1536x864",
+        size: "1536x1024",
         n: 1,
       }),
     });

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
 
@@ -73,6 +74,14 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">
+          <Link
+            to="/father-time"
+            onClick={() => setIsMenuOpen(false)}
+            className="w-full flex items-center justify-center py-3 rounded-lg shadow-md border border-time-accent/60 text-time-accent bg-time-dark/90 hover:bg-time-accent/10 transition-all transform hover:translate-y-[-2px]"
+          >
+            <span>TRAVEL WITH FATHER TIME (ON THIS SITE)</span>
+          </Link>
+
           <a 
             href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
             onClick={handleNativeAmericanHistoryClick}
