@@ -51,7 +51,12 @@ import {
   TimeVoice,
   type ChatMessage,
 } from '@/lib/fatherTime';
-import { timeMachineById, type TimeMachineId } from '@/data/timeMachines';
+import {
+  timeMachineById,
+  externalOptionFor,
+  externalVersionLabel,
+  type TimeMachineId,
+} from '@/data/timeMachines';
 
 type Turn = ChatMessage & { image?: string };
 
