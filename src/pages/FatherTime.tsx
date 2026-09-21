@@ -13,6 +13,7 @@ import {
   Square,
   UserRound,
   Volume2,
+  ExternalLink,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -43,7 +44,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useSpeechInput } from '@/hooks/use-speech-input';
-import { streamStory, generateVision, TimeVoice, type ChatMessage } from '@/lib/fatherTime';
+import {
+  streamStory,
+  generateVision,
+  isCreditLimitError,
+  TimeVoice,
+  type ChatMessage,
+} from '@/lib/fatherTime';
 import { timeMachineById, type TimeMachineId } from '@/data/timeMachines';
 
 type Turn = ChatMessage & { image?: string };
@@ -58,6 +65,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   const [autoSpeak, setAutoSpeak] = useState(false);
   const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
   const [renderingIndex, setRenderingIndex] = useState<number | null>(null);
+  const [showCreditFallback, setShowCreditFallback] = useState(false);
   const [year, setYear] = useState('');
   const [destination, setDestination] = useState('');
   const [focus, setFocus] = useState('');
@@ -114,6 +122,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     try {
       await voice.speak(machine.id, text);
     } catch (error) {
+      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
       toast.error(error instanceof Error ? error.message : 'The voice of time is silent.');
     } finally {
       setSpeakingIndex((current) => (current === index ? null : current));
@@ -127,6 +136,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       setTurns((prev) => prev.map((t, i) => (i === index ? { ...t, image } : t)));
       celebrate('arrival');
     } catch (error) {
+      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
       toast.error(error instanceof Error ? error.message : 'The vision could not be rendered.');
     } finally {
       setRenderingIndex(null);
@@ -172,6 +182,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       celebrate('arrival');
     } catch (error) {
       setTurns((prev) => prev.filter((_, i) => i !== replyIndex));
+      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
       toast.error(error instanceof Error ? error.message : 'The time machine could not respond.');
     } finally {
       setBusy(false);
@@ -198,6 +209,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     setYear('');
     setDestination('');
     setFocus('');
+    setShowCreditFallback(false);
     window.setTimeout(() => composerRef.current?.focus(), 80);
   };
 
@@ -355,6 +367,20 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
             </Conversation>
 
             <div className="border-t border-journey-gold/25 bg-journey-raised p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-5">
+              {showCreditFallback && machine.externalUrl && (
+                <div className="mb-4 border border-journey-gold/55 bg-journey-gold/10 p-4 text-left shadow-[0_10px_28px_hsl(var(--background)/0.5)]" role="status">
+                  <p className="font-semibold text-journey-gold">This INSITE VERSION has reached its AI usage limit.</p>
+                  <p className="mt-1 text-sm leading-6 text-foreground/85">
+                    Your journey does not have to stop. Continue with the original {machine.externalPlatform} version in a new window.
+                  </p>
+                  <Button asChild className="mt-3 h-auto min-h-11 w-full whitespace-normal bg-journey-gold py-2 text-center font-bold text-journey-gold-foreground hover:bg-journey-gold/90 sm:w-auto">
+                    <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
+                      Try original {machine.externalPlatform} version
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              )}
               {!journeyStarted && (
                 <form
                   onSubmit={(event) => {

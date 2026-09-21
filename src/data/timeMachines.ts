@@ -28,6 +28,7 @@ export type TimeMachineConfig = {
   imageAlt: string;
   externalUrl?: string;
   externalLabel?: string;
+  externalPlatform?: 'ChatGPT' | 'Lovable App';
 };
 
 export const timeMachines: TimeMachineConfig[] = [
@@ -62,6 +63,7 @@ export const timeMachines: TimeMachineConfig[] = [
     imageAlt: 'Golden time portal opening onto the ancient, industrial, and future worlds',
     externalUrl: 'https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt',
     externalLabel: 'Open original ChatGPT version',
+    externalPlatform: 'ChatGPT',
   },
   {
     id: 'talk-history',
@@ -79,6 +81,7 @@ export const timeMachines: TimeMachineConfig[] = [
     imageAlt: 'Historical figures gathered for conversation around a candlelit table',
     externalUrl: 'https://talk-to-history-gpt.lovable.app/',
     externalLabel: 'Open original Talk to History app',
+    externalPlatform: 'Lovable App',
   },
   {
     id: 'black-history',
@@ -96,6 +99,7 @@ export const timeMachines: TimeMachineConfig[] = [
     imageAlt: 'A dignified timeline of Black scholarship, freedom, civil rights, and cultural achievement',
     externalUrl: 'https://blackhistorymattersgpt.lovable.app/?via=aiwebtools',
     externalLabel: 'Open original Black History app',
+    externalPlatform: 'Lovable App',
   },
   {
     id: 'native-history',
@@ -113,6 +117,7 @@ export const timeMachines: TimeMachineConfig[] = [
     imageAlt: 'Diverse Indigenous communities and landscapes connected across time',
     externalUrl: 'https://nativeamerican-timemachine.lovable.app/?via=aiwebtools',
     externalLabel: 'Open original Native American History app',
+    externalPlatform: 'Lovable App',
   },
   {
     id: 'unwritten-history',
@@ -130,6 +135,7 @@ export const timeMachines: TimeMachineConfig[] = [
     imageAlt: 'Ancient archive opening onto a mysterious archaeological time rift',
     externalUrl: 'https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt',
     externalLabel: 'Open original ChatGPT version',
+    externalPlatform: 'ChatGPT',
   },
 ];
 

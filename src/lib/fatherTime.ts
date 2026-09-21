@@ -16,9 +16,29 @@ export type TimeMachinePersona =
   | "native-history"
   | "unwritten-history";
 
+export class TimeMachineServiceError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "TimeMachineServiceError";
+    this.status = status;
+  }
+}
+
+export function isCreditLimitError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const status = error instanceof TimeMachineServiceError ? error.status : 0;
+  return (
+    status === 402 ||
+    status === 429 ||
+    /credit|quota|billing|payment|insufficient|usage limit|rate limit/i.test(error.message)
+  );
+}
+
 async function readSSE(
   body: ReadableStream<Uint8Array>,
-  onEvent: (payload: any) => void,
+  onEvent: (payload: Record<string, unknown>) => void,
 ) {
   const reader = body.getReader();
   const decoder = new TextDecoder();
@@ -58,12 +78,12 @@ export async function streamStory(
 
   if (!res.ok || !res.body) {
     const info = await res.json().catch(() => ({}));
-    throw new Error(info.error ?? "The time machine could not respond.");
+    throw new TimeMachineServiceError(info.error ?? "The time machine could not respond.", res.status);
   }
 
   await readSSE(res.body, (payload) => {
-    if (payload?.type === "response.output_text.delta" && payload.delta) {
-      onDelta(payload.delta as string);
+    if (payload.type === "response.output_text.delta" && typeof payload.delta === "string") {
+      onDelta(payload.delta);
     }
   });
 }
@@ -80,7 +100,7 @@ export async function generateVision(
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok || !data.image) {
-    throw new Error(data.error ?? "The vision could not be rendered.");
+    throw new TimeMachineServiceError(data.error ?? "The vision could not be rendered.", res.status);
   }
   return data.image as string;
 }
@@ -157,12 +177,12 @@ export class TimeVoice {
       });
       if (!res.ok || !res.body) {
         const info = await res.json().catch(() => ({}));
-        throw new Error(info.error ?? "The voice of time is silent right now.");
+        throw new TimeMachineServiceError(info.error ?? "The voice of time is silent right now.", res.status);
       }
 
       let pending = new Uint8Array(0);
       await readSSE(res.body, (payload) => {
-        if (payload?.type !== "speech.audio.delta" || !payload.audio) return;
+        if (payload.type !== "speech.audio.delta" || typeof payload.audio !== "string") return;
         if (this.stopped || !this.ctx) return;
         const binary = atob(payload.audio);
         const incoming = new Uint8Array(binary.length);

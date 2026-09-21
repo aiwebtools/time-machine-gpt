@@ -66,14 +66,14 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => (
 
               <Button asChild className="w-full bg-time-accent text-time-dark font-bold hover:bg-time-accent/90 btn-glow">
                 <Link to={machine.path}>
-                  Enter {machine.shortName}
+                  Enter {machine.shortName} — INSITE VERSION
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
               {machine.externalUrl && (
                 <Button asChild variant="outline" className="mt-3 w-full border-time-accent/45 text-time-accent hover:bg-time-accent/10 hover:text-time-accent">
                   <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
-                    {machine.externalLabel ?? 'Open original version'}
+                    {machine.externalLabel ?? 'Open original version'} — ORIGINAL {machine.externalPlatform?.toUpperCase()}
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
