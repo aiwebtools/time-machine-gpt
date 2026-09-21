@@ -57,6 +57,7 @@ import {
   externalVersionLabel,
   type TimeMachineId,
 } from '@/data/timeMachines';
+import { parseChoices, stripChoiceMarkers, type ChoiceOption } from '@/lib/timeChoices';
 
 type Turn = ChatMessage & { image?: string };
 
@@ -71,6 +72,9 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
   const [renderingIndex, setRenderingIndex] = useState<number | null>(null);
   const [showCreditFallback, setShowCreditFallback] = useState(false);
+  const [visionPause, setVisionPause] = useState(false);
+  const [futureAnswers, setFutureAnswers] = useState(0);
+  const [redPills, setRedPills] = useState(0);
   const [year, setYear] = useState('');
   const [destination, setDestination] = useState('');
   const [focus, setFocus] = useState('');
@@ -142,7 +146,13 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   };
 
   const renderVision = async (index: number, text: string) => {
+    const voice = voiceRef.current;
     setRenderingIndex(index);
+    const wasSpeaking = speakingIndex !== null;
+    if (wasSpeaking) {
+      voice?.pause();
+      setVisionPause(true);
+    }
     try {
       const image = await generateVision(machine.id, text.slice(-1200));
       setTurns((prev) => prev.map((t, i) => (i === index ? { ...t, image } : t)));
@@ -152,14 +162,24 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       toast.error(error instanceof Error ? error.message : 'The vision could not be rendered.');
     } finally {
       setRenderingIndex(null);
+      if (wasSpeaking) {
+        voice?.resume();
+        setVisionPause(false);
+      }
     }
   };
 
-  const send = async (messageText = input, effect: 'launch' | 'message' = 'message') => {
+  const send = async (
+    messageText = input,
+    effect: 'launch' | 'message' = 'message',
+    options: { autoVision?: boolean } = {},
+  ) => {
     const text = messageText.trim();
     if (!text || busy) return;
-    voiceRef.current?.stop();
+    const voice = voiceRef.current;
+    voice?.stop();
     setSpeakingIndex(null);
+    setVisionPause(false);
     setInput('');
     setBusy(true);
     celebrate(effect);
@@ -168,6 +188,16 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     setTurns([...history, { role: 'assistant', content: '' }]);
     const replyIndex = history.length;
     revealLatestReply();
+
+    const narrating = autoSpeak && !!voice;
+    if (narrating && voice) {
+      voice.onError = (error) => {
+        if (isCreditLimitError(error)) setShowCreditFallback(true);
+        setSpeakingIndex(null);
+      };
+      voice.start(machine.id);
+      setSpeakingIndex(replyIndex);
+    }
 
     try {
       let full = '';
@@ -179,9 +209,12 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
           setTurns((prev) =>
             prev.map((t, i) => (i === replyIndex ? { ...t, content: full } : t)),
           );
+          if (narrating) voice?.feed(stripChoiceMarkers(full));
         },
       );
       if (!full.trim()) {
+        if (narrating) voice?.stop();
+        setSpeakingIndex(null);
         setTurns((prev) =>
           prev.map((t, i) =>
             i === replyIndex
@@ -189,12 +222,19 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               : t,
           ),
         );
-      } else if (autoSpeak) {
-        void speak(replyIndex, full);
+      } else if (narrating) {
+        void voice
+          ?.flush(stripChoiceMarkers(full))
+          .finally(() => setSpeakingIndex((current) => (current === replyIndex ? null : current)));
       }
       celebrate('arrival');
+      if (full.trim() && options.autoVision) {
+        void renderVision(replyIndex, full);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'The time machine could not respond.';
+      voice?.stop();
+      setSpeakingIndex(null);
       setTurns((prev) =>
         prev.map((turn, index) =>
           index === replyIndex
@@ -208,6 +248,33 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       setBusy(false);
       window.setTimeout(() => composerRef.current?.focus(), 80);
     }
+  };
+
+  const chooseFate = (kind: 'future' | 'past', option: ChoiceOption) => {
+    if (busy) return;
+    if (kind === 'future') {
+      const answered = futureAnswers + 1;
+      const red = redPills + (option.key === 'red' ? 1 : 0);
+      setFutureAnswers(answered);
+      setRedPills(red);
+      const base = `I choose the ${option.label}: ${option.text}`;
+      if (answered >= 3) {
+        const verdict = red >= 2 ? 'flourishing' : 'cautionary';
+        void send(
+          `${base} (The Test of Two Fates is complete: ${red} of 3 Red Pill choices, so the ${verdict} future is confirmed. Announce that confirmed future, take me there, and bring this journey to its true ending.)`,
+          'launch',
+          { autoVision: true },
+        );
+        return;
+      }
+      void send(base, 'message');
+      return;
+    }
+    void send(
+      `I choose ${option.label}: ${option.text} (Follow this course and conclude with the documented historical outcome and a true ending.)`,
+      'launch',
+      { autoVision: true },
+    );
   };
 
   const initializeJourney = () => {
@@ -224,6 +291,9 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   const restart = () => {
     voiceRef.current?.stop();
     setSpeakingIndex(null);
+    setVisionPause(false);
+    setFutureAnswers(0);
+    setRedPills(0);
     setTurns([{ role: 'assistant', content: machine.greeting }]);
     setInput('');
     setYear('');
