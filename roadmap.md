@@ -11,4 +11,4 @@
 - [x] Redesign every Time Machine chat for readable, phone-first use.
 - [x] Add guided year and destination launch controls.
 - [x] Add send, launch, and response celebration effects with reduced-motion support.
-- [ ] Verify the redesigned journey on desktop and phone.
+- [x] Verify the redesigned journey on desktop and phone.
