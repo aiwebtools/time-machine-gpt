@@ -18,3 +18,8 @@
 - [x] Show the matching original version inside a journey when AI credits or usage limits are unavailable.
 - [x] Standardize every internal and external option as (INSITE VERSION), (CHATGPT VERSION), (GEMINI VERSION), or (LOVABLE APP VERSION).
 - [x] Offer the original ChatGPT fallback for Father Time when community AI credits run out.
+
+- [x] Speak narration live while the story streams, with a pause before each generated image.
+- [x] Make the Test of Two Fates a real three-choice path with a confirmed future, its image, and an ending.
+- [x] Add a past fork whose choice leads to the documented outcome and a true ending.
+- [x] Add the /time-machines hub page and link it in the header, phone menu, footer, and sitemap.
