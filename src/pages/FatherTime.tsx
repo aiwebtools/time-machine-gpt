@@ -308,7 +308,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                     className={cn(
                       'text-[15px] leading-7 md:text-base',
                       turn.role === 'user'
-                        ? 'border border-journey-gold bg-journey-gold px-4 py-3 text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)]'
+                        ? '!border-journey-gold !bg-journey-gold !px-4 !py-3 !text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)] [&_*]:!text-journey-gold-foreground'
                         : 'w-full overflow-visible border-l-2 border-journey-gold/70 pl-4 text-foreground',
                     )}
                   >
