@@ -31,6 +31,13 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+    --composer: 40 18% 94%;
+    --composer-foreground: 0 0% 8%;
+    --composer-muted: 30 8% 36%;
+    --journey-surface: 0 0% 5%;
+    --journey-surface-raised: 0 0% 8%;
+    --journey-gold: 36 40% 60%;
+    --journey-gold-foreground: 0 0% 7%;
 
     --radius: 0.5rem;
 
@@ -72,6 +79,13 @@
     --border: 0 0% 16%;
     --input: 0 0% 16%;
     --ring: 212.7 26.8% 83.9%;
+    --composer: 40 18% 94%;
+    --composer-foreground: 0 0% 8%;
+    --composer-muted: 30 8% 36%;
+    --journey-surface: 0 0% 5%;
+    --journey-surface-raised: 0 0% 8%;
+    --journey-gold: 36 40% 60%;
+    --journey-gold-foreground: 0 0% 7%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -86,7 +100,6 @@
 
 @layer base {
   * {
-    border: none !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

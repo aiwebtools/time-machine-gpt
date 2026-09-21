@@ -8,7 +8,7 @@
 - [x] Verify all six branches on desktop and mobile, plus deployed story and voice responses.
 - [ ] Recheck live image generation when the image service is no longer timing out.
 
-- [ ] Redesign every Time Machine chat for readable, phone-first use.
-- [ ] Add guided year and destination launch controls.
-- [ ] Add send, launch, and response celebration effects with reduced-motion support.
+- [x] Redesign every Time Machine chat for readable, phone-first use.
+- [x] Add guided year and destination launch controls.
+- [x] Add send, launch, and response celebration effects with reduced-motion support.
 - [ ] Verify the redesigned journey on desktop and phone.

@@ -58,6 +58,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				composer: {
+					DEFAULT: 'hsl(var(--composer))',
+					foreground: 'hsl(var(--composer-foreground))',
+					muted: 'hsl(var(--composer-muted))',
+				},
+				journey: {
+					surface: 'hsl(var(--journey-surface))',
+					raised: 'hsl(var(--journey-surface-raised))',
+					gold: 'hsl(var(--journey-gold))',
+					'gold-foreground': 'hsl(var(--journey-gold-foreground))',
+				},
 				time: {
 					dark: '#050505',
 					medium: '#151515',
