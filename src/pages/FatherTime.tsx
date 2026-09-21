@@ -92,7 +92,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     twitterDescription?.setAttribute('content', machine.description);
     voiceRef.current = new TimeVoice();
     return () => voiceRef.current?.stop();
-  }, [machine.description, machine.name]);
+  }, [machine.description, machine.name, machine.path]);
 
   useEffect(() => {
     composerRef.current?.focus();
