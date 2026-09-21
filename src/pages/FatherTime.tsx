@@ -380,6 +380,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                     </MessageActions>
                   )}
                 </Message>
+                </div>
               ))}
               </ConversationContent>
               <ConversationScrollButton className="border-journey-gold/40 bg-journey-raised text-journey-gold hover:bg-journey-gold/10" />
