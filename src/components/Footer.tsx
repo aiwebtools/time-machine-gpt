@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Instagram, Mail, Phone } from 'lucide-react';
-import { timeMachines } from '@/data/timeMachines';
+import { timeMachines, externalVersionLabel } from '@/data/timeMachines';
 
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="text-white/70 transition-colors hover:text-time-accent"
                   >
-                    {machine.name} — ORIGINAL {machine.externalPlatform?.toUpperCase()}
+                    {machine.name} — {externalVersionLabel(machine.externalPlatform)}
                   </a>
                 </li>
               ))}
