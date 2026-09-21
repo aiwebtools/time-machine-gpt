@@ -8,6 +8,13 @@ const headers = {
 };
 
 export type ChatMessage = { role: "user" | "assistant"; content: string };
+export type TimeMachinePersona =
+  | "father-time"
+  | "original"
+  | "talk-history"
+  | "black-history"
+  | "native-history"
+  | "unwritten-history";
 
 async function readSSE(
   body: ReadableStream<Uint8Array>,
@@ -39,13 +46,14 @@ async function readSSE(
 
 /** Streams Father Time's story. Calls onDelta with each new piece of text. */
 export async function streamStory(
+  persona: TimeMachinePersona,
   messages: ChatMessage[],
   onDelta: (text: string) => void,
 ): Promise<void> {
   const res = await fetch(`${BASE}/father-time-chat`, {
     method: "POST",
     headers,
-    body: JSON.stringify({ messages }),
+    body: JSON.stringify({ persona, messages }),
   });
 
   if (!res.ok || !res.body) {
@@ -61,11 +69,14 @@ export async function streamStory(
 }
 
 /** Renders a 16:9 image of the current scene. Returns a data URL. */
-export async function generateVision(prompt: string): Promise<string> {
+export async function generateVision(
+  persona: TimeMachinePersona,
+  prompt: string,
+): Promise<string> {
   const res = await fetch(`${BASE}/father-time-image`, {
     method: "POST",
     headers,
-    body: JSON.stringify({ prompt }),
+    body: JSON.stringify({ persona, prompt }),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok || !data.image) {
@@ -127,7 +138,7 @@ export class TimeVoice {
     }
   }
 
-  async speak(text: string) {
+  async speak(persona: TimeMachinePersona, text: string) {
     this.stop();
     this.stopped = false;
     const ctx = new AudioContext({ sampleRate: 24000 });
@@ -141,7 +152,7 @@ export class TimeVoice {
       const res = await fetch(`${BASE}/father-time-voice`, {
         method: "POST",
         headers,
-        body: JSON.stringify({ text: chunk }),
+        body: JSON.stringify({ persona, text: chunk }),
         signal,
       });
       if (!res.ok || !res.body) {

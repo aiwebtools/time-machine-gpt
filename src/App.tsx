@@ -138,6 +138,11 @@ const AppRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
         <Route path="/father-time" element={<FatherTime />} />
+        <Route path="/original-time-machine" element={<FatherTime machineId="original" />} />
+        <Route path="/talk-to-history" element={<FatherTime machineId="talk-history" />} />
+        <Route path="/black-history-matters" element={<FatherTime machineId="black-history" />} />
+        <Route path="/native-american-history" element={<FatherTime machineId="native-history" />} />
+        <Route path="/unwritten-history" element={<FatherTime machineId="unwritten-history" />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

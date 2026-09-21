@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { createTimePortalEffect } from '@/utils/timeEffects';
-import { ExternalLink, ChevronDown } from 'lucide-react';
+import { ExternalLink, ChevronDown, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { timeMachines } from '@/data/timeMachines';
 
 interface DesktopNavProps {
   scrollPosition: number;
@@ -16,9 +16,7 @@ interface DesktopNavProps {
 
 const DesktopNav: React.FC<DesktopNavProps> = ({
   scrollPosition,
-  historyGptUrl,
   timeMachineUrl,
-  storyWriterUrl
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -39,48 +37,13 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     createTimePortalEffect(timeMachineUrl);
   };
 
-  const handleHistoryGptClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDropdownOpen(false);
-    window.open(historyGptUrl, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(historyGptUrl);
-  };
-
-  const handleStoryWriterClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDropdownOpen(false);
-    window.open(storyWriterUrl, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(storyWriterUrl);
-  };
-
-  const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDropdownOpen(false);
-    window.open('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
-    createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
-  };
-
-  const handleBlackHistoryClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDropdownOpen(false);
-    window.open('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
-    createTimePortalEffect('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools');
-  };
-
-  const isScrolled = scrollPosition > 50;
-
-  const tools = [
-    { name: 'Native American History Time Machine', onClick: handleNativeAmericanHistoryClick },
-    { name: 'Black History Matters Time Machine', onClick: handleBlackHistoryClick },
-    { name: 'Talk to History GPT', onClick: handleHistoryGptClick },
-    { name: 'Time Machine of Unwritten History GPT', onClick: handleStoryWriterClick },
-  ];
-
   return (
     <nav className="hidden md:flex items-center gap-3">
       {/* Dropdown for Time Machine Tools */}
       <div className="relative" ref={dropdownRef}>
-        <button
+        <Button
+          type="button"
+          variant="ghost"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className={cn(
             "flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all",
@@ -94,41 +57,28 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
             "h-4 w-4 transition-transform duration-200",
             isDropdownOpen && "rotate-180"
           )} />
-        </button>
+        </Button>
         
         {isDropdownOpen && (
           <div className="absolute top-full right-0 mt-2 w-80 rounded-xl border border-time-accent/30 bg-time-dark shadow-[0_10px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(212,175,55,0.2)] z-50 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
-            {tools.map((tool, index) => (
-              <button
-                key={index}
-                onClick={tool.onClick}
-                className="w-full px-4 py-3 text-left text-sm text-white/90 hover:bg-time-accent/20 hover:text-time-accent transition-colors flex items-center justify-between group"
+            {timeMachines.map((tool) => (
+              <Link
+                key={tool.id}
+                to={tool.path}
+                onClick={() => setIsDropdownOpen(false)}
+                className="w-full px-4 py-3 text-left text-sm text-foreground/90 hover:bg-time-accent/20 hover:text-time-accent transition-colors flex items-center justify-between group"
               >
                 <span className="font-medium">{tool.name}</span>
-                <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-time-accent" />
-              </button>
+                <Clock3 className="h-4 w-4 opacity-60 group-hover:opacity-100 transition-opacity text-time-accent" />
+              </Link>
             ))}
           </div>
         )}
       </div>
 
-      {/* Free on-site Father Time experience */}
+      {/* Primary on-site journey */}
       <Button
         asChild
-        className={cn(
-          "font-semibold text-sm px-5 py-2.5 h-auto",
-          "bg-gradient-to-b from-time-dark via-time-dark to-time-dark/90",
-          "border-2 border-time-accent/70 text-time-accent",
-          "shadow-[0_0_18px_rgba(212,175,55,0.35),0_4px_15px_rgba(0,0,0,0.3)]",
-          "hover:shadow-[0_0_28px_rgba(212,175,55,0.55)] hover:scale-[1.02] transition-all duration-300"
-        )}
-      >
-        <Link to="/father-time">Travel With Father Time</Link>
-      </Button>
-
-      {/* Primary CTA - The Original Time Machine GPT */}
-      <Button
-        onClick={handleTimeMachineClick}
         className={cn(
           "font-semibold text-sm px-5 py-2.5 h-auto",
           "bg-gradient-to-b from-time-dark via-time-dark to-time-dark/90",
@@ -139,8 +89,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           "relative overflow-hidden"
         )}
       >
-        <span className="relative z-10">The Original Time Machine GPT</span>
-        <span className="absolute inset-0 bg-gradient-to-r from-time-accent/0 via-time-accent/10 to-time-accent/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000" />
+        <Link to="/original-time-machine">The Original Time Machine GPT</Link>
       </Button>
 
       {/* Secondary CTA - More AI Tools */}

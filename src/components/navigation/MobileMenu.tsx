@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { createTimePortalEffect } from '@/utils/timeEffects';
+import { timeMachines } from '@/data/timeMachines';
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -17,54 +17,7 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({
   isMenuOpen,
   setIsMenuOpen,
-  imageTravelerUrl,
-  historyGptUrl,
-  timeMachineUrl,
-  bookWriterUrl,
-  storyWriterUrl
 }) => {
-  const handleTimeMachineClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    window.open(timeMachineUrl, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(timeMachineUrl);
-  };
-
-  const handleHistoryGptClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    window.open(historyGptUrl, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(historyGptUrl);
-  };
-
-const handleImageTravelerClick = (e: React.MouseEvent) => {
-  e.preventDefault();
-  setIsMenuOpen(false);
-  window.open(imageTravelerUrl, '_blank', 'noopener,noreferrer');
-  createTimePortalEffect(imageTravelerUrl);
-};
-
-const handleStoryWriterClick = (e: React.MouseEvent) => {
-  e.preventDefault();
-  setIsMenuOpen(false);
-  window.open(storyWriterUrl, '_blank', 'noopener,noreferrer');
-  createTimePortalEffect(storyWriterUrl);
-};
-
-const handleBookWriterClick = (e: React.MouseEvent) => {
-  e.preventDefault();
-  setIsMenuOpen(false);
-  window.open(bookWriterUrl, '_blank', 'noopener,noreferrer');
-  createTimePortalEffect(bookWriterUrl);
-};
-
-const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
-  e.preventDefault();
-  setIsMenuOpen(false);
-  window.open('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
-  createTimePortalEffect('https://nativeamerican-timemachine.lovable.app/?via=aiwebtools');
-};
-
   return (
     <div className={cn(
       "md:hidden absolute w-full left-0 shadow-xl",
@@ -74,69 +27,16 @@ const handleNativeAmericanHistoryClick = (e: React.MouseEvent) => {
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">
-          <Link
-            to="/father-time"
-            onClick={() => setIsMenuOpen(false)}
-            className="w-full flex items-center justify-center py-3 rounded-lg shadow-md border border-time-accent/60 text-time-accent bg-time-dark/90 hover:bg-time-accent/10 transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>TRAVEL WITH FATHER TIME (ON THIS SITE)</span>
-          </Link>
-
-          <a 
-            href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" 
-            onClick={handleNativeAmericanHistoryClick}
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>NATIVE AMERICAN HISTORY TIME MACHINE</span>
-          </a>
-          
-          <a 
-            href="https://blackhistorymattersgpt.lovable.app/?via=aiwebtools" 
-            onClick={(e) => {
-              e.preventDefault();
-              setIsMenuOpen(false);
-              window.open('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools', '_blank', 'noopener,noreferrer');
-              createTimePortalEffect('https://blackhistorymattersgpt.lovable.app/?via=aiwebtools');
-            }}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>BLACK HISTORY MATTERS TIME MACHINE</span>
-          </a>
-          
-          <a 
-            href={historyGptUrl} 
-            onClick={handleHistoryGptClick}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>TALK TO HISTORY GPT</span>
-          </a>
-
-          <a 
-            href={storyWriterUrl} 
-            onClick={handleStoryWriterClick}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center py-3 bg-time-dark/90 text-white rounded-lg shadow-md hover:bg-time-dark transition-all transform hover:translate-y-[-2px]"
-          >
-            <span>TIME MACHINE OF UNWRITTEN HISTORY GPT</span>
-          </a>
-
-          <a 
-            href={timeMachineUrl} 
-            onClick={handleTimeMachineClick}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center py-3 rounded-lg shadow-md transition-all relative overflow-hidden group transform hover:translate-y-[-2px]" 
-          >
-            <span className="relative z-10 text-time-accent font-medium">THE ORIGINAL TIME MACHINE GPT</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-time-dark to-time-dark/90 opacity-100 group-hover:opacity-90 transition-opacity duration-300"></span>
-          </a>
+          {timeMachines.map((machine) => (
+            <Link
+              key={machine.id}
+              to={machine.path}
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full min-h-12 flex items-center justify-center px-3 py-3 text-center rounded-lg shadow-md border border-time-accent/35 text-foreground bg-time-dark/90 hover:bg-time-accent/10 hover:text-time-accent transition-all"
+            >
+              <span>{machine.name.toUpperCase()}</span>
+            </Link>
+          ))}
         </div>
         
         <div className="mt-6 pt-4 border-t border-gray-700/30">
