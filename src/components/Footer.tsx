@@ -98,6 +98,17 @@ const Footer: React.FC = () => {
                   About
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/time-machines"
+                  className={cn(
+                    'text-white/70 hover:text-time-accent transition-colors',
+                    location.pathname === '/time-machines' && 'text-time-accent',
+                  )}
+                >
+                  All Six Time Machines
+                </Link>
+              </li>
               {timeMachines.map((machine) => (
                 <li key={machine.id}>
                   <Link

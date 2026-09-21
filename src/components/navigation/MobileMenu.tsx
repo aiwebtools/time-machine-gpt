@@ -23,6 +23,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">
+          <Link
+            to="/time-machines"
+            onClick={() => setIsMenuOpen(false)}
+            className="flex min-h-12 w-full items-center justify-center rounded-lg border border-time-accent bg-time-accent/10 px-3 py-3 text-center font-semibold text-time-accent transition-all hover:bg-time-accent/20"
+          >
+            SEE ALL SIX TIME MACHINES
+          </Link>
           <p className="text-xs font-semibold uppercase text-time-accent/70">(INSITE VERSIONS)</p>
           {timeMachines.map((machine) => (
             <Link
