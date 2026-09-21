@@ -1,15 +1,19 @@
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { createTimePortalEffect } from '@/utils/timeEffects';
+import { Button } from '@/components/ui/button';
 
-const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+const TIME_MACHINE_PATH = "/original-time-machine";
 
 const About = () => {
+  const navigate = useNavigate();
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
-    createTimePortalEffect(TIME_MACHINE_URL);
+    createTimePortalEffect(TIME_MACHINE_PATH);
+    window.setTimeout(() => navigate(TIME_MACHINE_PATH), 900);
   };
   
   return (
@@ -73,17 +77,15 @@ const About = () => {
           </div>
           
           <div className="mt-12 text-center space-y-6">
-            <a 
-              href={TIME_MACHINE_URL}
-              onClick={handleStartJourney}
-              className="inline-flex items-center px-8 py-4 bg-time-accent text-white rounded-full hover:bg-time-accent/90 transition-colors text-lg font-medium animate-pulse hover:animate-none"
-            >
-              <span className="mr-2">START YOUR JOURNEY THROUGH TIME NOW</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m5 12 14 0"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+            <Button asChild onClick={handleStartJourney} className="h-auto px-8 py-4 bg-time-accent text-time-dark rounded-full hover:bg-time-accent/90 text-lg font-semibold animate-pulse hover:animate-none">
+              <Link to={TIME_MACHINE_PATH}>
+                <span className="mr-2">START YOUR JOURNEY THROUGH TIME NOW</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m5 12 14 0"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </Link>
+            </Button>
           </div>
         </div>
       </main>

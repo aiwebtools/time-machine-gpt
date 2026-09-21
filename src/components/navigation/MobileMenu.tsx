@@ -7,11 +7,6 @@ import { timeMachines } from '@/data/timeMachines';
 interface MobileMenuProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
-  imageTravelerUrl: string;
-  historyGptUrl: string;
-  timeMachineUrl: string;
-  bookWriterUrl: string;
-  storyWriterUrl: string;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -23,7 +18,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       "md:hidden absolute w-full left-0 shadow-xl",
       "bg-time-dark border-t border-time-accent/20 rounded-b-xl",
       "transition-all duration-300 ease-in-out",
-      isMenuOpen ? "opacity-100 top-full max-h-[80vh] overflow-y-auto py-4 px-4" : "opacity-0 -top-40 pointer-events-none max-h-0"
+      isMenuOpen ? "opacity-100 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto py-4 pb-[max(1rem,env(safe-area-inset-bottom))] px-4" : "opacity-0 -top-40 pointer-events-none max-h-0"
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">

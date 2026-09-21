@@ -1,7 +1,9 @@
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
+import { Button } from '@/components/ui/button';
 
 interface CtaSectionProps {
   className?: string;
@@ -10,10 +12,11 @@ interface CtaSectionProps {
 }
 
 const CtaSection = ({ className, addToRefs, timeDestinationUrl }: CtaSectionProps) => {
+  const navigate = useNavigate();
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open(timeDestinationUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(timeDestinationUrl);
+    window.setTimeout(() => navigate(timeDestinationUrl), 900);
   };
 
   return (
@@ -28,13 +31,9 @@ const CtaSection = ({ className, addToRefs, timeDestinationUrl }: CtaSectionProp
         <p className="text-white/80 max-w-2xl mx-auto mb-8">
           Start exploring the past with unprecedented detail and accuracy. Begin your adventure through history with Father Time.
         </p>
-        <a 
-          href={timeDestinationUrl} 
-          onClick={handleStartJourney}
-          className="px-8 py-4 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-colors inline-block"
-        >
-          Access Time Machine GPT
-        </a>
+        <Button asChild onClick={handleStartJourney} className="px-8 py-4 h-auto bg-time-accent text-time-dark rounded-md font-semibold hover:bg-time-accent/90">
+          <Link to={timeDestinationUrl}>Access Time Machine GPT</Link>
+        </Button>
       </div>
     </section>
   );

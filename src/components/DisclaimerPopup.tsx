@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const DisclaimerPopup: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,13 +35,16 @@ const DisclaimerPopup: React.FC = () => {
         "p-4 rounded-xl shadow-2xl max-w-sm w-full",
         "border border-time-accent/30 text-white"
       )}>
-        <button 
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
           onClick={handleAccept}
           className="absolute top-2 right-2 text-gray-300 hover:text-white transition-colors"
           aria-label="Close"
         >
           <X size={18} />
-        </button>
+        </Button>
         
         <div className="space-y-3">
           <h2 className="text-lg font-serif font-bold text-center animate-text-shimmer bg-clip-text text-transparent bg-gradient-to-r from-time-accent via-white to-time-accent bg-[length:200%_auto]">
@@ -74,17 +78,18 @@ const DisclaimerPopup: React.FC = () => {
           </div>
           
           <div className="flex justify-center pt-2">
-            <button
+            <Button
+              type="button"
               onClick={handleAccept}
               className={cn(
                 "btn-glow px-4 py-2 rounded-md text-sm font-medium transition-all duration-300",
-                "bg-time-accent hover:bg-time-accent/90 text-white",
+                "bg-time-accent hover:bg-time-accent/90 text-time-dark",
                 "border border-time-accent/50 hover:border-time-accent",
                 "hover:scale-105"
               )}
             >
               Got it!
-            </button>
+            </Button>
           </div>
         </div>
       </div>

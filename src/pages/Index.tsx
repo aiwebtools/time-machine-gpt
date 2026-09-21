@@ -18,7 +18,7 @@ import FaqSection from '@/components/FaqSection';
 import ToolCards from '@/components/ToolCards';
 import { cn } from '@/lib/utils';
 
-const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
+const TIME_MACHINE_PATH = "/original-time-machine";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,7 +49,6 @@ const Index = () => {
   
   const handleTimeTravelClick = () => {
     try {
-      window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
       toast.success("Launching Time Machine GPT!", {
         description: "Prepare for an extraordinary journey through time",
         duration: 3000
@@ -74,7 +73,7 @@ const Index = () => {
       <main className="flex-1">
         <HeroSection 
           onStartJourney={handleStartJourney}
-          timeDestinationUrl={TIME_MACHINE_URL}
+          timeDestinationUrl={TIME_MACHINE_PATH}
           setHeroSectionRef={setHeroSectionRef}
         />
         
@@ -85,7 +84,7 @@ const Index = () => {
           <FaqSection />
           <Features />
           <ToolCards />
-          <CtaSection timeDestinationUrl={TIME_MACHINE_URL} />
+          <CtaSection timeDestinationUrl={TIME_MACHINE_PATH} />
         </ScrollReveal>
         
         <InformationalDisclaimer />

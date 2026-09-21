@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Instagram, Mail, Phone } from 'lucide-react';
-import { createTimePortalEffect } from '@/utils/timeEffects';
+import { timeMachines } from '@/data/timeMachines';
 
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -26,20 +26,6 @@ const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const Footer: React.FC = () => {
   const location = useLocation();
-  const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
-  const BOOK_WRITER_URL = "https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt";
-  
-  const handleTimeMachineClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(TIME_MACHINE_URL, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(TIME_MACHINE_URL);
-  };
-
-  const handleBookWriterClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(BOOK_WRITER_URL, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(BOOK_WRITER_URL);
-  };
 
   return (
     <footer className="bg-time-dark text-white py-12">
@@ -112,48 +98,19 @@ const Footer: React.FC = () => {
                   About
                 </Link>
               </li>
-              <li>
-                <a 
-                  href={TIME_MACHINE_URL}
-                  onClick={handleTimeMachineClick}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white/70 hover:text-time-accent transition-colors"
-                >
-                  THE ORIGINAL TIME MACHINE GPT
-                </a>
-              </li>
-              <li>
-                <a 
-                  href={BOOK_WRITER_URL} 
-                  onClick={handleBookWriterClick} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white/70 hover:text-time-accent transition-colors"
-                >
-                  Time Machine of Unwritten History GPT
-                </a>
-              </li>
-              <li>
-                <a href="/father-time" className="text-time-accent/90 hover:text-time-accent transition-colors">
-                  Travel With Father Time (on this site)
-                </a>
-              </li>
-              <li>
-                <a href="https://talk-to-history-gpt.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  Talk to History GPT
-                </a>
-              </li>
-              <li>
-                <a href="https://blackhistorymattersgpt.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  Black History Matters Time Machine
-                </a>
-              </li>
-              <li>
-                <a href="https://nativeamerican-timemachine.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
-                  Native American History Time Machine
-                </a>
-              </li>
+              {timeMachines.map((machine) => (
+                <li key={machine.id}>
+                  <Link
+                    to={machine.path}
+                    className={cn(
+                      'text-white/70 hover:text-time-accent transition-colors',
+                      location.pathname === machine.path && 'text-time-accent',
+                    )}
+                  >
+                    {machine.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <a href="https://aiwebtools.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   MORE AI TOOLS

@@ -7,16 +7,10 @@ import { timeMachines } from '@/data/timeMachines';
 
 interface DesktopNavProps {
   scrollPosition: number;
-  imageTravelerUrl: string;
-  historyGptUrl: string;
-  timeMachineUrl: string;
-  bookWriterUrl: string;
-  storyWriterUrl: string;
 }
 
 const DesktopNav: React.FC<DesktopNavProps> = ({
   scrollPosition,
-  timeMachineUrl,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -30,12 +24,6 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const handleTimeMachineClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(timeMachineUrl, '_blank', 'noopener,noreferrer');
-    createTimePortalEffect(timeMachineUrl);
-  };
 
   return (
     <nav className="hidden md:flex items-center gap-3">
