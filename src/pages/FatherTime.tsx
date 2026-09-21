@@ -36,7 +36,20 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   useEffect(() => {
     document.title = `${machine.name} — Live AI Experience | TIME MACHINE GPT`;
     const description = document.querySelector('meta[name="description"]');
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    const pageUrl = `${window.location.origin}${machine.path}`;
     description?.setAttribute('content', machine.description);
+    canonical?.setAttribute('href', pageUrl);
+    ogTitle?.setAttribute('content', `${machine.name} | TIME MACHINE GPT`);
+    ogDescription?.setAttribute('content', machine.description);
+    ogUrl?.setAttribute('content', pageUrl);
+    twitterTitle?.setAttribute('content', `${machine.name} | TIME MACHINE GPT`);
+    twitterDescription?.setAttribute('content', machine.description);
     voiceRef.current = new TimeVoice();
     return () => voiceRef.current?.stop();
   }, [machine.description, machine.name]);
@@ -178,7 +191,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               </div>
             </div>
 
-            <div className="max-h-[65vh] overflow-y-auto px-3 md:px-5 py-5 space-y-5">
+            <div className="h-[50vh] min-h-[320px] md:h-[58vh] md:min-h-[440px] overflow-y-auto px-3 md:px-5 py-5 space-y-5">
               {turns.map((turn, index) => (
                 <div
                   key={index}
@@ -252,7 +265,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               <div ref={endRef} />
             </div>
 
-            <div className="border-t border-time-accent/20 p-3 md:p-4 bg-black/40">
+            <div className="border-t border-time-accent/20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-4 bg-black/40">
               <div className="flex items-end gap-2">
                 <Textarea
                   value={input}
