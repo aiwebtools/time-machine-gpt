@@ -142,3 +142,20 @@ export const timeMachines: TimeMachineConfig[] = [
 export const timeMachineById = Object.fromEntries(
   timeMachines.map((machine) => [machine.id, machine]),
 ) as Record<TimeMachineId, TimeMachineConfig>;
+
+/** Fallback external tool offered when on-site AI credits run out for a machine that has no own external version. */
+export const fallbackExternal = {
+  url: 'https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt',
+  platform: 'ChatGPT' as const,
+  name: 'The Original Time Machine GPT',
+};
+
+/** Short, unmistakable label for an external destination, e.g. "CHATGPT VERSION". */
+export const externalVersionLabel = (platform?: 'ChatGPT' | 'Lovable App') =>
+  platform === 'Lovable App' ? 'LOVABLE APP VERSION' : 'CHATGPT VERSION';
+
+/** The external option to offer for a machine, falling back to the original ChatGPT tool. */
+export const externalOptionFor = (machine: TimeMachineConfig) =>
+  machine.externalUrl
+    ? { url: machine.externalUrl, platform: machine.externalPlatform ?? 'ChatGPT', name: machine.name }
+    : fallbackExternal;

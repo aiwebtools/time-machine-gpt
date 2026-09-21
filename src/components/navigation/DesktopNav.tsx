@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { ExternalLink, ChevronDown, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { timeMachines } from '@/data/timeMachines';
+import { timeMachines, externalVersionLabel } from '@/data/timeMachines';
 
 interface DesktopNavProps {
   scrollPosition: number;
@@ -62,7 +62,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
               </Link>
             ))}
             <div className="mx-4 my-2 border-t border-time-accent/20" />
-            <p className="px-4 pb-1 pt-1 text-xs font-semibold uppercase text-time-accent/70">ORIGINAL APP VERSIONS</p>
+            <p className="px-4 pb-1 pt-1 text-xs font-semibold uppercase text-time-accent/70">EXTERNAL VERSIONS (OPEN IN NEW TAB)</p>
             {timeMachines.filter((tool) => tool.externalUrl).map((tool) => (
               <a
                 key={`${tool.id}-external`}
@@ -72,7 +72,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
                 onClick={() => setIsDropdownOpen(false)}
                 className="group flex w-full items-center justify-between px-4 py-3 text-left text-sm text-foreground/90 transition-colors hover:bg-time-accent/20 hover:text-time-accent"
               >
-                <span className="font-medium">{tool.name} — ORIGINAL {tool.externalPlatform?.toUpperCase()}</span>
+                <span className="font-medium">{tool.name} — {externalVersionLabel(tool.externalPlatform)}</span>
                 <ExternalLink className="h-4 w-4 text-time-accent opacity-60 transition-opacity group-hover:opacity-100" />
               </a>
             ))}

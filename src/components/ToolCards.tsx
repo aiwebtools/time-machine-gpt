@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink, MessageCircle, ImageIcon, Volume2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { timeMachines } from '@/data/timeMachines';
+import { timeMachines, externalVersionLabel } from '@/data/timeMachines';
 
 interface ToolCardsProps {
   className?: string;
@@ -73,7 +73,7 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => (
               {machine.externalUrl && (
                 <Button asChild variant="outline" className="mt-3 w-full border-time-accent/45 text-time-accent hover:bg-time-accent/10 hover:text-time-accent">
                   <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
-                    {machine.externalLabel ?? 'Open original version'} — ORIGINAL {machine.externalPlatform?.toUpperCase()}
+                    Open {machine.shortName} — {externalVersionLabel(machine.externalPlatform)}
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
