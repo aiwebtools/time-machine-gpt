@@ -57,7 +57,12 @@ import {
   externalVersionLabel,
   type TimeMachineId,
 } from '@/data/timeMachines';
-import { parseChoices, stripChoiceMarkers, type ChoiceOption } from '@/lib/timeChoices';
+import {
+  parseChoices,
+  stripChoiceMarkers,
+  stripDirectorNote,
+  type ChoiceOption,
+} from '@/lib/timeChoices';
 
 type Turn = ChatMessage & { image?: string };
 
@@ -374,7 +379,9 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                 const choice =
                   turn.role === 'assistant' && isLast && !busy ? parseChoices(turn.content) : null;
                 const display =
-                  turn.role === 'assistant' ? stripChoiceMarkers(turn.content) : turn.content;
+                  turn.role === 'assistant'
+                    ? stripChoiceMarkers(turn.content)
+                    : stripDirectorNote(turn.content);
                 return (
                 <div
                   key={index}

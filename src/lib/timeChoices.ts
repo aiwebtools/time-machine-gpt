@@ -54,3 +54,10 @@ export function stripChoiceMarkers(content: string): string {
     .replace(/\n{3,}/g, '\n\n')
     .trimEnd();
 }
+
+/** Hides the private stage direction appended to a choice from the traveler's view. */
+export function stripDirectorNote(content: string): string {
+  return content
+    .replace(/\s*\((?:The Test of Two Fates|Follow this course)[^)]*\)\s*$/i, '')
+    .trim();
+}
