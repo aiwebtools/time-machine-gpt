@@ -12,3 +12,4 @@
 - [x] Add guided year and destination launch controls.
 - [x] Add send, launch, and response celebration effects with reduced-motion support.
 - [x] Verify the redesigned journey on desktop and phone.
+- [x] Restore the original ChatGPT and Lovable destinations beside every on-site journey.

@@ -111,6 +111,18 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
+              {timeMachines.filter((machine) => machine.externalUrl).map((machine) => (
+                <li key={`${machine.id}-external`}>
+                  <a
+                    href={machine.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/70 transition-colors hover:text-time-accent"
+                  >
+                    {machine.name} — Original
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href="https://aiwebtools.lovable.app/?via=aiwebtools" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-time-accent transition-colors">
                   MORE AI TOOLS
