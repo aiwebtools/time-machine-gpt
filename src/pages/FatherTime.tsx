@@ -387,15 +387,18 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
             </Conversation>
 
             <div className="border-t border-journey-gold/25 bg-journey-raised p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-5">
-              {showCreditFallback && machine.externalUrl && (
+              {showCreditFallback && (
                 <div className="mb-4 border border-journey-gold/55 bg-journey-gold/10 p-4 text-left shadow-[0_10px_28px_hsl(var(--background)/0.5)]" role="status">
-                  <p className="font-semibold text-journey-gold">This INSITE VERSION has reached its AI usage limit.</p>
+                  <p className="font-semibold text-journey-gold">
+                    Sorry — community AI credits have run out for today on this INSITE VERSION.
+                  </p>
                   <p className="mt-1 text-sm leading-6 text-foreground/85">
-                    Your journey does not have to stop. Continue with the original {machine.externalPlatform} version in a new window.
+                    Your journey does not have to stop. Please try the{' '}
+                    {externalVersionLabel(externalOptionFor(machine).platform).toLowerCase()} of this tool — it opens in a new tab.
                   </p>
                   <Button asChild className="mt-3 h-auto min-h-11 w-full whitespace-normal bg-journey-gold py-2 text-center font-bold text-journey-gold-foreground hover:bg-journey-gold/90 sm:w-auto">
-                    <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
-                      Try original {machine.externalPlatform} version
+                    <a href={externalOptionFor(machine).url} target="_blank" rel="noopener noreferrer">
+                      Open {externalOptionFor(machine).name} — {externalVersionLabel(externalOptionFor(machine).platform)}
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </Button>
