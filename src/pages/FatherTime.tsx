@@ -76,6 +76,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   const voiceRef = useRef<TimeVoice | null>(null);
   const composerRef = useRef<HTMLTextAreaElement>(null);
   const heroRef = useRef<HTMLElement | null>(null);
+  const latestReplyRef = useRef<HTMLDivElement | null>(null);
 
   const { listening, supported: micSupported, toggle: toggleMic } = useSpeechInput((text) => {
     setInput((prev) => (prev ? `${prev} ${text}` : text));
@@ -108,6 +109,12 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
 
   const celebrate = (variant: 'launch' | 'message' | 'arrival') => {
     setBurst({ key: Date.now(), variant });
+  };
+
+  const revealLatestReply = () => {
+    window.setTimeout(() => {
+      latestReplyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
   };
 
   const speak = async (index: number, text: string) => {
@@ -155,6 +162,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     const history: Turn[] = [...turns, { role: 'user', content: text }];
     setTurns([...history, { role: 'assistant', content: '' }]);
     const replyIndex = history.length;
+    revealLatestReply();
 
     try {
       let full = '';
@@ -181,9 +189,16 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       }
       celebrate('arrival');
     } catch (error) {
-      setTurns((prev) => prev.filter((_, i) => i !== replyIndex));
+      const message = error instanceof Error ? error.message : 'The time machine could not respond.';
+      setTurns((prev) =>
+        prev.map((turn, index) =>
+          index === replyIndex
+            ? { ...turn, content: `The portal could not answer: ${message}` }
+            : turn,
+        ),
+      );
       if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
-      toast.error(error instanceof Error ? error.message : 'The time machine could not respond.');
+      toast.error(message);
     } finally {
       setBusy(false);
       window.setTimeout(() => composerRef.current?.focus(), 80);
@@ -283,6 +298,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                 <Message
                   key={index}
                   from={turn.role}
+                  ref={index === turns.length - 1 && turn.role === 'assistant' ? latestReplyRef : undefined}
                   className={cn(
                     'animate-fade-in',
                     turn.role === 'user' ? 'max-w-[88%] sm:max-w-[75%]' : 'max-w-full',
@@ -293,7 +309,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                       'text-[15px] leading-7 md:text-base',
                       turn.role === 'user'
                         ? 'border border-journey-gold bg-journey-gold px-4 py-3 text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)]'
-                        : 'w-full overflow-visible text-foreground',
+                        : 'w-full overflow-visible border-l-2 border-journey-gold/70 pl-4 text-foreground',
                     )}
                   >
                     {turn.role === 'assistant' && (
@@ -302,7 +318,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                       </span>
                     )}
                     {turn.content ? (
-                      <MessageResponse className="[&_p]:my-3 first:[&_p]:mt-0 last:[&_p]:mb-0">
+                      <MessageResponse className="font-medium text-foreground [&_p]:my-3 [&_p]:text-foreground [&_li]:text-foreground first:[&_p]:mt-0 last:[&_p]:mb-0">
                         {turn.content}
                       </MessageResponse>
                     ) : busy && index === turns.length - 1 ? (
