@@ -137,10 +137,20 @@ export class TimeVoice {
   private sources: AudioBufferSourceNode[] = [];
   private controller: AbortController | null = null;
   private playhead = 0;
-  private stopped = false;
+  private stopped = true;
+  private paused = false;
+  private chain: Promise<void> = Promise.resolve();
+  private consumed = 0;
+  private persona: TimeMachinePersona = "father-time";
+
+  /** Called when a queued narration piece fails. */
+  onError?: (error: unknown) => void;
 
   stop() {
     this.stopped = true;
+    this.paused = false;
+    this.consumed = 0;
+    this.chain = Promise.resolve();
     this.controller?.abort();
     this.controller = null;
     this.sources.forEach((s) => {
@@ -158,56 +168,127 @@ export class TimeVoice {
     }
   }
 
-  async speak(persona: TimeMachinePersona, text: string) {
+  /** Holds further narration; audio already scheduled finishes naturally. */
+  pause() {
+    this.paused = true;
+  }
+
+  resume() {
+    this.paused = false;
+  }
+
+  get isPaused() {
+    return this.paused;
+  }
+
+  /** Opens a narration session that can be fed while the story is still streaming. */
+  start(persona: TimeMachinePersona) {
     this.stop();
     this.stopped = false;
+    this.paused = false;
+    this.consumed = 0;
+    this.persona = persona;
+    this.controller = new AbortController();
     const ctx = new AudioContext({ sampleRate: 24000 });
     this.ctx = ctx;
-    if (ctx.state === "suspended") await ctx.resume().catch(() => {});
-    this.controller = new AbortController();
-    const signal = this.controller.signal;
+    if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+  }
 
+  /** Speaks any complete sentences that arrived since the last feed. */
+  feed(fullText: string) {
+    if (this.stopped) return;
+    const pending = fullText.slice(this.consumed);
+    if (pending.length < 180) return;
+    const boundary = Math.max(
+      pending.lastIndexOf(". "),
+      pending.lastIndexOf("! "),
+      pending.lastIndexOf("? "),
+      pending.lastIndexOf(".\n"),
+      pending.lastIndexOf("!\n"),
+      pending.lastIndexOf("?\n"),
+    );
+    if (boundary < 80) return;
+    const ready = pending.slice(0, boundary + 1);
+    this.consumed += ready.length;
+    this.enqueue(ready);
+  }
+
+  /** Speaks whatever narration is left and resolves when playback is queued through. */
+  flush(fullText: string): Promise<void> {
+    if (this.stopped) return Promise.resolve();
+    const remaining = fullText.slice(this.consumed);
+    this.consumed = fullText.length;
+    if (remaining.trim()) this.enqueue(remaining);
+    return this.chain;
+  }
+
+  /** Speaks one complete block of narration from the beginning. */
+  async speak(persona: TimeMachinePersona, text: string) {
+    this.start(persona);
+    this.enqueue(text);
+    await this.chain;
+  }
+
+  private enqueue(text: string) {
     for (const chunk of chunkForSpeech(text)) {
-      if (this.stopped) return;
-      const res = await fetch(`${BASE}/father-time-voice`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({ persona, text: chunk }),
-        signal,
-      });
-      if (!res.ok || !res.body) {
-        const info = await res.json().catch(() => ({}));
-        throw new TimeMachineServiceError(info.error ?? "The voice of time is silent right now.", res.status);
-      }
-
-      let pending = new Uint8Array(0);
-      await readSSE(res.body, (payload) => {
-        if (payload.type !== "speech.audio.delta" || typeof payload.audio !== "string") return;
-        if (this.stopped || !this.ctx) return;
-        const binary = atob(payload.audio);
-        const incoming = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) incoming[i] = binary.charCodeAt(i);
-        const bytes = new Uint8Array(pending.length + incoming.length);
-        bytes.set(pending);
-        bytes.set(incoming, pending.length);
-        const usable = bytes.length - (bytes.length % 2);
-        pending = bytes.slice(usable);
-        if (usable === 0) return;
-        const samples = new Int16Array(bytes.buffer, 0, usable / 2);
-        const floats = Float32Array.from(samples, (s) => s / 32768);
-        const buffer = ctx.createBuffer(1, floats.length, 24000);
-        buffer.copyToChannel(floats, 0);
-        const source = ctx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(ctx.destination);
-        this.playhead =
-          this.playhead === 0
-            ? ctx.currentTime + 0.08
-            : Math.max(this.playhead, ctx.currentTime);
-        source.start(this.playhead);
-        this.playhead += buffer.duration;
-        this.sources.push(source);
-      });
+      this.chain = this.chain
+        .then(async () => {
+          while (this.paused && !this.stopped) {
+            await new Promise((resolve) => setTimeout(resolve, 150));
+          }
+          if (this.stopped) return;
+          await this.playChunk(chunk);
+        })
+        .catch((error) => {
+          if (!this.stopped) this.onError?.(error);
+        });
     }
+  }
+
+  private async playChunk(chunk: string) {
+    const ctx = this.ctx;
+    if (!ctx) return;
+    const res = await fetch(`${BASE}/father-time-voice`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ persona: this.persona, text: chunk }),
+      signal: this.controller?.signal,
+    });
+    if (!res.ok || !res.body) {
+      const info = await res.json().catch(() => ({}));
+      throw new TimeMachineServiceError(
+        info.error ?? "The voice of time is silent right now.",
+        res.status,
+      );
+    }
+
+    let pending = new Uint8Array(0);
+    await readSSE(res.body, (payload) => {
+      if (payload.type !== "speech.audio.delta" || typeof payload.audio !== "string") return;
+      if (this.stopped || this.ctx !== ctx) return;
+      const binary = atob(payload.audio);
+      const incoming = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) incoming[i] = binary.charCodeAt(i);
+      const bytes = new Uint8Array(pending.length + incoming.length);
+      bytes.set(pending);
+      bytes.set(incoming, pending.length);
+      const usable = bytes.length - (bytes.length % 2);
+      pending = bytes.slice(usable);
+      if (usable === 0) return;
+      const samples = new Int16Array(bytes.buffer, 0, usable / 2);
+      const floats = Float32Array.from(samples, (s) => s / 32768);
+      const buffer = ctx.createBuffer(1, floats.length, 24000);
+      buffer.copyToChannel(floats, 0);
+      const source = ctx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(ctx.destination);
+      this.playhead =
+        this.playhead === 0
+          ? ctx.currentTime + 0.08
+          : Math.max(this.playhead, ctx.currentTime);
+      source.start(this.playhead);
+      this.playhead += buffer.duration;
+      this.sources.push(source);
+    });
   }
 }

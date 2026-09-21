@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { ExternalLink, ChevronDown, Clock3 } from 'lucide-react';
+import { ExternalLink, ChevronDown, Clock3, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { timeMachines, externalVersionLabel } from '@/data/timeMachines';
 
@@ -49,6 +49,14 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
         
         {isDropdownOpen && (
           <div className="absolute top-full right-0 mt-2 w-80 rounded-xl border border-time-accent/30 bg-time-dark shadow-[0_10px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(212,175,55,0.2)] z-50 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+            <Link
+              to="/time-machines"
+              onClick={() => setIsDropdownOpen(false)}
+              className="mx-2 mb-2 flex items-center justify-between rounded-lg border border-time-accent/40 px-3 py-2.5 text-sm font-semibold text-time-accent transition-colors hover:bg-time-accent/15"
+            >
+              See all six Time Machines
+              <ArrowRight className="h-4 w-4" />
+            </Link>
             <p className="px-4 pb-1 pt-2 text-xs font-semibold uppercase text-time-accent/70">(INSITE VERSIONS)</p>
             {timeMachines.map((tool) => (
               <Link

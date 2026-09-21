@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import FatherTime from "./pages/FatherTime";
+import TimeMachinesHub from "./pages/TimeMachinesHub";
 import NotFound from "./pages/NotFound";
 import { useFacebookBrowser } from "./hooks/use-facebook-browser";
 import { useEffect, useRef } from "react";
@@ -137,6 +138,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
+        <Route path="/time-machines" element={<TimeMachinesHub />} />
         <Route path="/father-time" element={<FatherTime />} />
         <Route path="/original-time-machine" element={<FatherTime machineId="original" />} />
         <Route path="/talk-to-history" element={<FatherTime machineId="talk-history" />} />
