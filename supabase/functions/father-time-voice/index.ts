@@ -42,7 +42,7 @@ Deno.serve(async (req) => {
         generationConfig: {
           responseModalities: ["AUDIO"],
           speechConfig: {
-            voiceConfig: { prebuiltVoiceConfig: { voiceName: "Charon" } },
+            voiceConfig: { prebuiltVoiceConfig: { voiceName: persona.voiceName } },
           },
         },
       }),

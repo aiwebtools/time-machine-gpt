@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Inventory every Time Machine currently shown in navigation, footer, and the main page.
-- [ ] Define distinct live-page behavior and story instructions for each Time Machine.
-- [ ] Build reusable live story pages with image, voice, and continuity.
-- [ ] Add every version to the main page and Explore dropdown.
-- [ ] Add routes and search indexing, then verify desktop and mobile.
+- [x] Inventory every Time Machine currently shown in navigation, footer, and the main page.
+- [x] Define distinct live-page behavior, story instructions, and voices for each Time Machine.
+- [x] Build reusable live story pages with image, voice, and continuity.
+- [x] Add every version to the main page, Explore dropdown, and footer.
+- [ ] Deploy the updated live services and verify every branch on desktop and mobile.

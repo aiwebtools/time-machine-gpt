@@ -4,12 +4,7 @@ import { cn } from '@/lib/utils';
 import NavLogo from './navigation/NavLogo';
 import DesktopNav from './navigation/DesktopNav';
 import MobileMenu from './navigation/MobileMenu';
-
-const TIME_MACHINE_URL = "https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt";
-const HISTORY_GPT_URL = "https://talk-to-history-gpt.lovable.app/";
-const IMAGINATION_TRAVELER_URL = "https://chatgpt.com/g/g-686a172232648191b2fe8d0224e5d997-black-history-matters-time-machine";
-const BOOK_WRITER_URL = "https://chatgpt.com/g/g-67fdcb6a97508191bb1926a1cf8a4624-time-machine-interactive-book-writer-v9";
-const STORY_WRITER_URL = "https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt";
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -33,9 +28,12 @@ const Navbar = () => {
           <NavLogo scrollPosition={scrollPosition} />
         </div>
         
-        <button 
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
           className={cn(
-            "md:hidden p-2 rounded-lg transition-all",
+            "md:hidden shrink-0 transition-all",
             scrollPosition > 50 
               ? "text-time-dark hover:bg-time-dark/10" 
               : "text-time-accent hover:bg-white/10"
@@ -56,26 +54,14 @@ const Navbar = () => {
           >
             {isMenuOpen ? <path d="M18 6 6 18 M6 6 18 18" /> : <path d="M4 12h16 M4 6h16 M4 18h16" />}
           </svg>
-        </button>
+        </Button>
         
-        <DesktopNav 
-          scrollPosition={scrollPosition}
-          imageTravelerUrl={IMAGINATION_TRAVELER_URL}
-          historyGptUrl={HISTORY_GPT_URL}
-          timeMachineUrl={TIME_MACHINE_URL}
-          bookWriterUrl={BOOK_WRITER_URL}
-          storyWriterUrl={STORY_WRITER_URL}
-        />
+        <DesktopNav scrollPosition={scrollPosition} />
       </div>
       
       <MobileMenu 
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        imageTravelerUrl={IMAGINATION_TRAVELER_URL}
-        historyGptUrl={HISTORY_GPT_URL}
-        timeMachineUrl={TIME_MACHINE_URL}
-        bookWriterUrl={BOOK_WRITER_URL}
-        storyWriterUrl={STORY_WRITER_URL}
       />
     </header>
   );

@@ -7,11 +7,6 @@ import { timeMachines } from '@/data/timeMachines';
 interface MobileMenuProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
-  imageTravelerUrl: string;
-  historyGptUrl: string;
-  timeMachineUrl: string;
-  bookWriterUrl: string;
-  storyWriterUrl: string;
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
