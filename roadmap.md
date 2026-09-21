@@ -13,3 +13,6 @@
 - [x] Add send, launch, and response celebration effects with reduced-motion support.
 - [x] Verify the redesigned journey on desktop and phone.
 - [x] Restore the original ChatGPT and Lovable destinations beside every on-site journey.
+- [x] Clearly label every internal journey as INSITE VERSION across the header, footer, and main page.
+- [x] Keep each original ChatGPT or Lovable app beside its matching internal journey with its original URL.
+- [x] Show the matching original version inside a journey when AI credits or usage limits are unavailable.

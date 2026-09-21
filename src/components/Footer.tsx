@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
                       location.pathname === machine.path && 'text-time-accent',
                     )}
                   >
-                    {machine.name}
+                    {machine.name} — INSITE VERSION
                   </Link>
                 </li>
               ))}
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="text-white/70 transition-colors hover:text-time-accent"
                   >
-                    {machine.name} — Original
+                    {machine.name} — ORIGINAL {machine.externalPlatform?.toUpperCase()}
                   </a>
                 </li>
               ))}
