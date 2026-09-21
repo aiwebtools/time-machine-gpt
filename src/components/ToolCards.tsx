@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MessageCircle, ImageIcon, Volume2 } from 'lucide-react';
+import { ArrowRight, ExternalLink, MessageCircle, ImageIcon, Volume2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { timeMachines } from '@/data/timeMachines';
@@ -70,6 +70,14 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => (
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
+              {machine.externalUrl && (
+                <Button asChild variant="outline" className="mt-3 w-full border-time-accent/45 text-time-accent hover:bg-time-accent/10 hover:text-time-accent">
+                  <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
+                    {machine.externalLabel ?? 'Open original version'}
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              )}
             </div>
           </article>
         ))}

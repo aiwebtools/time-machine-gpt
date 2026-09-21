@@ -26,6 +26,8 @@ export type TimeMachineConfig = {
   narrator: string;
   image: string;
   imageAlt: string;
+  externalUrl?: string;
+  externalLabel?: string;
 };
 
 export const timeMachines: TimeMachineConfig[] = [
@@ -58,6 +60,8 @@ export const timeMachines: TimeMachineConfig[] = [
     narrator: 'The Chronoguide',
     image: originalImage,
     imageAlt: 'Golden time portal opening onto the ancient, industrial, and future worlds',
+    externalUrl: 'https://chatgpt.com/g/g-t8s65Zh0j-time-machine-gpt',
+    externalLabel: 'Open original ChatGPT version',
   },
   {
     id: 'talk-history',
@@ -73,6 +77,8 @@ export const timeMachines: TimeMachineConfig[] = [
     narrator: 'The Historical Envoy',
     image: talkHistoryImage,
     imageAlt: 'Historical figures gathered for conversation around a candlelit table',
+    externalUrl: 'https://talk-to-history-gpt.lovable.app/',
+    externalLabel: 'Open original Talk to History app',
   },
   {
     id: 'black-history',
@@ -88,6 +94,8 @@ export const timeMachines: TimeMachineConfig[] = [
     narrator: 'The Living Archive',
     image: blackHistoryImage,
     imageAlt: 'A dignified timeline of Black scholarship, freedom, civil rights, and cultural achievement',
+    externalUrl: 'https://blackhistorymattersgpt.lovable.app/?via=aiwebtools',
+    externalLabel: 'Open original Black History app',
   },
   {
     id: 'native-history',
@@ -103,6 +111,8 @@ export const timeMachines: TimeMachineConfig[] = [
     narrator: 'The Memory Keeper',
     image: nativeHistoryImage,
     imageAlt: 'Diverse Indigenous communities and landscapes connected across time',
+    externalUrl: 'https://nativeamerican-timemachine.lovable.app/?via=aiwebtools',
+    externalLabel: 'Open original Native American History app',
   },
   {
     id: 'unwritten-history',
@@ -118,6 +128,8 @@ export const timeMachines: TimeMachineConfig[] = [
     narrator: 'The Keeper of Lost Pages',
     image: unwrittenHistoryImage,
     imageAlt: 'Ancient archive opening onto a mysterious archaeological time rift',
+    externalUrl: 'https://chatgpt.com/g/g-6942c94dcb08819191863b6d35161f09-time-machine-of-unwritten-history-gpt',
+    externalLabel: 'Open original ChatGPT version',
   },
 ];
 
