@@ -74,14 +74,14 @@ const TimeMachinesHub = () => {
                     <span title="Generated visions"><ImageIcon className="h-4 w-4" /></span>
                   </div>
 
-                  <Button asChild className="w-full bg-time-accent font-bold text-time-dark hover:bg-time-accent/90 btn-glow">
+                  <Button asChild className="h-auto min-h-11 w-full whitespace-normal py-2 text-center text-sm leading-snug bg-time-accent font-bold text-time-dark hover:bg-time-accent/90 btn-glow">
                     <Link to={machine.path}>
                       Enter {machine.shortName} — (INSITE VERSION)
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                   {machine.externalUrl && (
-                    <Button asChild variant="outline" className="mt-3 w-full border-time-accent/45 text-time-accent hover:bg-time-accent/10 hover:text-time-accent">
+                    <Button asChild variant="outline" className="mt-3 h-auto min-h-11 w-full whitespace-normal py-2 text-center text-sm leading-snug border-time-accent/45 text-time-accent hover:bg-time-accent/10 hover:text-time-accent">
                       <a href={machine.externalUrl} target="_blank" rel="noopener noreferrer">
                         Open {machine.shortName} — {externalVersionLabel(machine.externalPlatform)}
                         <ExternalLink className="ml-2 h-4 w-4" />
