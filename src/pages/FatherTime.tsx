@@ -295,10 +295,13 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
             <Conversation className="h-[52dvh] min-h-[390px] max-h-[680px] bg-journey-surface md:h-[58dvh] md:min-h-[500px]">
               <ConversationContent className="gap-6 px-4 py-6 md:px-7">
               {turns.map((turn, index) => (
-                <Message
+                <div
                   key={index}
-                  from={turn.role}
                   ref={index === turns.length - 1 && turn.role === 'assistant' ? latestReplyRef : undefined}
+                  className="w-full"
+                >
+                <Message
+                  from={turn.role}
                   className={cn(
                     'animate-fade-in',
                     turn.role === 'user' ? 'max-w-[88%] sm:max-w-[75%]' : 'max-w-full',
@@ -308,7 +311,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                     className={cn(
                       'text-[15px] leading-7 md:text-base',
                       turn.role === 'user'
-                        ? 'border border-journey-gold bg-journey-gold px-4 py-3 text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)]'
+                        ? '!border-journey-gold !bg-journey-gold !px-4 !py-3 !text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)] [&_*]:!text-journey-gold-foreground'
                         : 'w-full overflow-visible border-l-2 border-journey-gold/70 pl-4 text-foreground',
                     )}
                   >
@@ -377,6 +380,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                     </MessageActions>
                   )}
                 </Message>
+                </div>
               ))}
               </ConversationContent>
               <ConversationScrollButton className="border-journey-gold/40 bg-journey-raised text-journey-gold hover:bg-journey-gold/10" />
