@@ -369,10 +369,16 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
 
             <Conversation className="h-[52dvh] min-h-[390px] max-h-[680px] bg-journey-surface md:h-[58dvh] md:min-h-[500px]">
               <ConversationContent className="gap-6 px-4 py-6 md:px-7">
-              {turns.map((turn, index) => (
+              {turns.map((turn, index) => {
+                const isLast = index === turns.length - 1;
+                const choice =
+                  turn.role === 'assistant' && isLast && !busy ? parseChoices(turn.content) : null;
+                const display =
+                  turn.role === 'assistant' ? stripChoiceMarkers(turn.content) : turn.content;
+                return (
                 <div
                   key={index}
-                  ref={index === turns.length - 1 && turn.role === 'assistant' ? latestReplyRef : undefined}
+                  ref={isLast && turn.role === 'assistant' ? latestReplyRef : undefined}
                   className="w-full"
                 >
                 <Message
@@ -395,13 +401,19 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                         {machine.narrator}
                       </span>
                     )}
-                    {turn.content ? (
+                    {display ? (
                       <MessageResponse className="font-medium text-foreground [&_p]:my-3 [&_p]:text-foreground [&_li]:text-foreground first:[&_p]:mt-0 last:[&_p]:mb-0">
-                        {turn.content}
+                        {display}
                       </MessageResponse>
-                    ) : busy && index === turns.length - 1 ? (
+                    ) : busy && isLast ? (
                       <Shimmer className="text-sm font-medium">Charging the flux of ages…</Shimmer>
                     ) : null}
+
+                    {turn.role === 'assistant' && isLast && visionPause && (
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-journey-gold">
+                        Pausing for the vision…
+                      </p>
+                    )}
 
                     {turn.image && (
                       <div className="mt-4 overflow-hidden rounded-md border border-journey-gold/40 shadow-[0_12px_32px_hsl(var(--background)/0.8)]">
@@ -454,9 +466,40 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                       </Button>
                     </MessageActions>
                   )}
+
+                  {choice && (
+                    <div className="mt-4 rounded-md border border-journey-gold/45 bg-journey-raised/80 p-4 text-left">
+                      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-journey-gold">
+                        {choice.kind === 'future'
+                          ? `Test of Two Fates — question ${Math.min(futureAnswers + 1, 3)} of 3`
+                          : 'Choose your course through this moment'}
+                      </p>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {choice.options.map((option) => (
+                          <button
+                            key={option.key}
+                            type="button"
+                            onClick={() => chooseFate(choice.kind, option)}
+                            className={cn(
+                              'min-h-[4rem] rounded-md border p-3 text-left text-sm leading-6 transition-transform hover:-translate-y-0.5',
+                              option.key === 'red'
+                                ? 'border-destructive/70 bg-destructive/15 text-foreground hover:bg-destructive/25'
+                                : 'border-journey-gold/50 bg-journey-gold/10 text-foreground hover:bg-journey-gold/20',
+                            )}
+                          >
+                            <span className="block text-xs font-bold uppercase tracking-[0.14em] text-journey-gold">
+                              {option.label}
+                            </span>
+                            <span className="mt-1 block">{option.text}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </Message>
                 </div>
-              ))}
+                );
+              })}
               </ConversationContent>
               <ConversationScrollButton className="border-journey-gold/40 bg-journey-raised text-journey-gold hover:bg-journey-gold/10" />
             </Conversation>
