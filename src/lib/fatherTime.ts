@@ -38,7 +38,7 @@ export function isCreditLimitError(error: unknown): boolean {
 
 async function readSSE(
   body: ReadableStream<Uint8Array>,
-  onEvent: (payload: any) => void,
+  onEvent: (payload: Record<string, unknown>) => void,
 ) {
   const reader = body.getReader();
   const decoder = new TextDecoder();
@@ -82,8 +82,8 @@ export async function streamStory(
   }
 
   await readSSE(res.body, (payload) => {
-    if (payload?.type === "response.output_text.delta" && payload.delta) {
-      onDelta(payload.delta as string);
+    if (payload.type === "response.output_text.delta" && typeof payload.delta === "string") {
+      onDelta(payload.delta);
     }
   });
 }
@@ -182,7 +182,7 @@ export class TimeVoice {
 
       let pending = new Uint8Array(0);
       await readSSE(res.body, (payload) => {
-        if (payload?.type !== "speech.audio.delta" || !payload.audio) return;
+        if (payload.type !== "speech.audio.delta" || typeof payload.audio !== "string") return;
         if (this.stopped || !this.ctx) return;
         const binary = atob(payload.audio);
         const incoming = new Uint8Array(binary.length);
