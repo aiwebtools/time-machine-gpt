@@ -134,7 +134,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     try {
       await voice.speak(machine.id, text);
     } catch (error) {
-      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
+      if (isCreditLimitError(error)) setShowCreditFallback(true);
       toast.error(error instanceof Error ? error.message : 'The voice of time is silent.');
     } finally {
       setSpeakingIndex((current) => (current === index ? null : current));
@@ -148,7 +148,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       setTurns((prev) => prev.map((t, i) => (i === index ? { ...t, image } : t)));
       celebrate('arrival');
     } catch (error) {
-      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
+      if (isCreditLimitError(error)) setShowCreditFallback(true);
       toast.error(error instanceof Error ? error.message : 'The vision could not be rendered.');
     } finally {
       setRenderingIndex(null);
@@ -202,7 +202,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
             : turn,
         ),
       );
-      if (isCreditLimitError(error) && machine.externalUrl) setShowCreditFallback(true);
+      if (isCreditLimitError(error)) setShowCreditFallback(true);
       toast.error(message);
     } finally {
       setBusy(false);
@@ -395,11 +395,11 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               {showCreditFallback && (
                 <div className="mb-4 border border-journey-gold/55 bg-journey-gold/10 p-4 text-left shadow-[0_10px_28px_hsl(var(--background)/0.5)]" role="status">
                   <p className="font-semibold text-journey-gold">
-                    Sorry — community AI credits have run out for today on this INSITE VERSION.
+                    Sorry — community AI credits have run out for today on this (INSITE VERSION).
                   </p>
                   <p className="mt-1 text-sm leading-6 text-foreground/85">
                     Your journey does not have to stop. Please try the{' '}
-                    {externalVersionLabel(externalOptionFor(machine).platform).toLowerCase()} of this tool — it opens in a new tab.
+                    {externalVersionLabel(externalOptionFor(machine).platform)} of this tool. It opens safely in a new tab.
                   </p>
                   <Button asChild className="mt-3 h-auto min-h-11 w-full whitespace-normal bg-journey-gold py-2 text-center font-bold text-journey-gold-foreground hover:bg-journey-gold/90 sm:w-auto">
                     <a href={externalOptionFor(machine).url} target="_blank" rel="noopener noreferrer">
