@@ -1,4 +1,5 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { getPersona } from "../_shared/time-machine-personas.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -14,22 +15,24 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { text } = await req.json();
-    if (!text || typeof text !== "string") {
-      return new Response(JSON.stringify({ error: "text is required" }), {
+    const { text, persona: personaId } = await req.json();
+    const persona = getPersona(personaId);
+    if (!persona || !text || typeof text !== "string" || text.length > 12000) {
+      return new Response(JSON.stringify({ error: "A valid Time Machine narration is required." }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
     const spoken =
-      `Speak as an ancient, mystical keeper of time: deep, calm, theatrical and awe-filled. ` +
+      `${persona.voiceStyle} ` +
       `Narrate this: ${text}`;
 
     const upstream = await fetch("https://ai.gateway.lovable.dev/v1/audio/speech", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        "Lovable-API-Key": apiKey,
+        "X-Lovable-AIG-SDK": "fetch",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -48,8 +51,14 @@ Deno.serve(async (req) => {
     if (!upstream.ok || !upstream.body) {
       const details = await upstream.text().catch(() => "");
       console.error(`TTS failed [${upstream.status}]: ${details}`);
+      let message = "The voice of time is silent right now.";
+      try {
+        const parsed = JSON.parse(details);
+        if (typeof parsed?.message === "string") message = parsed.message;
+        else if (typeof parsed?.error?.message === "string") message = parsed.error.message;
+      } catch { /* upstream returned non-JSON details */ }
       return new Response(
-        JSON.stringify({ error: "The voice of time is silent right now.", details }),
+        JSON.stringify({ error: message, details }),
         { status: upstream.status, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }

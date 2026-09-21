@@ -11,14 +11,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useSpeechInput } from '@/hooks/use-speech-input';
 import { streamStory, generateVision, TimeVoice, type ChatMessage } from '@/lib/fatherTime';
-
-const GREETING =
-  'Great Scott! User, what date would you like to teleport to, & where do you want to go?';
+import { timeMachineById, type TimeMachineId } from '@/data/timeMachines';
 
 type Turn = ChatMessage & { image?: string };
 
-const FatherTime = () => {
-  const [turns, setTurns] = useState<Turn[]>([{ role: 'assistant', content: GREETING }]);
+type TimeMachinePageProps = { machineId?: TimeMachineId };
+
+const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
+  const machine = timeMachineById[machineId];
+  const [turns, setTurns] = useState<Turn[]>([{ role: 'assistant', content: machine.greeting }]);
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [autoSpeak, setAutoSpeak] = useState(false);
@@ -33,10 +34,12 @@ const FatherTime = () => {
   });
 
   useEffect(() => {
-    document.title = 'Father Time — Live AI Time Travel | TIME MACHINE GPT';
+    document.title = `${machine.name} — Live AI Experience | TIME MACHINE GPT`;
+    const description = document.querySelector('meta[name="description"]');
+    description?.setAttribute('content', machine.description);
     voiceRef.current = new TimeVoice();
     return () => voiceRef.current?.stop();
-  }, []);
+  }, [machine.description, machine.name]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -52,7 +55,7 @@ const FatherTime = () => {
     }
     setSpeakingIndex(index);
     try {
-      await voice.speak(text);
+      await voice.speak(machine.id, text);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'The voice of time is silent.');
     } finally {
@@ -63,7 +66,7 @@ const FatherTime = () => {
   const renderVision = async (index: number, text: string) => {
     setRenderingIndex(index);
     try {
-      const image = await generateVision(text.slice(-1200));
+      const image = await generateVision(machine.id, text.slice(-1200));
       setTurns((prev) => prev.map((t, i) => (i === index ? { ...t, image } : t)));
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'The vision could not be rendered.');
@@ -87,6 +90,7 @@ const FatherTime = () => {
     try {
       let full = '';
       await streamStory(
+        machine.id,
         history.map(({ role, content }) => ({ role, content })),
         (delta) => {
           full += delta;
@@ -117,7 +121,7 @@ const FatherTime = () => {
   const restart = () => {
     voiceRef.current?.stop();
     setSpeakingIndex(null);
-    setTurns([{ role: 'assistant', content: GREETING }]);
+    setTurns([{ role: 'assistant', content: machine.greeting }]);
     setInput('');
   };
 
@@ -132,12 +136,10 @@ const FatherTime = () => {
           className="container mx-auto px-4 pt-24 pb-6 text-center"
         >
           <h1 className="text-3xl md:text-5xl font-bold text-glow text-time-accent mb-3">
-            FATHER TIME — LIVE TIME TRAVEL
+            {machine.heading}
           </h1>
           <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-300">
-            Travel to any date and place on this page. Father Time narrates your journey,
-            speaks it aloud, and paints what you see. The past is told with strict historical
-            truth; the future is earned through the test of two fates.
+            {machine.description}
           </p>
         </section>
 
@@ -189,7 +191,7 @@ const FatherTime = () => {
                 >
                   {turn.role === 'assistant' && (
                     <span className="block text-[11px] uppercase tracking-[0.2em] text-time-accent mb-2">
-                      Father Time
+                      {machine.narrator}
                     </span>
                   )}
                   <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">
@@ -200,7 +202,7 @@ const FatherTime = () => {
                   {turn.image && (
                     <img
                       src={turn.image}
-                      alt="A vision of the time and place Father Time has taken you to"
+                      alt={`A vision created during the ${machine.name} journey`}
                       className="mt-4 w-full rounded-lg border border-time-accent/30 aspect-video object-cover"
                       loading="lazy"
                     />
@@ -261,7 +263,7 @@ const FatherTime = () => {
                       void send();
                     }
                   }}
-                  placeholder="Name your date and your destination…"
+                  placeholder={machine.inputPlaceholder}
                   rows={2}
                   className="resize-none bg-time-dark/70 border-time-accent/30 text-gray-100 placeholder:text-gray-500 focus-visible:ring-time-accent"
                 />
@@ -290,7 +292,7 @@ const FatherTime = () => {
                 </Button>
               </div>
               <p className="mt-2 text-[11px] text-gray-400">
-                Stories are long — give Father Time a moment to write them. Voice narration and
+                Stories are long — give {machine.narrator} a moment to write them. Voice narration and
                 images are generated as you travel.
               </p>
             </div>

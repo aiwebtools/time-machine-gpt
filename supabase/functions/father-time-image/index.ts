@@ -1,4 +1,5 @@
 import { corsHeaders } from "../_shared/cors.ts";
+import { getPersona } from "../_shared/time-machine-personas.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -14,16 +15,17 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { prompt } = await req.json();
-    if (!prompt || typeof prompt !== "string") {
-      return new Response(JSON.stringify({ error: "prompt is required" }), {
+    const { prompt, persona: personaId } = await req.json();
+    const persona = getPersona(personaId);
+    if (!persona || !prompt || typeof prompt !== "string" || prompt.length > 4000) {
+      return new Response(JSON.stringify({ error: "A valid Time Machine scene is required." }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
     const safePrompt =
-      `Cinematic, historically accurate, widescreen 16:9 scene. ${prompt}. ` +
+      `Cinematic, historically grounded, widescreen 16:9 scene. ${persona.imageStyle} ${prompt}. ` +
       `No text, no logos, no brand marks, no depictions of named living people. Photoreal, dramatic lighting.`;
 
     const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
@@ -44,12 +46,12 @@ Deno.serve(async (req) => {
     if (!res.ok) {
       const details = await res.text().catch(() => "");
       console.error(`Image generation failed [${res.status}]: ${details}`);
-      const message =
-        res.status === 429
-          ? "Too many visions at once. Try again shortly."
-          : res.status === 402
-            ? "AI credits are exhausted. Please top up your workspace credits."
-            : "The vision could not be rendered.";
+      let message = "The vision could not be rendered.";
+      try {
+        const parsed = JSON.parse(details);
+        if (typeof parsed?.message === "string") message = parsed.message;
+        else if (typeof parsed?.error?.message === "string") message = parsed.error.message;
+      } catch { /* upstream returned non-JSON details */ }
       return new Response(JSON.stringify({ error: message, details }), {
         status: res.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
