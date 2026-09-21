@@ -1,8 +1,10 @@
 
 import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import TimePortal from '@/components/TimePortal';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
+import { Button } from '@/components/ui/button';
 
 interface HeroSectionProps {
   className?: string;
@@ -19,11 +21,12 @@ const HeroSection = ({
   timeDestinationUrl,
   setHeroSectionRef
 }: HeroSectionProps) => {
+  const navigate = useNavigate();
   
   const handleStartJourney = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open(timeDestinationUrl, '_blank', 'noopener,noreferrer');
     createTimePortalEffect(timeDestinationUrl);
+    window.setTimeout(() => navigate(timeDestinationUrl), 900);
   };
   
   return (
@@ -70,16 +73,16 @@ const HeroSection = ({
             </p>
             
             <div ref={addToRefs} className="reveal flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a 
-                href={timeDestinationUrl} 
+              <Button
+                asChild
                 onClick={handleStartJourney}
-                className="btn-glow px-6 py-3 bg-time-accent text-white rounded-md font-medium hover:bg-time-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                className="btn-glow px-6 py-3 h-auto bg-time-accent text-time-dark rounded-md font-semibold hover:bg-time-accent/90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
-                Start Your Journey
-              </a>
-              <a href="/about" className="btn-glow px-6 py-3 bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                Learn More
-              </a>
+                <Link to={timeDestinationUrl}>Start Your Journey</Link>
+              </Button>
+              <Button asChild variant="outline" className="btn-glow px-6 py-3 h-auto bg-transparent border border-white/30 text-white rounded-md font-medium hover:bg-white/10 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link to="/about">Learn More</Link>
+              </Button>
             </div>
           </div>
         </div>
