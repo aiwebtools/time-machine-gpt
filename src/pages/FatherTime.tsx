@@ -158,18 +158,18 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
 
         <section className="container mx-auto px-3 md:px-6 pb-12 max-w-4xl">
           <div className="rounded-2xl border border-time-accent/30 bg-time-dark/80 backdrop-blur-sm shadow-[0_0_35px_rgba(212,175,55,0.15)] overflow-hidden">
-            <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-time-accent/20">
-              <span className="text-time-accent text-sm font-semibold tracking-wide">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-b border-time-accent/20">
+              <span className="text-time-accent text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap">
                 THE TIME PORTAL IS ACTIVE
               </span>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
                 <Button
                   type="button"
                   size="sm"
                   variant="ghost"
                   onClick={() => setAutoSpeak((v) => !v)}
                   className={cn(
-                    'text-xs border',
+                    'text-xs border w-full sm:w-auto',
                     autoSpeak
                       ? 'bg-time-accent text-time-dark border-time-accent hover:bg-time-accent/90'
                       : 'text-time-accent border-time-accent/40 hover:bg-time-accent/10',
@@ -183,7 +183,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                   size="sm"
                   variant="ghost"
                   onClick={restart}
-                  className="text-xs text-time-accent border border-time-accent/40 hover:bg-time-accent/10"
+                  className="text-xs text-time-accent border border-time-accent/40 hover:bg-time-accent/10 w-full sm:w-auto"
                 >
                   <RotateCcw className="h-4 w-4 mr-1" />
                   New journey

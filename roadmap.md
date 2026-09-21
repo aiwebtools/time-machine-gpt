@@ -5,4 +5,5 @@
 - [x] Build reusable live story pages with image, voice, and continuity.
 - [x] Add every version to the main page, Explore dropdown, and footer.
 - [x] Deploy the updated live services.
-- [ ] Verify every branch, voice, and image flow on desktop and mobile.
+- [x] Verify all six branches on desktop and mobile, plus deployed story and voice responses.
+- [ ] Recheck live image generation when the image service is no longer timing out.
