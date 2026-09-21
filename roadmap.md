@@ -16,3 +16,5 @@
 - [x] Clearly label every internal journey as INSITE VERSION across the header, footer, and main page.
 - [x] Keep each original ChatGPT or Lovable app beside its matching internal journey with its original URL.
 - [x] Show the matching original version inside a journey when AI credits or usage limits are unavailable.
+- [x] Standardize every internal and external option as (INSITE VERSION), (CHATGPT VERSION), (GEMINI VERSION), or (LOVABLE APP VERSION).
+- [x] Offer the original ChatGPT fallback for Father Time when community AI credits run out.

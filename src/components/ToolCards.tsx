@@ -66,7 +66,7 @@ const ToolCards: React.FC<ToolCardsProps> = ({ className }) => (
 
               <Button asChild className="w-full bg-time-accent text-time-dark font-bold hover:bg-time-accent/90 btn-glow">
                 <Link to={machine.path}>
-                  Enter {machine.shortName} — INSITE VERSION
+                  Enter {machine.shortName} — (INSITE VERSION)
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>

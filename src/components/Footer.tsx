@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
                       location.pathname === machine.path && 'text-time-accent',
                     )}
                   >
-                    {machine.name} — INSITE VERSION
+                    {machine.name} — (INSITE VERSION)
                   </Link>
                 </li>
               ))}

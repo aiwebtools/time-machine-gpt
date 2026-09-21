@@ -12,6 +12,8 @@ export type TimeMachineId =
   | 'native-history'
   | 'unwritten-history';
 
+export type ExternalPlatform = 'ChatGPT' | 'Gemini' | 'Lovable App';
+
 export type TimeMachineConfig = {
   id: TimeMachineId;
   path: string;
@@ -28,7 +30,7 @@ export type TimeMachineConfig = {
   imageAlt: string;
   externalUrl?: string;
   externalLabel?: string;
-  externalPlatform?: 'ChatGPT' | 'Lovable App';
+  externalPlatform?: ExternalPlatform;
 };
 
 export const timeMachines: TimeMachineConfig[] = [
@@ -150,9 +152,12 @@ export const fallbackExternal = {
   name: 'The Original Time Machine GPT',
 };
 
-/** Short, unmistakable label for an external destination, e.g. "CHATGPT VERSION". */
-export const externalVersionLabel = (platform?: 'ChatGPT' | 'Lovable App') =>
-  platform === 'Lovable App' ? 'LOVABLE APP VERSION' : 'CHATGPT VERSION';
+/** Short, unmistakable label for an external destination, e.g. "(CHATGPT VERSION)". */
+export const externalVersionLabel = (platform?: ExternalPlatform) => {
+  if (platform === 'Gemini') return '(GEMINI VERSION)';
+  if (platform === 'Lovable App') return '(LOVABLE APP VERSION)';
+  return '(CHATGPT VERSION)';
+};
 
 /** The external option to offer for a machine, falling back to the original ChatGPT tool. */
 export const externalOptionFor = (machine: TimeMachineConfig) =>

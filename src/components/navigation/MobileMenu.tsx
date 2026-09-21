@@ -23,7 +23,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     )}>
       <nav className="flex flex-col space-y-4 text-gray-100">
         <div className="pt-2 space-y-3">
-          <p className="text-xs font-semibold uppercase text-time-accent/70">INSITE VERSIONS</p>
+          <p className="text-xs font-semibold uppercase text-time-accent/70">(INSITE VERSIONS)</p>
           {timeMachines.map((machine) => (
             <Link
               key={machine.id}
@@ -31,7 +31,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               onClick={() => setIsMenuOpen(false)}
               className="w-full min-h-12 flex items-center justify-center px-3 py-3 text-center rounded-lg shadow-md border border-time-accent/35 text-foreground bg-time-dark/90 hover:bg-time-accent/10 hover:text-time-accent transition-all"
             >
-              <span>{machine.name.toUpperCase()} — INSITE VERSION</span>
+              <span>{machine.name.toUpperCase()} — (INSITE VERSION)</span>
             </Link>
           ))}
         </div>
