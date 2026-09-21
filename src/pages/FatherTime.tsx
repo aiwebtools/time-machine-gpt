@@ -1,13 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Mic, MicOff, Volume2, Square, ImageIcon, Send, Loader2, RotateCcw } from 'lucide-react';
+import {
+  CalendarClock,
+  ImageIcon,
+  Loader2,
+  MapPin,
+  Mic,
+  MicOff,
+  RotateCcw,
+  Rocket,
+  Square,
+  UserRound,
+  Volume2,
+} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StarryBackground from '@/components/StarryBackground';
 import InformationalDisclaimer from '@/components/InformationalDisclaimer';
+import PortalCelebration from '@/components/time-machine/PortalCelebration';
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from '@/components/ai-elements/conversation';
+import {
+  Message,
+  MessageActions,
+  MessageContent,
+  MessageResponse,
+} from '@/components/ai-elements/message';
+import {
+  PromptInput,
+  PromptInputButton,
+  PromptInputFooter,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  PromptInputTools,
+} from '@/components/ai-elements/prompt-input';
+import { Shimmer } from '@/components/ai-elements/shimmer';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useSpeechInput } from '@/hooks/use-speech-input';
 import { streamStory, generateVision, TimeVoice, type ChatMessage } from '@/lib/fatherTime';
@@ -25,8 +58,15 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
   const [autoSpeak, setAutoSpeak] = useState(false);
   const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
   const [renderingIndex, setRenderingIndex] = useState<number | null>(null);
+  const [year, setYear] = useState('');
+  const [destination, setDestination] = useState('');
+  const [focus, setFocus] = useState('');
+  const [burst, setBurst] = useState<{ key: number; variant: 'launch' | 'message' | 'arrival' }>({
+    key: 0,
+    variant: 'message',
+  });
   const voiceRef = useRef<TimeVoice | null>(null);
-  const endRef = useRef<HTMLDivElement>(null);
+  const composerRef = useRef<HTMLTextAreaElement>(null);
   const heroRef = useRef<HTMLElement | null>(null);
 
   const { listening, supported: micSupported, toggle: toggleMic } = useSpeechInput((text) => {
@@ -52,11 +92,15 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     twitterDescription?.setAttribute('content', machine.description);
     voiceRef.current = new TimeVoice();
     return () => voiceRef.current?.stop();
-  }, [machine.description, machine.name]);
+  }, [machine.description, machine.name, machine.path]);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [turns]);
+    composerRef.current?.focus();
+  }, [machine.id]);
+
+  const celebrate = (variant: 'launch' | 'message' | 'arrival') => {
+    setBurst({ key: Date.now(), variant });
+  };
 
   const speak = async (index: number, text: string) => {
     const voice = voiceRef.current;
@@ -81,6 +125,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     try {
       const image = await generateVision(machine.id, text.slice(-1200));
       setTurns((prev) => prev.map((t, i) => (i === index ? { ...t, image } : t)));
+      celebrate('arrival');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'The vision could not be rendered.');
     } finally {
@@ -88,13 +133,14 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     }
   };
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (messageText = input, effect: 'launch' | 'message' = 'message') => {
+    const text = messageText.trim();
     if (!text || busy) return;
     voiceRef.current?.stop();
     setSpeakingIndex(null);
     setInput('');
     setBusy(true);
+    celebrate(effect);
 
     const history: Turn[] = [...turns, { role: 'user', content: text }];
     setTurns([...history, { role: 'assistant', content: '' }]);
@@ -123,12 +169,25 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
       } else if (autoSpeak) {
         void speak(replyIndex, full);
       }
+      celebrate('arrival');
     } catch (error) {
       setTurns((prev) => prev.filter((_, i) => i !== replyIndex));
       toast.error(error instanceof Error ? error.message : 'The time machine could not respond.');
     } finally {
       setBusy(false);
+      window.setTimeout(() => composerRef.current?.focus(), 80);
     }
+  };
+
+  const initializeJourney = () => {
+    const yearValue = year.trim();
+    const placeValue = destination.trim();
+    if (!yearValue || !placeValue || busy) return;
+    const focusValue = focus.trim();
+    const openingPrompt = `Take me to ${yearValue}, in ${placeValue}.${
+      focusValue ? ` I want to experience ${focusValue}.` : ''
+    }`;
+    void send(openingPrompt, 'launch');
   };
 
   const restart = () => {
@@ -136,7 +195,13 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     setSpeakingIndex(null);
     setTurns([{ role: 'assistant', content: machine.greeting }]);
     setInput('');
+    setYear('');
+    setDestination('');
+    setFocus('');
+    window.setTimeout(() => composerRef.current?.focus(), 80);
   };
+
+  const journeyStarted = turns.some((turn) => turn.role === 'user');
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -156,23 +221,32 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
           </p>
         </section>
 
-        <section className="container mx-auto px-3 md:px-6 pb-12 max-w-4xl">
-          <div className="rounded-2xl border border-time-accent/30 bg-time-dark/80 backdrop-blur-sm shadow-[0_0_35px_rgba(212,175,55,0.15)] overflow-hidden">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 border-b border-time-accent/20">
-              <span className="text-time-accent text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap">
-                THE TIME PORTAL IS ACTIVE
-              </span>
-              <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+        <section className="container mx-auto px-3 md:px-6 pb-12 max-w-5xl">
+          <div className="travel-chat-shell relative overflow-hidden rounded-lg border border-journey-gold/45 bg-journey-surface/95 shadow-[0_20px_60px_hsl(var(--background)/0.9),0_0_38px_hsl(var(--journey-gold)/0.15)] backdrop-blur-sm">
+            <PortalCelebration burstKey={burst.key} variant={burst.variant} />
+
+            <div className="flex flex-col gap-3 border-b border-journey-gold/25 bg-journey-raised/90 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-3 w-3" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-journey-gold opacity-60" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-journey-gold" />
+                </span>
+                <div className="text-left">
+                  <span className="block text-sm font-semibold text-journey-gold">Time portal active</span>
+                  <span className="block text-xs text-muted-foreground">Coordinates ready for {machine.narrator}</span>
+                </div>
+              </div>
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto">
                 <Button
                   type="button"
                   size="sm"
                   variant="ghost"
                   onClick={() => setAutoSpeak((v) => !v)}
                   className={cn(
-                    'text-xs border w-full sm:w-auto',
+                    'h-11 w-full border text-xs sm:h-9 sm:w-auto',
                     autoSpeak
-                      ? 'bg-time-accent text-time-dark border-time-accent hover:bg-time-accent/90'
-                      : 'text-time-accent border-time-accent/40 hover:bg-time-accent/10',
+                      ? 'border-journey-gold bg-journey-gold text-journey-gold-foreground hover:bg-journey-gold/90'
+                      : 'border-journey-gold/40 text-journey-gold hover:bg-journey-gold/10',
                   )}
                 >
                   <Volume2 className="h-4 w-4 mr-1" />
@@ -183,7 +257,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                   size="sm"
                   variant="ghost"
                   onClick={restart}
-                  className="text-xs text-time-accent border border-time-accent/40 hover:bg-time-accent/10 w-full sm:w-auto"
+                  className="h-11 w-full border border-journey-gold/40 text-xs text-journey-gold hover:bg-journey-gold/10 sm:h-9 sm:w-auto"
                 >
                   <RotateCcw className="h-4 w-4 mr-1" />
                   New journey
@@ -191,44 +265,58 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               </div>
             </div>
 
-            <div className="h-[48dvh] min-h-[320px] max-h-[560px] md:h-[52dvh] md:min-h-[420px] overflow-y-auto px-3 md:px-5 py-5 space-y-5">
+            <Conversation className="h-[52dvh] min-h-[390px] max-h-[680px] bg-journey-surface md:h-[58dvh] md:min-h-[500px]">
+              <ConversationContent className="gap-6 px-4 py-6 md:px-7">
               {turns.map((turn, index) => (
-                <div
+                <Message
                   key={index}
+                  from={turn.role}
                   className={cn(
-                    'rounded-xl p-4 border',
-                    turn.role === 'user'
-                      ? 'ml-auto max-w-[85%] bg-time-accent/10 border-time-accent/30 text-gray-100'
-                      : 'max-w-full bg-black/50 border-time-accent/20 text-gray-100',
+                    'animate-fade-in',
+                    turn.role === 'user' ? 'max-w-[88%] sm:max-w-[75%]' : 'max-w-full',
                   )}
                 >
-                  {turn.role === 'assistant' && (
-                    <span className="block text-[11px] uppercase tracking-[0.2em] text-time-accent mb-2">
-                      {machine.narrator}
-                    </span>
-                  )}
-                  <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">
-                    {turn.content ||
-                      (busy && index === turns.length - 1 ? 'Charging the flux of ages…' : '')}
-                  </p>
+                  <MessageContent
+                    className={cn(
+                      'text-[15px] leading-7 md:text-base',
+                      turn.role === 'user'
+                        ? 'border border-journey-gold bg-journey-gold px-4 py-3 text-journey-gold-foreground shadow-[0_8px_24px_hsl(var(--journey-gold)/0.16)]'
+                        : 'w-full overflow-visible text-foreground',
+                    )}
+                  >
+                    {turn.role === 'assistant' && (
+                      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-journey-gold">
+                        {machine.narrator}
+                      </span>
+                    )}
+                    {turn.content ? (
+                      <MessageResponse className="[&_p]:my-3 first:[&_p]:mt-0 last:[&_p]:mb-0">
+                        {turn.content}
+                      </MessageResponse>
+                    ) : busy && index === turns.length - 1 ? (
+                      <Shimmer className="text-sm font-medium">Charging the flux of ages…</Shimmer>
+                    ) : null}
 
-                  {turn.image && (
-                    <img
-                      src={turn.image}
-                      alt={`A vision created during the ${machine.name} journey`}
-                      className="mt-4 w-full rounded-lg border border-time-accent/30 aspect-video object-cover"
-                      loading="lazy"
-                    />
-                  )}
+                    {turn.image && (
+                      <div className="mt-4 overflow-hidden rounded-md border border-journey-gold/40 shadow-[0_12px_32px_hsl(var(--background)/0.8)]">
+                        <img
+                          src={turn.image}
+                          alt={`A vision created during the ${machine.name} journey`}
+                          className="aspect-video w-full object-cover animate-fade-in"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                  </MessageContent>
 
                   {turn.role === 'assistant' && turn.content.length > 40 && (
-                    <div className="flex flex-wrap gap-2 mt-4">
+                    <MessageActions className="grid w-full grid-cols-2 gap-2 sm:flex">
                       <Button
                         type="button"
                         size="sm"
                         variant="ghost"
                         onClick={() => speak(index, turn.content)}
-                        className="text-xs text-time-accent border border-time-accent/40 hover:bg-time-accent/10"
+                        className="h-11 border border-journey-gold/40 text-xs text-journey-gold hover:bg-journey-gold/10 sm:h-9"
                       >
                         {speakingIndex === index ? (
                           <>
@@ -246,7 +334,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                         variant="ghost"
                         disabled={renderingIndex === index}
                         onClick={() => renderVision(index, turn.content)}
-                        className="text-xs text-time-accent border border-time-accent/40 hover:bg-time-accent/10"
+                        className="h-11 border border-journey-gold/40 text-xs text-journey-gold hover:bg-journey-gold/10 sm:h-9"
                       >
                         {renderingIndex === index ? (
                           <>
@@ -258,53 +346,119 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                           </>
                         )}
                       </Button>
-                    </div>
+                    </MessageActions>
                   )}
-                </div>
+                </Message>
               ))}
-              <div ref={endRef} />
-            </div>
+              </ConversationContent>
+              <ConversationScrollButton className="border-journey-gold/40 bg-journey-raised text-journey-gold hover:bg-journey-gold/10" />
+            </Conversation>
 
-            <div className="border-t border-time-accent/20 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-4 bg-black/40">
-              <div className="flex items-end gap-2">
-                <Textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      void send();
-                    }
+            <div className="border-t border-journey-gold/25 bg-journey-raised p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-5">
+              {!journeyStarted && (
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    initializeJourney();
                   }}
-                  placeholder={machine.inputPlaceholder}
-                  rows={2}
-                  className="resize-none bg-time-dark/70 border-time-accent/30 text-gray-100 placeholder:text-gray-500 focus-visible:ring-time-accent"
-                />
-                {micSupported && (
-                  <Button
-                    type="button"
-                    onClick={toggleMic}
-                    aria-label={listening ? 'Stop listening' : 'Speak your destination'}
-                    className={cn(
-                      'h-11 w-11 p-0 shrink-0 border',
-                      listening
-                        ? 'bg-red-600 text-white border-red-500 animate-pulse'
-                        : 'bg-time-dark text-time-accent border-time-accent/50 hover:bg-time-accent/10',
-                    )}
-                  >
-                    {listening ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
-                  </Button>
-                )}
-                <Button
-                  type="button"
-                  onClick={send}
-                  disabled={busy || !input.trim()}
-                  className="h-11 px-4 shrink-0 bg-time-accent text-time-dark font-semibold hover:bg-time-accent/90 disabled:opacity-60"
+                  className="mb-4 rounded-md border border-journey-gold/35 bg-journey-surface p-4 shadow-[inset_0_1px_0_hsl(var(--journey-gold)/0.14),0_12px_28px_hsl(var(--background)/0.6)]"
                 >
-                  {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
-                </Button>
-              </div>
-              <p className="mt-2 text-[11px] text-gray-400">
+                  <div className="mb-4 flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-journey-gold/40 bg-journey-gold/10 text-journey-gold">
+                      <Rocket className="h-5 w-5" />
+                    </div>
+                    <div className="text-left">
+                      <h2 className="text-base font-semibold text-foreground">Initialize your journey</h2>
+                      <p className="text-xs leading-5 text-muted-foreground">Set two coordinates, then open the portal.</p>
+                    </div>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <label className="text-left text-xs font-semibold text-journey-gold">
+                      Year or era
+                      <span className="relative mt-1.5 block">
+                        <CalendarClock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                        <Input
+                          value={year}
+                          onChange={(event) => setYear(event.target.value)}
+                          placeholder="Example: 1963"
+                          className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
+                        />
+                      </span>
+                    </label>
+                    <label className="text-left text-xs font-semibold text-journey-gold">
+                      Destination
+                      <span className="relative mt-1.5 block">
+                        <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                        <Input
+                          value={destination}
+                          onChange={(event) => setDestination(event.target.value)}
+                          placeholder="Example: Washington, D.C."
+                          className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
+                        />
+                      </span>
+                    </label>
+                  </div>
+                  <label className="mt-3 block text-left text-xs font-semibold text-journey-gold">
+                    Person, event, or moment <span className="font-normal text-muted-foreground">(optional)</span>
+                    <span className="relative mt-1.5 block">
+                      <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                      <Input
+                        value={focus}
+                        onChange={(event) => setFocus(event.target.value)}
+                        placeholder="What do you want to witness?"
+                        className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
+                      />
+                    </span>
+                  </label>
+                  <Button
+                    type="submit"
+                    disabled={busy || !year.trim() || !destination.trim()}
+                    className="mt-4 h-12 w-full border border-journey-gold bg-journey-gold font-bold text-journey-gold-foreground shadow-[0_8px_0_hsl(var(--journey-gold)/0.25),0_14px_28px_hsl(var(--journey-gold)/0.14)] transition-transform hover:bg-journey-gold/90 active:translate-y-1 active:shadow-none"
+                  >
+                    <Rocket className="h-5 w-5" /> Initialize time portal
+                  </Button>
+                </form>
+              )}
+
+              <PromptInput
+                onSubmit={({ text }) => send(text)}
+                className="[&_[data-slot=input-group]]:border-journey-gold/55 [&_[data-slot=input-group]]:bg-composer [&_[data-slot=input-group]]:shadow-[0_10px_26px_hsl(var(--background)/0.5),inset_0_1px_0_hsl(var(--foreground)/0.55)]"
+              >
+                <PromptInputTextarea
+                  ref={composerRef}
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  placeholder={journeyStarted ? machine.inputPlaceholder : 'Or describe your journey in your own words…'}
+                  className="min-h-24 bg-composer px-4 py-4 text-base leading-6 text-composer-foreground placeholder:text-composer-muted focus-visible:ring-0"
+                />
+                <PromptInputFooter className="border-t border-journey-gold/20 px-3 py-2">
+                  <PromptInputTools>
+                    {micSupported && (
+                      <PromptInputButton
+                        type="button"
+                        size="sm"
+                        onClick={toggleMic}
+                        tooltip={listening ? 'Stop listening' : 'Speak your destination'}
+                        className={cn(
+                          'h-10 border px-3 text-composer-foreground',
+                          listening
+                            ? 'border-destructive bg-destructive text-destructive-foreground animate-pulse'
+                            : 'border-composer-muted/30 bg-background/10 hover:bg-background/20',
+                        )}
+                      >
+                        {listening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                        <span>{listening ? 'Listening' : 'Speak'}</span>
+                      </PromptInputButton>
+                    )}
+                  </PromptInputTools>
+                  <PromptInputSubmit
+                    status={busy ? 'streaming' : 'ready'}
+                    disabled={busy || !input.trim()}
+                    className="h-11 w-11 border border-journey-gold bg-journey-gold text-journey-gold-foreground shadow-[0_5px_12px_hsl(var(--journey-gold)/0.28)] hover:bg-journey-gold/90"
+                  />
+                </PromptInputFooter>
+              </PromptInput>
+              <p className="mt-3 text-xs leading-5 text-muted-foreground">
                 Stories are long — give {machine.narrator} a moment to write them. Voice narration and
                 images are generated as you travel.
               </p>
