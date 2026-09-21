@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { createTimePortalEffect } from '@/utils/timeEffects';
 import { ExternalLink, ChevronDown } from 'lucide-react';
@@ -110,6 +111,20 @@ const DesktopNav: React.FC<DesktopNavProps> = ({
           </div>
         )}
       </div>
+
+      {/* Free on-site Father Time experience */}
+      <Button
+        asChild
+        className={cn(
+          "font-semibold text-sm px-5 py-2.5 h-auto",
+          "bg-gradient-to-b from-time-dark via-time-dark to-time-dark/90",
+          "border-2 border-time-accent/70 text-time-accent",
+          "shadow-[0_0_18px_rgba(212,175,55,0.35),0_4px_15px_rgba(0,0,0,0.3)]",
+          "hover:shadow-[0_0_28px_rgba(212,175,55,0.55)] hover:scale-[1.02] transition-all duration-300"
+        )}
+      >
+        <Link to="/father-time">Travel With Father Time</Link>
+      </Button>
 
       {/* Primary CTA - The Original Time Machine GPT */}
       <Button
