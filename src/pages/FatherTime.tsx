@@ -295,10 +295,13 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
             <Conversation className="h-[52dvh] min-h-[390px] max-h-[680px] bg-journey-surface md:h-[58dvh] md:min-h-[500px]">
               <ConversationContent className="gap-6 px-4 py-6 md:px-7">
               {turns.map((turn, index) => (
-                <Message
+                <div
                   key={index}
-                  from={turn.role}
                   ref={index === turns.length - 1 && turn.role === 'assistant' ? latestReplyRef : undefined}
+                  className="w-full"
+                >
+                <Message
+                  from={turn.role}
                   className={cn(
                     'animate-fade-in',
                     turn.role === 'user' ? 'max-w-[88%] sm:max-w-[75%]' : 'max-w-full',
