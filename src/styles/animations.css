@@ -130,6 +130,47 @@
   100% { opacity: 0; transform: translate(-50%, -50%) scale(2.4); }
 }
 
+@keyframes warp-overlay-life {
+  0%, 100% { opacity: 0; visibility: hidden; }
+  4%, 80% { opacity: 1; visibility: visible; }
+}
+
+@keyframes warp-tunnel-rush {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.08) rotate(0deg); }
+  18% { opacity: 0.96; }
+  78% { opacity: 0.9; transform: translate(-50%, -50%) scale(2.8) rotate(210deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(5) rotate(280deg); }
+}
+
+@keyframes warp-ring-rush {
+  0% { opacity: 0; transform: translate(-50%, -50%) perspective(500px) rotateX(68deg) scale(0.08); }
+  22% { opacity: 0.85; }
+  100% { opacity: 0; transform: translate(-50%, -50%) perspective(500px) rotateX(68deg) scale(8); }
+}
+
+@keyframes warp-streak-flight {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--streak-angle)) translateX(18px) scaleX(0.08); }
+  22% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--streak-angle)) translateX(var(--streak-distance)) scaleX(3.6); }
+}
+
+@keyframes warp-coordinate-lock {
+  0%, 10% { opacity: 0; transform: translate(-50%, -42%) scale(0.9); }
+  22%, 64% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  86%, 100% { opacity: 0; transform: translate(-50%, -58%) scale(1.06); }
+}
+
+@keyframes warp-arrival-flash {
+  0%, 66% { opacity: 0; }
+  76% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@keyframes launch-panel-charge {
+  0%, 100% { box-shadow: inset 0 0 0 hsl(var(--journey-gold) / 0); }
+  50% { box-shadow: inset 0 0 42px hsl(var(--journey-gold) / 0.12); }
+}
+
 .travel-chat-shell {
   animation: travel-panel-arrive 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
   transform-style: preserve-3d;
@@ -190,7 +231,114 @@
   animation-duration: 1000ms;
 }
 
+.time-warp-launch {
+  animation: warp-overlay-life 2500ms ease-out both;
+  background: hsl(var(--background) / 0.94);
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 100;
+}
+
+.time-warp-launch__tunnel,
+.time-warp-launch__core,
+.time-warp-launch__rings,
+.time-warp-launch__streaks,
+.time-warp-launch__flash {
+  inset: 0;
+  position: absolute;
+}
+
+.time-warp-launch__tunnel {
+  animation: warp-tunnel-rush 2100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: repeating-conic-gradient(from 0deg, hsl(var(--journey-gold) / 0.52) 0deg 2deg, transparent 3deg 13deg);
+  border-radius: 9999px;
+  height: min(72vw, 760px);
+  left: 50%;
+  mask-image: radial-gradient(circle, transparent 0 8%, hsl(var(--background)) 28%, transparent 72%);
+  top: 50%;
+  width: min(72vw, 760px);
+}
+
+.time-warp-launch__core {
+  background: radial-gradient(circle at center, hsl(var(--foreground)) 0 2%, hsl(var(--journey-gold) / 0.86) 5%, transparent 23%);
+  filter: blur(1px);
+}
+
+.time-warp-launch__ring,
+.time-warp-launch__streak {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+}
+
+.time-warp-launch__ring {
+  animation: warp-ring-rush 1450ms cubic-bezier(0.1, 0.7, 0.2, 1) var(--ring-delay) both;
+  border: 2px solid hsl(var(--journey-gold) / 0.82);
+  border-radius: 9999px;
+  box-shadow: 0 0 24px hsl(var(--journey-gold) / 0.5), inset 0 0 16px hsl(var(--journey-gold) / 0.24);
+  height: 84px;
+  width: 84px;
+}
+
+.time-warp-launch__streak {
+  animation: warp-streak-flight 880ms ease-in var(--streak-delay) 2 both;
+  background: linear-gradient(90deg, transparent, hsl(var(--journey-gold)), hsl(var(--foreground)));
+  box-shadow: 0 0 10px hsl(var(--journey-gold) / 0.9);
+  height: 2px;
+  transform-origin: left center;
+  width: 84px;
+}
+
+.time-warp-launch__streak--bright { height: 4px; width: 118px; }
+
+.time-warp-launch__coordinates {
+  animation: warp-coordinate-lock 2200ms ease-out both;
+  left: 50%;
+  max-width: min(86vw, 520px);
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  z-index: 2;
+}
+
+.time-warp-launch__coordinates span,
+.time-warp-launch__coordinates small { color: hsl(var(--foreground)); display: block; }
+.time-warp-launch__coordinates span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+.time-warp-launch__coordinates strong { color: hsl(var(--journey-gold)); display: block; font-size: clamp(3rem, 12vw, 7rem); line-height: 1; text-shadow: 0 0 30px hsl(var(--journey-gold) / 0.8); }
+.time-warp-launch__coordinates small { font-size: clamp(0.9rem, 3vw, 1.35rem); margin-top: 0.5rem; }
+
+.time-warp-launch__flash {
+  animation: warp-arrival-flash 2500ms ease-out both;
+  background: hsl(var(--foreground));
+}
+
+.journey-launch-panel { animation: launch-panel-charge 3.2s ease-in-out infinite; }
+.journey-launch-button { overflow: hidden; position: relative; }
+.journey-launch-button::after {
+  background: linear-gradient(100deg, transparent, hsl(var(--foreground) / 0.45), transparent);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transform: translateX(-120%);
+  transition: transform 500ms ease;
+}
+.journey-launch-button:hover::after { transform: translateX(120%); }
+
 @media (prefers-reduced-motion: reduce) {
   .travel-chat-shell { animation: none; }
   .portal-celebration { display: none; }
+  .time-warp-launch { animation-duration: 700ms; }
+  .time-warp-launch__tunnel,
+  .time-warp-launch__rings,
+  .time-warp-launch__streaks { display: none; }
+  .time-warp-launch__coordinates { animation-duration: 650ms; }
+  .time-warp-launch__flash { animation-duration: 700ms; }
+  .journey-launch-panel { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .time-warp-launch__streak:nth-child(n + 21),
+  .time-warp-launch__ring:nth-child(n + 6) { display: none; }
 }

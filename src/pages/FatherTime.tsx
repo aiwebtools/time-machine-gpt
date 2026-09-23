@@ -20,6 +20,7 @@ import Footer from '@/components/Footer';
 import StarryBackground from '@/components/StarryBackground';
 import InformationalDisclaimer from '@/components/InformationalDisclaimer';
 import PortalCelebration from '@/components/time-machine/PortalCelebration';
+import TimeWarpLaunch from '@/components/time-machine/TimeWarpLaunch';
 import {
   Conversation,
   ConversationContent,
@@ -44,6 +45,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useSpeechInput } from '@/hooks/use-speech-input';
+import { playTimeWarpSound, stopTimeWarpSound } from '@/utils/timeWarpSound';
 import {
   streamStory,
   generateVision,
@@ -87,9 +89,11 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     key: 0,
     variant: 'message',
   });
+  const [warp, setWarp] = useState({ key: 0, year: '', destination: '' });
   const voiceRef = useRef<TimeVoice | null>(null);
   const composerRef = useRef<HTMLTextAreaElement>(null);
   const heroRef = useRef<HTMLElement | null>(null);
+  const conversationRef = useRef<HTMLDivElement | null>(null);
   const latestReplyRef = useRef<HTMLDivElement | null>(null);
 
   const { listening, supported: micSupported, toggle: toggleMic } = useSpeechInput((text) => {
@@ -114,7 +118,10 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     twitterTitle?.setAttribute('content', `${machine.name} | TIME MACHINE GPT`);
     twitterDescription?.setAttribute('content', machine.description);
     voiceRef.current = new TimeVoice();
-    return () => voiceRef.current?.stop();
+    return () => {
+      voiceRef.current?.stop();
+      stopTimeWarpSound();
+    };
   }, [machine.description, machine.name, machine.path]);
 
   useEffect(() => {
@@ -194,7 +201,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     const replyIndex = history.length;
     revealLatestReply();
 
-    const narrating = autoSpeak && !!voice;
+    const narrating = (autoSpeak || effect === 'launch') && !!voice;
     if (narrating && voice) {
       voice.onError = (error) => {
         if (isCreditLimitError(error)) setShowCreditFallback(true);
@@ -290,6 +297,12 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     const openingPrompt = `Take me to ${yearValue}, in ${placeValue}.${
       focusValue ? ` I want to experience ${focusValue}.` : ''
     }`;
+    setAutoSpeak(true);
+    setWarp({ key: Date.now(), year: yearValue, destination: placeValue });
+    playTimeWarpSound();
+    window.setTimeout(() => {
+      conversationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 760);
     void send(openingPrompt, 'launch');
   };
 
@@ -304,6 +317,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
     setYear('');
     setDestination('');
     setFocus('');
+    setWarp({ key: 0, year: '', destination: '' });
     setShowCreditFallback(false);
     window.setTimeout(() => composerRef.current?.focus(), 80);
   };
@@ -312,6 +326,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <TimeWarpLaunch sequenceKey={warp.key} year={warp.year} destination={warp.destination} />
       <Navbar />
       <StarryBackground containerRef={heroRef} />
 
@@ -372,6 +387,53 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               </div>
             </div>
 
+            {!journeyStarted && (
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  initializeJourney();
+                }}
+                className="journey-launch-panel relative z-10 border-b border-journey-gold/35 bg-journey-surface p-4 shadow-[inset_0_1px_0_hsl(var(--journey-gold)/0.14),0_12px_28px_hsl(var(--background)/0.6)] md:p-5"
+              >
+                <div className="mb-4 flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-journey-gold/40 bg-journey-gold/10 text-journey-gold">
+                    <Rocket className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <h2 className="text-base font-semibold text-foreground">Initialize your journey</h2>
+                    <p className="text-xs leading-5 text-muted-foreground">Set two coordinates, then open the portal.</p>
+                  </div>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="text-left text-xs font-semibold text-journey-gold">
+                    Year or era
+                    <span className="relative mt-1.5 block">
+                      <CalendarClock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                      <Input value={year} onChange={(event) => setYear(event.target.value)} placeholder="Example: 1963" className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold" />
+                    </span>
+                  </label>
+                  <label className="text-left text-xs font-semibold text-journey-gold">
+                    Destination
+                    <span className="relative mt-1.5 block">
+                      <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                      <Input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="Example: Washington, D.C." className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold" />
+                    </span>
+                  </label>
+                </div>
+                <label className="mt-3 block text-left text-xs font-semibold text-journey-gold">
+                  Person, event, or moment <span className="font-normal text-muted-foreground">(optional)</span>
+                  <span className="relative mt-1.5 block">
+                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
+                    <Input value={focus} onChange={(event) => setFocus(event.target.value)} placeholder="What do you want to witness?" className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold" />
+                  </span>
+                </label>
+                <Button type="submit" disabled={busy || !year.trim() || !destination.trim()} className="journey-launch-button mt-4 h-12 w-full border border-journey-gold bg-journey-gold font-bold text-journey-gold-foreground shadow-[0_8px_0_hsl(var(--journey-gold)/0.25),0_14px_28px_hsl(var(--journey-gold)/0.14)] transition-transform hover:bg-journey-gold/90 active:translate-y-1 active:shadow-none">
+                  <Rocket className="h-5 w-5" /> Initialize time portal
+                </Button>
+              </form>
+            )}
+
+            <div ref={conversationRef} className="scroll-mt-20">
             <Conversation className="h-[52dvh] min-h-[390px] max-h-[680px] bg-journey-surface md:h-[58dvh] md:min-h-[500px]">
               <ConversationContent className="gap-6 px-4 py-6 md:px-7">
               {turns.map((turn, index) => {
@@ -510,6 +572,7 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
               </ConversationContent>
               <ConversationScrollButton className="border-journey-gold/40 bg-journey-raised text-journey-gold hover:bg-journey-gold/10" />
             </Conversation>
+            </div>
 
             <div className="border-t border-journey-gold/25 bg-journey-raised p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:p-5">
               {showCreditFallback && (
@@ -529,71 +592,6 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
                   </Button>
                 </div>
               )}
-              {!journeyStarted && (
-                <form
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    initializeJourney();
-                  }}
-                  className="mb-4 rounded-md border border-journey-gold/35 bg-journey-surface p-4 shadow-[inset_0_1px_0_hsl(var(--journey-gold)/0.14),0_12px_28px_hsl(var(--background)/0.6)]"
-                >
-                  <div className="mb-4 flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-journey-gold/40 bg-journey-gold/10 text-journey-gold">
-                      <Rocket className="h-5 w-5" />
-                    </div>
-                    <div className="text-left">
-                      <h2 className="text-base font-semibold text-foreground">Initialize your journey</h2>
-                      <p className="text-xs leading-5 text-muted-foreground">Set two coordinates, then open the portal.</p>
-                    </div>
-                  </div>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <label className="text-left text-xs font-semibold text-journey-gold">
-                      Year or era
-                      <span className="relative mt-1.5 block">
-                        <CalendarClock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
-                        <Input
-                          value={year}
-                          onChange={(event) => setYear(event.target.value)}
-                          placeholder="Example: 1963"
-                          className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
-                        />
-                      </span>
-                    </label>
-                    <label className="text-left text-xs font-semibold text-journey-gold">
-                      Destination
-                      <span className="relative mt-1.5 block">
-                        <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
-                        <Input
-                          value={destination}
-                          onChange={(event) => setDestination(event.target.value)}
-                          placeholder="Example: Washington, D.C."
-                          className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
-                        />
-                      </span>
-                    </label>
-                  </div>
-                  <label className="mt-3 block text-left text-xs font-semibold text-journey-gold">
-                    Person, event, or moment <span className="font-normal text-muted-foreground">(optional)</span>
-                    <span className="relative mt-1.5 block">
-                      <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-composer-muted" />
-                      <Input
-                        value={focus}
-                        onChange={(event) => setFocus(event.target.value)}
-                        placeholder="What do you want to witness?"
-                        className="h-12 border-journey-gold/50 bg-composer pl-10 text-base text-composer-foreground placeholder:text-composer-muted focus-visible:ring-journey-gold"
-                      />
-                    </span>
-                  </label>
-                  <Button
-                    type="submit"
-                    disabled={busy || !year.trim() || !destination.trim()}
-                    className="mt-4 h-12 w-full border border-journey-gold bg-journey-gold font-bold text-journey-gold-foreground shadow-[0_8px_0_hsl(var(--journey-gold)/0.25),0_14px_28px_hsl(var(--journey-gold)/0.14)] transition-transform hover:bg-journey-gold/90 active:translate-y-1 active:shadow-none"
-                  >
-                    <Rocket className="h-5 w-5" /> Initialize time portal
-                  </Button>
-                </form>
-              )}
-
               <PromptInput
                 onSubmit={({ text }) => send(text)}
                 className="[&_[data-slot=input-group]]:border-journey-gold/55 [&_[data-slot=input-group]]:bg-composer [&_[data-slot=input-group]]:shadow-[0_10px_26px_hsl(var(--background)/0.5),inset_0_1px_0_hsl(var(--foreground)/0.55)]"
