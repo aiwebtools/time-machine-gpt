@@ -23,3 +23,6 @@
 - [x] Make the Test of Two Fates a real three-choice path with a confirmed future, its image, and an ending.
 - [x] Add a past fork whose choice leads to the documented outcome and a true ending.
 - [x] Add the /time-machines hub page and link it in the header, phone menu, footer, and sitemap.
+- [x] Move the guided coordinates above every on-site Time Machine conversation.
+- [x] Auto-scroll into the streaming journey and enable narration when the portal launches.
+- [x] Add a reduced-motion-safe full-screen time warp with stars, rings, confetti, and synthesized launch audio.
