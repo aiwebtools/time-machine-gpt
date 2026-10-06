@@ -213,9 +213,16 @@ const FatherTime = ({ machineId = 'father-time' }: TimeMachinePageProps) => {
 
     try {
       let full = '';
+      // The server accepts at most 40 messages; keep the greeting plus the
+      // most recent turns so long journeys never hit the limit.
+      const MAX_HISTORY = 38;
+      const trimmed =
+        history.length > MAX_HISTORY
+          ? [history[0], ...history.slice(-(MAX_HISTORY - 1))]
+          : history;
       await streamStory(
         machine.id,
-        history.map(({ role, content }) => ({ role, content })),
+        trimmed.map(({ role, content }) => ({ role, content })),
         (delta) => {
           full += delta;
           setTurns((prev) =>
